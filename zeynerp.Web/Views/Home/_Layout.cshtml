@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top py-4 shadow">
+        <div class="container">
+            <div class="col-6 col-lg-3">
+                <a class="navbar-brand" href="/">
+                    <img src="~/img/zeynerp/logo.png" alt="" width="190" height="40"
+                        class="d-inline-block align-text-top img-fluid">
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto m-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#kurumsal">Kurumsal</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Ürünler
+                        </a>
+                        <ul class="dropdown-menu mt-0 mt-lg-4" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#urunler">İnsan Kaynakları</a></li>
+                            <li><a class="dropdown-item" href="#urunler">Satın Alma</a></li>
+                            <li><a class="dropdown-item" href="#urunler">Pazarlama</a></li>
+                            <li><a class="dropdown-item" href="#urunler">Muhasebe</a></li>
+                            <li><a class="dropdown-item" href="#urunler">Stok Yönetimi</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#hakkimizda">Hakkımızda</a>
+                    </li>
+                </ul>
+                <form class="d-flex d-lg-none justify-content-end">
+                    @* @Html.ActionLink("Kayıt Ol", "Register", "Zeynerp", null, new { @class = "btn btn-outline-primary me-2 px-4" })
+                    @Html.ActionLink("Giriş", "Login", "Zeynerp", null, new { @class = "btn btn-primary px-4" }) *@
+                    <a href="#" class="btn btn-outline-primary me-2 px-4">Kayıt Ol</a>
+                    <a href="#" class="btn btn-primary px-4">Giriş</a>
+                </form>
+            </div>
+            <div class="d-flex col-3 justify-content-end d-none d-lg-block text-end">
+                @* @Html.ActionLink("Kayıt Ol", "Register", "Zeynerp", null, new { @class = "btn btn-outline-primary me-2 px-4" })
+                @Html.ActionLink("Giriş", "Login", "Zeynerp", null, new { @class = "btn btn-primary px-4" }) *@
+                <a class="btn btn-outline-primary me-2 px-4" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+                <a class="btn btn-primary px-4" asp-controller="Account" asp-action="Login">Giriş</a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+    <footer class="bg-dark text-center text-white">
+        <div class="container p-4">
+            <section class="mb-4">
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+                    <i class="fab fa-github"></i>
+                </a>
+            </section>
+            <section class="">
+                <form action="">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-auto">
+                            <p class="pt-2">
+                                <strong>E-posta adresinizi girin, tekliflerimizi ve planlarımızı postanıza
+                                    alın.</strong>
+                            </p>
+                        </div>
+                        <div class="col-md-5 col-12">
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="form5Example21" class="form-control"
+                                    placeholder="E-posta adres" />
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-outline-light mb-4">
+                                Abone Ol
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <section class="">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Ürünler</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <span>İnsan Kaynakları</span>
+                            </li>
+                            <li>
+                                <span>Satın Alma</span>
+                            </li>
+                            <li>
+                                <span>Pazarlama</span>
+                            </li>
+                            <li>
+                                <span>Muhasebe</span>
+                            </li>
+                            <li>
+                                <span>Stok Yönetimi</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">ZeynERP</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <span>Kurumsal</span>
+                            </li>
+                            <li>
+                                <span>Hakkımızda</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 offset-lg-1 col-md-12 mb-4 mb-md-0 text-lg-start">
+                        <h5 class="text-uppercase">İLETİŞİM</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <span><strong>Adres: </strong>Taşköprü Merkez Mah. Malazgirt Cad. No:3/A, Çiftlikköy /
+                                    Yalova</span>
+                            </li>
+                            <li>
+                                <span><strong>Telefon: </strong>(226) 353-3330</span>
+                            </li>
+                            <li>
+                                <span><strong>E-posta: </strong>info@zeynerp.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <span>ZeynERP.com</span>
+        </div>
+    </footer>
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

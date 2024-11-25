@@ -1,0 +1,11 @@
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\bin\Debug\net8.0\zeynerp.Business.deps.json
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\bin\Debug\net8.0\zeynerp.Business.dll
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\bin\Debug\net8.0\zeynerp.Business.pdb
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.AssemblyInfoInputs.cache
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.AssemblyInfo.cs
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.csproj.CoreCompileInputs.cache
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.dll
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\refint\zeynerp.Business.dll
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\zeynerp.Business.pdb
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Business\obj\Debug\net8.0\ref\zeynerp.Business.dll

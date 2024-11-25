@@ -1,0 +1,216 @@
+﻿@{
+    Layout = "_Layout.cshtml";
+}
+
+<main>
+    <section class="py-5">
+        <div class="container">
+            <div class="row py-lg-5">
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <div class="d-block d-lg-flex flex-column justify-content-center h-100 mb-3 mb-lg-0">
+                        <h1 class="display-6"><strong>ZeynERP</strong></h1>
+                        <h1 class="display-6">ile işinizi büyütmeye başlayın</h1>
+                        <div class="w-100" style="height: 10px;"></div>
+                        <p class="d-inline mt-3" style="width: 95%; font-size: 18px;">
+                            Kolay anlaşılabilir, kurumsal kaynak planlama programı ZeynERP ile işlerinizde ki tüm
+                            süreçlere her an her yerden kolayca ulaşın.
+                        </p>
+                        <a href="/kayit-ol"
+                            class="btn btn-primary btn-lg text-white rounded mt-4 mt-lg-3 d-block col-12 col-lg-7 col-lg-5">
+                            7
+                            Gün Ücretsiz Deneyin
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <img src="~/img/zeynerp/30l.jpg" class="rounded img-fluid" alt="...">
+                </div>
+            </div>
+        </div>
+    </section>
+    @using (Html.BeginForm("Zeynerp", "Zeynerp", FormMethod.Post))
+    {
+        <section class="py-5" style="background-color: gainsboro;">
+            <div class="container">
+                <div class="d-lg-flex justify-content-between align-items-center">
+                    <div class="col-12 col-lg-4 mb-4 mb-lg-0">
+                        <h3>Bilgilendirme bültenlerimize abone olmak ister misiniz</h3>
+                    </div>
+                    <div class="col-12 col-lg-5 mb-3 mb-lg-0">
+                        @* @Html.TextBoxFor(x => x.Email, new
+                            {
+                                @class = "form-control",
+                                type = "email",
+                                placeholder =
+                                 "E-Posta"
+                            })
+                        @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" }) *@
+                    </div>
+                    <div class="col-12 col-lg-2">
+                        <button class="btn btn-outline-dark form-control px-5">Abone Ol</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+    <section id="kurumsal" class="py-5">
+        <div class="container">
+            <div class="row py-lg-5">
+                <div class="col-12 col-lg-6">
+                    <div class="d-block d-lg-flex flex-column justify-content-center h-100 mb-5 mb-lg-0">
+                        <h1 class="display-6">Kurumsal</h1>
+                        <div class="w-100" style="height: 10px;"></div>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            2018 yılında grup şirketlerimizde başladığımız dijital dönüşüm projesinin en önemli
+                            ürünü olan ERP yazılımımızı, bizler gibi işlerini geliştirmek isteyen başta küçük ve
+                            orta ölçekli işletmeler ile paylaşarak, ülkemizin kalkınmasına destek olmak istedik.
+                        </p>
+                        <h6 class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            Mottomuz kullanıcı dostu ara yüzlü ve her yerden ulaşılabilir olmaktır.
+                        </h6>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            ZeynERP kullanıcılarına kolay anlaşılabilir, zorlanmadan işlem yapma olanağı sunar ve her
+                            seviyeden çalışanın da işlem yapabilmesine uygun olarak tasarlanmıştır.
+                            ZeynERP ye dilediğiniz her yerden akıllı telefon yada tabletiniz ile de ulaşabilir ve
+                            ofisinizin haricinde de işlerinizi yürütebilirsiniz.
+                        </p>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            ZeynERP sayesinde işlerinizde ki tüm süreçler birbiri ile koordineli çalışır ve verimlilik
+                            en üst seviyeye çıkar.
+                        </p>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            Duraksamadan her aşamada katkı alacağınız şekilde ZeynERP'i geliştirmeye devam ediyoruz.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center">
+                    <img src="~/img/zeynerp/Systems-Analysis-And-Design.jpg" class="rounded img-fluid" alt="...">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="urunler" class="py-5" style="background-color: gainsboro;">
+    </section>
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h1 class="display-5">Ürünler</h1>
+            </div>
+            <div class="">
+                <div class="row">
+                    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0 py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/hr.png" class="mb-3" width="80" height="80"
+                                alt="ZeynERP">
+                            <p class="h5">İnsan Kaynakları</p>
+                            <p>
+                                Tüm çalışanlarınızın özlük dosyasına her yerden ulaşabilir ve izin, mesai,giriş çıkış ve
+                                puantajlarını entegre bir sistem üzerinden yönetebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12 col-lg-4 d-flex justify-content-center align-items-center c-border-left c-border-right mb-4 mb-lg-0 py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/purchase.png" class="mb-3" width="80"
+                                height="80" alt="ZeynERP">
+                            <p class="h5">Satın Alma</p>
+                            <p>
+                                Onaylı tedarikçilerinizden kolaylıkla fiyat alabilir ve bunları tek tuşla karşılaştırma
+                                tablosuna dönüştürüp yetkili kişi onayına gönderebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0 py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/profit.png" class="mb-3" width="80"
+                                height="80" alt="ZeynERP">
+                            <p class="h5">Pazarlama</p>
+                            <p>
+                                Tüm teklif verme süreçlerinizi dijital olarak yönetebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div
+                        class="col-12 col-lg-4 d-flex justify-content-center align-items-center c-border-top mb-4 mb-lg-0 py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/accounting.png" class="mb-3" width="80"
+                                height="80" alt="ZeynERP">
+                            <p class="h5">Muhasebe</p>
+                            <p>
+                                Alışlar, Satışlar Kasa durumlarınızı tek bir tuşla her yerden işleyebilir ve dilediğiniz
+                                şekilde kontrol edebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="col-12 col-lg-4 d-flex justify-content-center align-items-center c-border-top c-border-left c-border-right mb-4 mb-lg-0 py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/inventory.png" class="mb-3" width="80"
+                                height="80" alt="ZeynERP">
+                            <p class="h5">Stok Yönetimi</p>
+                            <p>
+                                Ürün giriş ve çıkışların en güncel bilgisine dilediğiniz her yerden ulaşabilir,
+                                kontrollü olmanın güveni ile şirketinizi yönetebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 d-flex justify-content-center align-items-center c-border-top py-lg-5">
+                        <div class="text-center w-75">
+                            <img src="~/img/zeynerp/homepage-products-icons/report.png" class="mb-3" width="80"
+                                height="80" alt="ZeynERP">
+                            <p class="h5">Raporlar</p>
+                            <p>
+                                Entegre veriler sayesinde birbirinden kullanışlı bir çok raporu çekebilirsiniz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5" style="background-color: gainsboro;">
+    </section>
+    <section id="hakkimizda" class="py-5">
+        <div class="container-fluid">
+            <div class="row py-lg-5">
+                <div class="col-12 col-lg-6 d-flex align-items-center justify-content-center mb-5 mb-lg-0">
+                    @*<iframe class="col-12 col-lg-10" height="418" src="https://www.youtube.com/embed/6qys-562kp4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>*@
+                    <video class="col-12 col-lg-10" height="418" controls>
+                        <source src="~/video/ERP.mp4" type="video/mp4">
+                        What is ZeynERP?
+                    </video>
+                </div>
+                <div class="col-12 col-lg-5">
+                    <div class="d-block d-lg-flex flex-column justify-content-center h-100">
+                        <h1 class="display-6">Hakkımızda</h1>
+                        <div class="w-100" style="height: 10px;"></div>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            2018 yılında grup şirketlerimizde başladığımız dijital dönüşüm projesinin en önemli
+                            ürünü olan ERP yazılımımızı, bizler gibi işlerini geliştirmek isteyen başta küçük ve
+                            orta ölçekli işletmeler ile paylaşarak, ülkemizin kalkınmasına destek olmak istedik.
+                        </p>
+                        <h6 class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            Mottomuz kullanıcı dostu ara yüzlü ve her yerden ulaşılabilir olmaktır.
+                        </h6>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            ZeynERP kullanıcılarına kolay anlaşılabilir, zorlanmadan işlem yapma olanağı sunar ve her
+                            seviyeden çalışanın da işlem yapabilmesine uygun olarak tasarlanmıştır.
+                            ZeynERP ye dilediğiniz her yerden akıllı telefon yada tabletiniz ile de ulaşabilir ve
+                            ofisinizin haricinde de işlerinizi yürütebilirsiniz.
+                        </p>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            ZeynERP sayesinde işlerinizde ki tüm süreçler birbiri ile koordineli çalışır ve verimlilik
+                            en üst seviyeye çıkar.
+                        </p>
+                        <p class="d-block d-lg-inline mt-3" style="width: 95%; font-size: 18px;">
+                            Duraksamadan her aşamada katkı alacağınız şekilde ZeynERP'i geliştirmeye devam ediyoruz.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
