@@ -137,3 +137,4 @@ C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Web\bin\Debug\net8.0\ru\Microsoft.C
 C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Web\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Web\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Web\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\IT\Desktop\Projects\zeynerp\zeynerp.Web\obj\Debug\net8.0\zeynerp.Web.sourcelink.json

@@ -1,17 +1,19 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using zeynerp.Data.Models;
-using zeynerp.Web.ViewModels;
+using zeynerp.Web.Models;
 
 namespace zeynerp.Web.Controllers
 {
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Register()
@@ -21,12 +23,12 @@ namespace zeynerp.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([FromForm] RegisterViewModel registerViewModel)
+        public async Task<IActionResult> Register([FromForm] RegisterModel registerModel)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = registerViewModel.Email, Email = registerViewModel.Email };
-                var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+                var user = new ApplicationUser() { UserName = registerModel.UserName, Email = registerModel.Email };
+                var result = await _userManager.CreateAsync(user, registerModel.Password);
                 if(result.Succeeded)
                 {
                     return RedirectToAction("Login");
@@ -36,10 +38,16 @@ namespace zeynerp.Web.Controllers
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-            return View(registerViewModel);
+            return View(registerModel);
         }
 
         public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel loginModel)
         {
             return View();
         }

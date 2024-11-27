@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using zeynerp.Web.ViewModels;
+using zeynerp.Web.Models;
 
 namespace zeynerp.Web.Controllers;
 

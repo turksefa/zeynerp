@@ -1,13 +1,13 @@
-namespace zeynerp.Web.ViewModels
+namespace zeynerp.Web.Models
 {
-    public class RegisterViewModel
+    public class RegisterModel
     {
         public string UserName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
 
-    public class LoginViewModel
+    public class LoginModel
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
