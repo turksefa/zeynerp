@@ -1,0 +1,8 @@
+@model IEnumerable<ProductDto>
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <li>@product.Name</li>
+    }
+</ul>
