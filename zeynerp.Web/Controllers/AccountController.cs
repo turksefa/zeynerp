@@ -26,14 +26,7 @@ namespace zeynerp.Web.Controllers
                 var result = await _unitOfWork.AuthService.RegisterAsync(registerDto);
 
                 if (result.Succeeded)
-                {
-                    // var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token }, protocol: Request.Scheme);
-
-                    // if (callbackUrl != null)
-                    //     await _emailSender.SendEmailAsync(registerDto.Email, "Confirm your email",
-                    //         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
+                {                    
                     return RedirectToAction("Login");
                 }
 
@@ -64,27 +57,18 @@ namespace zeynerp.Web.Controllers
             returnUrl = returnUrl ?? Url.Content("~/Dashboard/Index");
             if (ModelState.IsValid)
             {
-                // var user = await _userManager.FindByEmailAsync(loginDto.Email);
-                // if(user == null)
-                // {
-                //     ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
-                //     return View();
-                // }
-
-                // if(!user.EmailConfirmed)
-                // {
-                //     ModelState.AddModelError(string.Empty, "Hesabınızı doğrulamadınız. Lütfen e-posta adresinizi kontrol edin.");
-                //     return View();
-                // }
-
                 var result = await _unitOfWork.AuthService.LoginAsync(loginDto);
-
                 if (result.Succeeded)
                 {
                     return Redirect(returnUrl);
                 }
-
-                ModelState.AddModelError(string.Empty, "Geçersiz kullanıcı adı veya şifre.");
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error);
+                    }
+                }                
             }
             return View();
         }

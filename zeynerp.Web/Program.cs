@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using zeynerp.Application.Interfaces;
 using zeynerp.Application.Services;
@@ -6,6 +7,7 @@ using zeynerp.Core.Entities;
 using zeynerp.Core.Interfaces;
 using zeynerp.Infrastructure.Data;
 using zeynerp.Infrastructure.Repositories;
+using zeynerp.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +21,11 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddAutoMapper(typeof(Program));
 

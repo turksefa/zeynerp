@@ -13,3 +13,4 @@ C:\Users\IT\Desktop\zeynerp\zeynerp.Infrastructure\obj\Debug\net8.0\zeynerp.Infr
 C:\Users\IT\Desktop\zeynerp\zeynerp.Infrastructure\obj\Debug\net8.0\refint\zeynerp.Infrastructure.dll
 C:\Users\IT\Desktop\zeynerp\zeynerp.Infrastructure\obj\Debug\net8.0\zeynerp.Infrastructure.pdb
 C:\Users\IT\Desktop\zeynerp\zeynerp.Infrastructure\obj\Debug\net8.0\ref\zeynerp.Infrastructure.dll
+C:\Users\IT\Desktop\zeynerp\zeynerp.Infrastructure\obj\Debug\net8.0\zeynerp.Infrastructure.sourcelink.json
