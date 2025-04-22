@@ -1,0 +1,101 @@
+@model SubscriptionViewModel
+@{
+    ViewData["LayoutTitle"] = "Planlar";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li>
+                <a asp-action="Index">Plan & Abonelik</a>
+            </li>
+
+            <li><span class="text-light">Planlar</span></li>
+
+        </ol>
+    </div>
+</header>
+
+<div class="row">
+    @if (Model.PlanViewModels != null)
+    {
+        foreach (var plan in Model.PlanViewModels)
+        {
+            <div class="col-lg-3 col-sm-6 mb-5">
+                <div class="pricing-card p-4 border bg-light">
+                    <h5 class="fw-bold fs-4 text-start text-dark">@plan.Name</h5>
+                    @if (plan.Name != "Tedarik Yönetimi")
+                    {
+                        <h2 class="fw-bold text-start text-dark">@plan.Price.ToString("C") <span class="fs-6">/ aylık</span></h2>
+                        <a href="@Url.Action("Checkout", "Payment", new { planId = plan.Id })" class="btn btn-dark w-100 my-3">Abone
+                            Ol</a>
+                        <ul class="list-unstyled text-center">
+                            <li class="py-1">✔ Stok Yönetimi</li>
+                            <li class="py-1">✔ Personel Yönetimi</li>
+                            <li class="py-1">✔ 1,000 Subscribers</li>
+                            <li class="py-1">✔ 10 Team Members</li>
+                            <li class="py-1">✔ 10 Metrics</li>
+                            <li class="py-1">✔ Email/SMS/Webhook Notifications</li>
+                            <li class="py-1">✔ Custom CSS</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <h2 class="fw-bold text-start text-dark">@plan.Price.ToString("C")</h2>
+                        <button type="button" class="btn w-100 my-3 border-0">Ücretsiz</button>
+                        <ul class="list-unstyled text-center">
+                            <li class="py-1">✔ Personel Yönetimi</li>
+                            <li class="py-1">✔ 250 Subscribers</li>
+                            <li class="py-1">✔ 5 Team Members</li>
+                            <li class="py-1">✔ 5 Metrics</li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@section Styles {
+    <style>
+        .card-header {
+            cursor: pointer;
+        }
+
+        .pricing-card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .pricing-card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script src="~/js/examples/examples.validation.js"></script>
+    <script>
+        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+        if (errorMessages.length > 0) {
+            var notice = new PNotify({
+                text: errorMessages.join('<br>'),
+                type: 'error',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        } 
+    </script>
+}

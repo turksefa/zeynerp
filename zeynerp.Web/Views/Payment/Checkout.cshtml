@@ -1,0 +1,162 @@
+@model PaymentViewModel
+@{
+    ViewData["LayoutTitle"] = "Checkout";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li>
+                <span><a asp-action="Index" asp-controller="Subscription">Plan & Abonelik</a></span>
+            </li>
+            <li>
+                <span><a asp-action="Plans" asp-controller="Subscription">Planlar</a></span>
+            </li>
+
+            <li><span class="text-light">Checkout</span></li>
+
+        </ol>
+    </div>
+</header>
+
+<form id="form" asp-action="Checkout" method="post">
+    <input type="hidden" asp-for="Price" value="@Model.PlanViewModel.Price">
+    <input type="hidden" asp-for="PlanId" value="@Model.PlanViewModel.Id">
+    <div class="row">
+        <div class="col-8 rounded bg-white">
+            <h3 class="mb-3">Kredi / ATM Kartı ile öde</h3>
+            <div class="payment-icons mb-3">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-cc-paypal"></i>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Kart Sahibi Adı</label>
+                <input type="text" asp-for="@Model.HolderName" class="form-control" placeholder="Adınız Soyadınız"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Kart Numarası</label>
+                <input type="text" asp-for="@Model.CardNumber" class="form-control" placeholder="**** **** **** ****"
+                    required>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Son Kullanma / Ay</label>
+                    <input type="text" asp-for="@Model.ExpireMonth" class="form-control" placeholder="Ay" required>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Son Kullanma / Yıl</label>
+                    <input type="text" asp-for="@Model.ExpireYear" class="form-control" placeholder="Yıl" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">CVV</label>
+                    <input type="text" asp-for="@Model.Cvc" class="form-control" placeholder="123" required>
+                </div>
+            </div>
+            <input type="checkbox" checked disabled>
+            <span>3D Secure kullanmak istiyorum</span>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="summary-box p-4 rounded bg-white">
+                        <h4 class="fs-4 text-dark">Ödeme Özeti</h4>
+                        <div class="invoice-summary">
+                            <table class="table">
+                                <tbody>
+                                    <tr class="b-top-0">
+                                        <td colspan="2" class="align-middle">Plan Sayısı</td>
+                                        <td class="text-start">
+                                            <select name="" id="" class="form-control">
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr class="b-top-0">
+                                        <td colspan="2"><strong>@Model.PlanViewModel.Name</strong></td>
+                                        <td class="text-end">@Model.PlanViewModel.Price.ToString("C")</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">KDV</td>
+                                        <td class="text-end">@(((@Model.PlanViewModel.Price * 20) / 100).ToString("C"))
+                                        </td>
+                                    </tr>
+                                    <tr class="h5">
+                                        <td colspan="2">Toplam</td>
+                                        <td class="text-end">
+                                            @((((@Model.PlanViewModel.Price * 20) / 100) +
+                                                                                        @Model.PlanViewModel.Price).ToString("C"))
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item border-0 p-0">
+                                <input type="checkbox">
+                                <span><a href="">Ön bilgilendirme formunu</a> ve <a href="">mesafeli satış
+                                        sözleşmesini</a> kabul ediyorum.</span>
+                            </li>
+                            <li class="list-group-item border-0 p-0">
+                                <input type="checkbox">
+                                <span><a href="">Kullanıcı sözleşmesini</a> ve <a href="">gizlilik politikasını</a>
+                                    okudum ve kabul ediyorum.</span>
+                            </li>
+                            <li class="list-group-item border-0 px-0">
+                                <button type="submit" class="btn btn-primary w-100">Ödemeyi Tamamla</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section VendorStyles
+{
+    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
+}
+
+@section VendorScripts
+{
+    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
+    <script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
+}
+
+@section Scripts
+{
+    <script src="~/js/examples/examples.validation.js"></script>
+    <script>
+        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
+        if (errorMessages.length > 0) {
+            var notice = new PNotify({
+                text: errorMessages.join('<br>'),
+                type: 'error',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        } 
+    </script>
+}
