@@ -1,0 +1,22 @@
+@model string
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>3D Secure Yönlendirme</title>
+</head>
+<body>
+    <div id="iyzico-3d-form">
+        @Html.Raw(Model)
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("iyzico-3d-form").getElementsByTagName("form")[0].submit();
+        });
+    </script>
+</body>
+</html>

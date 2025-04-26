@@ -2,8 +2,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using zeynerp.Core.Entities;
-using zeynerp.Core.Exceptions;
-using zeynerp.Core.Services;
+using zeynerp.Application.Services;
 using zeynerp.Infrastructure.Data.Contexts;
 
 namespace zeynerp.Infrastructure.Services

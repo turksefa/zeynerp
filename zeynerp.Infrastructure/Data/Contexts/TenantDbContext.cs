@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using zeynerp.Core.Entities;
 
 namespace zeynerp.Infrastructure.Data.Contexts
 {

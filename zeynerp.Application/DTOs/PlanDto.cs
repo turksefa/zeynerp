@@ -1,4 +1,4 @@
-namespace zeynerp.Core.DTOs
+namespace zeynerp.Application.DTOs
 {
     public class PlanDto
     {

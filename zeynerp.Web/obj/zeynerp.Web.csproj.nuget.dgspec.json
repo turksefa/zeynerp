@@ -158,8 +158,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj": {
-                "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj"
+              "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Application\\zeynerp.Application.csproj": {
+                "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Application\\zeynerp.Application.csproj"
               }
             }
           }
@@ -179,6 +179,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Iyzipay": {
+              "target": "Package",
+              "version": "[2.1.67, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[4.11.0, )"

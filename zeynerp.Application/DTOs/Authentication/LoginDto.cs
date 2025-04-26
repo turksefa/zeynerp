@@ -1,4 +1,4 @@
-namespace zeynerp.Core.DTOs.Authentication
+namespace zeynerp.Application.DTOs.Authentication
 {
     public class LoginDto
     {

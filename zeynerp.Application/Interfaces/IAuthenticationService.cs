@@ -1,6 +1,6 @@
-using zeynerp.Core.DTOs.Authentication;
+using zeynerp.Application.DTOs.Authentication;
 
-namespace zeynerp.Core.Services
+namespace zeynerp.Application.Services
 {
     public interface IAuthenticationService
     {

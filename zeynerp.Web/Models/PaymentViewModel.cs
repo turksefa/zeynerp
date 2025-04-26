@@ -10,6 +10,6 @@ namespace zeynerp.Web.Models
         public string ExpireYear { get; set; } = string.Empty;
         public string Cvc { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public int PlanId { get; set; }
+        public Guid PlanId { get; set; }
     }
 }

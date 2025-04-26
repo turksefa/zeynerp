@@ -1,6 +1,6 @@
 using zeynerp.Core.Entities;
 
-namespace zeynerp.Core.Services
+namespace zeynerp.Application.Services
 {
     public interface ITenantService
     {

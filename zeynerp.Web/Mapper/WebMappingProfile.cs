@@ -1,6 +1,6 @@
 using AutoMapper;
-using zeynerp.Core.DTOs;
-using zeynerp.Core.DTOs.Authentication;
+using zeynerp.Application.DTOs;
+using zeynerp.Application.DTOs.Authentication;
 using zeynerp.Web.Models;
 using zeynerp.Web.Models.Authentication;
 

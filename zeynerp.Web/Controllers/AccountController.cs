@@ -1,7 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using zeynerp.Core.DTOs.Authentication;
-using zeynerp.Core.Services;
+using zeynerp.Application.DTOs.Authentication;
+using zeynerp.Application.Services;
 using zeynerp.Web.Models.Authentication;
 
 namespace zeynerp.Web.Controllers

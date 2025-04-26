@@ -1,6 +1,6 @@
 using AutoMapper;
 using zeynerp.Application.Interfaces;
-using zeynerp.Core.DTOs;
+using zeynerp.Application.DTOs;
 using zeynerp.Core.Exceptions;
 using zeynerp.Core.Interfaces;
 

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using zeynerp.Core.Services;
+using zeynerp.Application.Services;
 
 namespace zeynerp.Infrastructure
 {

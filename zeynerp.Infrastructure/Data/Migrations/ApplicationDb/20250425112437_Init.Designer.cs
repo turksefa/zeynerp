@@ -12,7 +12,7 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250421125012_Init")]
+    [Migration("20250425112437_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -178,45 +178,45 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.HasData(
                         new
                         {
-                            Id = new Guid("23314547-e40a-4d78-af8d-51a1454708c7"),
-                            Name = "Finans ve Muhasebe Yönetimi",
-                            Price = 6000m
-                        },
-                        new
-                        {
-                            Id = new Guid("4a28fd15-f8eb-4438-8bd8-9736f5821429"),
-                            Name = "Personel Yönetimi",
-                            Price = 6000m
-                        },
-                        new
-                        {
-                            Id = new Guid("7bc4ba60-31ef-45d5-917a-298b6a4b7d5c"),
-                            Name = "Kalite Yönetimi",
-                            Price = 6000m
-                        },
-                        new
-                        {
-                            Id = new Guid("f6ef76d7-5a72-49d1-ac64-30ec40d14555"),
-                            Name = "Üretim Yönetimi",
-                            Price = 6000m
-                        },
-                        new
-                        {
-                            Id = new Guid("c5473f55-c9a1-468a-9a82-ff41fa423275"),
-                            Name = "Proje Yönetimi",
-                            Price = 6000m
-                        },
-                        new
-                        {
-                            Id = new Guid("c788cbb8-08d7-4710-84f0-e3177687574a"),
-                            Name = "Stok Yönetimi",
-                            Price = 1299m
-                        },
-                        new
-                        {
-                            Id = new Guid("dd726d8c-1302-4fc5-9ab9-e2a5860b3dbc"),
+                            Id = new Guid("05470cb5-1322-40d7-af30-45a507431416"),
                             Name = "Satın Alma Yönetimi",
                             Price = 0m
+                        },
+                        new
+                        {
+                            Id = new Guid("5211b08e-eca9-4882-81c1-b8bbf56dcd6b"),
+                            Name = "Finans ve Muhasebe Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("09179681-dff4-4f31-a3fd-b49afb4a353c"),
+                            Name = "Personel Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("baa65371-d1be-48f3-8dd0-54046a5c7905"),
+                            Name = "Kalite Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("ea389ff1-7115-47e8-95eb-936abd48eb26"),
+                            Name = "Üretim Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("2aaf7637-b199-4c63-b066-198428a975c6"),
+                            Name = "Proje Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("fb8e4f3e-8275-4fbe-bf12-aa08f9c6c6c2"),
+                            Name = "Stok Yönetimi",
+                            Price = 2000m
                         });
                 });
 
@@ -237,11 +237,9 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("zeynerp.Core.Entities.TenantPlan", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ExpiryDate")
                         .HasColumnType("datetime2");

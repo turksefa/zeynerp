@@ -110,8 +110,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                 name: "TenantPlans",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -224,13 +223,13 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("23314547-e40a-4d78-af8d-51a1454708c7"), "Finans ve Muhasebe Yönetimi", 6000m },
-                    { new Guid("4a28fd15-f8eb-4438-8bd8-9736f5821429"), "Personel Yönetimi", 6000m },
-                    { new Guid("7bc4ba60-31ef-45d5-917a-298b6a4b7d5c"), "Kalite Yönetimi", 6000m },
-                    { new Guid("c5473f55-c9a1-468a-9a82-ff41fa423275"), "Proje Yönetimi", 6000m },
-                    { new Guid("c788cbb8-08d7-4710-84f0-e3177687574a"), "Stok Yönetimi", 1299m },
-                    { new Guid("dd726d8c-1302-4fc5-9ab9-e2a5860b3dbc"), "Satın Alma Yönetimi", 0m },
-                    { new Guid("f6ef76d7-5a72-49d1-ac64-30ec40d14555"), "Üretim Yönetimi", 6000m }
+                    { new Guid("05470cb5-1322-40d7-af30-45a507431416"), "Satın Alma Yönetimi", 0m },
+                    { new Guid("09179681-dff4-4f31-a3fd-b49afb4a353c"), "Personel Yönetimi", 2000m },
+                    { new Guid("2aaf7637-b199-4c63-b066-198428a975c6"), "Proje Yönetimi", 2000m },
+                    { new Guid("5211b08e-eca9-4882-81c1-b8bbf56dcd6b"), "Finans ve Muhasebe Yönetimi", 2000m },
+                    { new Guid("baa65371-d1be-48f3-8dd0-54046a5c7905"), "Kalite Yönetimi", 2000m },
+                    { new Guid("ea389ff1-7115-47e8-95eb-936abd48eb26"), "Üretim Yönetimi", 2000m },
+                    { new Guid("fb8e4f3e-8275-4fbe-bf12-aa08f9c6c6c2"), "Stok Yönetimi", 2000m }
                 });
 
             migrationBuilder.CreateIndex(

@@ -2,7 +2,7 @@ namespace zeynerp.Core.Entities
 {
     public class TenantPlan
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public Guid TenantId { get; set; }
         public Guid PlanId { get; set; }
         public DateTime? ExpiryDate  { get; set; }

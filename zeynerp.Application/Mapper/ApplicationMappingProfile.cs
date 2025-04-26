@@ -1,5 +1,5 @@
 using AutoMapper;
-using zeynerp.Core.DTOs;
+using zeynerp.Application.DTOs;
 using zeynerp.Core.Entities;
 
 namespace zeynerp.Application.Mapper

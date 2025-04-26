@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using zeynerp.Core.DTOs.Authentication;
-using zeynerp.Core.Services;
+using zeynerp.Application.DTOs.Authentication;
+using zeynerp.Application.Services;
 using zeynerp.Infrastructure.Identity.Models;
 using zeynerp.Infrastructure.Services;
 

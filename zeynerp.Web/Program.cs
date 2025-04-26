@@ -6,11 +6,11 @@ using zeynerp.Application.Mapper;
 using zeynerp.Application.Services;
 using zeynerp.Core.Interfaces;
 using zeynerp.Core.Repositories;
-using zeynerp.Core.Services;
 using zeynerp.Infrastructure;
 using zeynerp.Infrastructure.Data;
 using zeynerp.Infrastructure.Data.Contexts;
 using zeynerp.Infrastructure.Data.Repositories;
+using zeynerp.Infrastructure.Identity;
 using zeynerp.Infrastructure.Identity.Models;
 using zeynerp.Infrastructure.Identity.Services;
 using zeynerp.Infrastructure.Services;
@@ -30,7 +30,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+    .AddDefaultTokenProviders()
+    .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
 builder.Services.AddHttpContextAccessor();
 
@@ -41,6 +42,7 @@ builder.Services.AddScoped<TenantDbContextFactory>();
 builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<IPaymentService, IyzicoPaymentService>();
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IPlanService, PlanService>();

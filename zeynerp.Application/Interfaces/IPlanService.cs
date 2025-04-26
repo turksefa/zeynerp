@@ -1,4 +1,4 @@
-using zeynerp.Core.DTOs;
+using zeynerp.Application.DTOs;
 
 namespace zeynerp.Application.Interfaces
 {

@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using zeynerp.Core.Services;
+using zeynerp.Application.Services;
 
 namespace zeynerp.Infrastructure.Data.Contexts
 {

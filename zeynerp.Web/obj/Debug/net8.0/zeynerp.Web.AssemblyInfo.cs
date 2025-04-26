@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("zeynerp.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45d42143a2a0d4cf9bb4b8bbc31cf9a38bb122fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("zeynerp.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("zeynerp.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

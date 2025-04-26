@@ -9,10 +9,5 @@ namespace zeynerp.Infrastructure.Data.Repositories
         public TenantPlanRepository(ApplicationDbContext context) : base(context)
         {
         }
-
-        public Task AssignPlanToTenantAsync(int tenantId, int planId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
