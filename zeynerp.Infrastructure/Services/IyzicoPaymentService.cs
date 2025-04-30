@@ -8,7 +8,7 @@ using zeynerp.Application.Interfaces;
 
 namespace zeynerp.Infrastructure.Services
 {
-    public class IyzicoPaymentService : IPaymentService
+    public class IyzicoPaymentService : IPaymentProcessor
     {
         private readonly Options _options;
 
@@ -21,7 +21,7 @@ namespace zeynerp.Infrastructure.Services
                 BaseUrl = configuration["Iyzico:BaseUrl"]
             };
         }
-        public async Task<(bool Success, string Error)> ProcessPaymentAsync(PaymentDto paymentDto)
+        public async Task<(bool Success, string Error, string HtmlContent)> Initialize3DPaymentAsync(PaymentDto paymentDto)
         {
             CreatePaymentRequest paymentRequest = new CreatePaymentRequest
             {
@@ -33,7 +33,7 @@ namespace zeynerp.Infrastructure.Services
                 BasketId = paymentDto.PlanId.ToString(),
                 PaymentChannel = PaymentChannel.WEB.ToString(),
                 PaymentGroup = PaymentGroup.PRODUCT.ToString(),
-                CallbackUrl = $"http://localhost:5294/Payment/Callback?planId={paymentDto.PlanId}"
+                CallbackUrl = $"http://localhost:5208/Payment/Callback?planId={paymentDto.PlanId}&tenantId={paymentDto.TenantId}"
             };
 
             PaymentCard paymentCard = new PaymentCard
@@ -100,7 +100,7 @@ namespace zeynerp.Infrastructure.Services
 
             ThreedsInitialize threedsInitialize = await ThreedsInitialize.Create(paymentRequest, _options);
 
-            return (threedsInitialize.Status == "success", threedsInitialize.ErrorMessage); 
+            return (threedsInitialize.Status == "success", threedsInitialize.ErrorMessage, threedsInitialize.HtmlContent); 
         }
     }
 }

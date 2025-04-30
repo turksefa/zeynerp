@@ -9,6 +9,7 @@ namespace zeynerp.Application.Mapper
         public ApplicationMappingProfile()
         {
             CreateMap<Plan, PlanDto>();
+            CreateMap<TenantPlan, TenantPlanDto>();
         }
     }
 }

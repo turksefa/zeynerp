@@ -1,5 +1,6 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using zeynerp.Application.Interfaces;
 using zeynerp.Application.Mapper;
@@ -41,11 +42,14 @@ builder.Services.AddAutoMapper(typeof(ApplicationMappingProfile));
 builder.Services.AddScoped<TenantDbContextFactory>();
 builder.Services.AddScoped<ITenantService, TenantService>();
 builder.Services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>();
-builder.Services.AddScoped<EmailService>();
-builder.Services.AddScoped<IPaymentService, IyzicoPaymentService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IPaymentProcessor, IyzicoPaymentService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IPlanService, PlanService>();
+builder.Services.AddScoped<ITenantPlanService, TenantPlanService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ITenantPlanRepository, TenantPlanRepository>();
@@ -64,7 +68,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseMiddleware<TenantMiddleware>();
-app.UseMiddleware<ExceptionMiddleware>();
+// app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseRouting();
 

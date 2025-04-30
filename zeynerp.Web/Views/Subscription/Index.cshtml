@@ -1,3 +1,4 @@
+@model TenantPlanViewModel
 @{
     ViewData["LayoutTitle"] = "Plan & Abonelik";
 }
@@ -14,7 +15,7 @@
 
 <div class="row">
     <div class="col-md-3">
-        <section class="card card-featured card-featured-success mb-4">
+        <section class="card card-featured card-featured-primary mb-4">
             <header class="card-header">
                 <div class="card-actions">
                     <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
@@ -35,75 +36,43 @@
         </section>
     </div>
 
-    @* <div class="col-md-3">
-        <section class="card card-featured card-featured-primary mb-4">
-            <header class="card-header">
-                <div class="card-actions">
-                    <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
-                </div>
+    @foreach (var tenantPlan in Model.TenantPlanDtos)
+    {
+        <div class="col-md-3">
+            <section class="card card-featured card-featured-dark mb-4">
+                <header class="card-header">
+                    <div class="card-actions">
+                        <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                    </div>
 
-                <h2 class="card-title">Enterprise Plan</h2>
-            </header>
-            <div class="card-body bg-light">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between bg-transparent border-0 border-bottom">
-                        <span>Abonelik</span><span>1</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between bg-transparent border-0">
-                        <span>Lisanslar</span><span>5</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <a class="btn btn-default">Yönet</a>
-                <div class="dropdown ms-auto">
-                    <a class="btn btn-default dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" data-bs-offset="0,5">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Kullanıcı Ata</a></li>
+                    <h2 class="card-title">@tenantPlan.Plan.Name</h2>
+                </header>
+                <div class="card-body bg-light">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between bg-transparent border-0 border-bottom">
+                            <span>Abonelik</span><span>1</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between bg-transparent border-0">
+                            <span>Lisanslar</span><span>1</span>
+                        </li>
                     </ul>
                 </div>
-            </div>
-        </section>
-    </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a class="btn btn-default">Yönet</a>
+                    <div class="dropdown ms-auto">
+                        <a class="btn btn-default dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" data-bs-offset="0,5">
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </a>
 
-    <div class="col-md-3">
-        <section class="card card-featured card-featured-danger mb-4">
-            <header class="card-header">
-                <div class="card-actions">
-                    <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Kullanıcı Ata</a></li>
+                        </ul>
+                    </div>
                 </div>
-
-                <h2 class="card-title">Premium Plan</h2>
-            </header>
-            <div class="card-body bg-light">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex justify-content-between bg-transparent border-0 border-bottom">
-                        <span>Abonelik</span><span>2</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between bg-transparent border-0">
-                        <span>Lisanslar</span><span>10</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-footer d-flex justify-content-between">
-                <a class="btn btn-default">Yönet</a>
-                <div class="dropdown ms-auto">
-                    <a class="btn btn-default dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" data-bs-offset="0,5">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Kullanıcı Ata</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </div> *@
+            </section>
+        </div>
+    }
 </div>
 
 @section Styles {

@@ -14,6 +14,8 @@ namespace zeynerp.Web.Mapper
             CreateMap<LoginViewModel, LoginDto>();
             CreateMap<PlanDto, PlanViewModel>();
             CreateMap<ForgotPasswordViewModel, ForgotPasswordDto>();
+            CreateMap<PaymentViewModel, PaymentDto>();
+            CreateMap<UserDto, UserViewModel>();
         }
     }
 }

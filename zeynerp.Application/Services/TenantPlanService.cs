@@ -1,3 +1,4 @@
+using AutoMapper;
 using zeynerp.Application.DTOs;
 using zeynerp.Application.Interfaces;
 using zeynerp.Core.Entities;
@@ -8,17 +9,16 @@ namespace zeynerp.Application.Services
     public class TenantPlanService : ITenantPlanService
     {
         private readonly IApplicationUnitOfWork _applicationUnitOfWork;
+        private readonly IMapper _mapper;
 
-        public TenantPlanService(IApplicationUnitOfWork applicationUnitOfWork)
+        public TenantPlanService(IApplicationUnitOfWork applicationUnitOfWork, IMapper mapper)
         {
             _applicationUnitOfWork = applicationUnitOfWork;
+            _mapper = mapper;
         }
 
-        public Task<IReadOnlyList<TenantPlanDto>> GetAllTenantPlansAsync()
-        {
-            throw new NotImplementedException();
-        }
-
+        public async Task<IReadOnlyList<TenantPlanDto>> GetTenantPlansByTenantIdAsync(Guid tenantId) =>
+            _mapper.Map<IReadOnlyList<TenantPlanDto>>(await _applicationUnitOfWork.TenantPlanRepository.GetPlansByTenantIdAsync(tenantId));
         public async Task CreateTenantPlanAsync(Guid tenantId, Guid planId)
         {
             var tenantPlan = new TenantPlan
@@ -31,6 +31,6 @@ namespace zeynerp.Application.Services
 
             await _applicationUnitOfWork.TenantPlanRepository.AddAsync(tenantPlan);
             await _applicationUnitOfWork.SaveChangesAsync();
-        }        
+        }
     }
 }

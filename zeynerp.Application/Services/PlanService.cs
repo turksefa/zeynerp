@@ -17,7 +17,11 @@ namespace zeynerp.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IReadOnlyList<PlanDto>> GetAllPlansAsync() => _mapper.Map<IReadOnlyList<PlanDto>>(await _applicationUnitOfWork.PlanRepository.GetAllAsync());
+        public async Task<IReadOnlyList<PlanDto>> GetPlansAsync()
+        {
+            var plans = await _applicationUnitOfWork.PlanRepository.GetAllAsync();
+            return _mapper.Map<IReadOnlyList<PlanDto>>(plans.OrderBy(p => p.Price));
+        }
 
         public async Task<(bool Success, string Error, PlanDto? planDto)> GetPlanByIdAsync(Guid planId)
         {

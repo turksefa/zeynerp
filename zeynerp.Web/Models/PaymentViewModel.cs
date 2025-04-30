@@ -11,5 +11,6 @@ namespace zeynerp.Web.Models
         public string Cvc { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public Guid PlanId { get; set; }
+        public Guid TenantId { get; set; }
     }
 }

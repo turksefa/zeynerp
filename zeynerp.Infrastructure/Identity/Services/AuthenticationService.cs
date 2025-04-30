@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using zeynerp.Application.DTOs.Authentication;
 using zeynerp.Application.Services;
 using zeynerp.Infrastructure.Identity.Models;
@@ -11,14 +12,14 @@ namespace zeynerp.Infrastructure.Identity.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITenantService _tenantService;
-        private readonly EmailService _emailService;
+        private readonly IEmailSender _emailSender;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITenantService tenantService, EmailService emailService)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITenantService tenantService, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tenantService = tenantService;
-            _emailService = emailService;
+            _emailSender = emailSender;
         }
 
         public async Task<(bool Success, string Error)> LoginAsync(LoginDto loginDto)
@@ -67,7 +68,7 @@ namespace zeynerp.Infrastructure.Identity.Services
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var resetLink = $"http://localhost:5208/ResetPassword?email={forgotPasswordDto.Email}&token={Uri.EscapeDataString(token)}";
-                await _emailService.SendEmailAsync(user.Email, "Reset Password", $"Please reset your password by <a href='{resetLink}'>clicking here</a>.");
+                await _emailSender.SendEmailAsync(user.Email, "Reset Password", $"Please reset your password by <a href='{resetLink}'>clicking here</a>.");
             }
             else
             {

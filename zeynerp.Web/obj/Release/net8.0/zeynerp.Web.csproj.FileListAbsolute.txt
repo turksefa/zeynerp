@@ -150,3 +150,6 @@ C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\obj\Release\net8.0\refint\zeynerp.We
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\obj\Release\net8.0\zeynerp.Web.pdb
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\obj\Release\net8.0\zeynerp.Web.genruntimeconfig.cache
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\obj\Release\net8.0\ref\zeynerp.Web.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\Iyzipay.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\Newtonsoft.Json.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\obj\Release\net8.0\zeynerp.Web.sourcelink.json

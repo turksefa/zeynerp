@@ -8,6 +8,7 @@ namespace zeynerp.Application.DTOs
         public string ExpireMonth { get; set; } = string.Empty;
         public string ExpireYear { get; set; } = string.Empty;
         public string CVC { get; set; } = string.Empty;
-        public int PlanId { get; set; }
+        public Guid TenantId { get; set; }
+        public Guid PlanId { get; set; }
     }
 }

@@ -22,8 +22,9 @@
 </header>
 
 <form id="form" asp-action="Checkout" method="post">
-    <input type="hidden" asp-for="Price" value="@Model.PlanViewModel.Price">
+    <input type="hidden" asp-for="TenantId" value="@Model.TenantId">
     <input type="hidden" asp-for="PlanId" value="@Model.PlanViewModel.Id">
+    <input type="hidden" asp-for="Price" value="@Model.PlanViewModel.Price">
     <div class="row">
         <div class="col-8 rounded bg-white">
             <h3 class="mb-3">Kredi / ATM Kartı ile öde</h3>

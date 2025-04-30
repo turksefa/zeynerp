@@ -8,6 +8,7 @@ C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\AutoMappe
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Azure.Core.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Azure.Identity.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\BouncyCastle.Cryptography.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Iyzipay.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\MailKit.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Microsoft.AspNetCore.Identity.UI.dll
@@ -28,6 +29,7 @@ C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Microsoft
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Microsoft.SqlServer.Server.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Microsoft.Win32.SystemEvents.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\MimeKit.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\Newtonsoft.Json.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\System.Configuration.ConfigurationManager.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\System.Drawing.Common.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web\bin\Release\net8.0\publish\System.Formats.Asn1.dll

@@ -175,43 +175,43 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.HasData(
                         new
                         {
-                            Id = new Guid("05470cb5-1322-40d7-af30-45a507431416"),
+                            Id = new Guid("c5437855-8f61-489e-aafd-63c750ee6911"),
                             Name = "Satın Alma Yönetimi",
                             Price = 0m
                         },
                         new
                         {
-                            Id = new Guid("5211b08e-eca9-4882-81c1-b8bbf56dcd6b"),
+                            Id = new Guid("b10cdd61-9b22-40b7-a14b-49109a303d4b"),
                             Name = "Finans ve Muhasebe Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("09179681-dff4-4f31-a3fd-b49afb4a353c"),
+                            Id = new Guid("19bc8f11-bb94-403c-906d-237a5aa8ecdd"),
                             Name = "Personel Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("baa65371-d1be-48f3-8dd0-54046a5c7905"),
+                            Id = new Guid("be23d233-bfd9-4b1e-b118-fbb63b1e8122"),
                             Name = "Kalite Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("ea389ff1-7115-47e8-95eb-936abd48eb26"),
+                            Id = new Guid("cb2ea3d1-be21-4de9-9df7-d85419b1e0fe"),
                             Name = "Üretim Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("2aaf7637-b199-4c63-b066-198428a975c6"),
+                            Id = new Guid("92b9a6df-8337-4786-8de3-d2af275bc90a"),
                             Name = "Proje Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("fb8e4f3e-8275-4fbe-bf12-aa08f9c6c6c2"),
+                            Id = new Guid("647744ac-827f-486c-866c-42c2a0a5e891"),
                             Name = "Stok Yönetimi",
                             Price = 2000m
                         });
@@ -311,6 +311,9 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier");

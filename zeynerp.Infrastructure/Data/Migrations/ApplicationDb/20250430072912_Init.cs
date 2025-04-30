@@ -80,6 +80,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     TenantId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -223,13 +224,13 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("05470cb5-1322-40d7-af30-45a507431416"), "Satın Alma Yönetimi", 0m },
-                    { new Guid("09179681-dff4-4f31-a3fd-b49afb4a353c"), "Personel Yönetimi", 2000m },
-                    { new Guid("2aaf7637-b199-4c63-b066-198428a975c6"), "Proje Yönetimi", 2000m },
-                    { new Guid("5211b08e-eca9-4882-81c1-b8bbf56dcd6b"), "Finans ve Muhasebe Yönetimi", 2000m },
-                    { new Guid("baa65371-d1be-48f3-8dd0-54046a5c7905"), "Kalite Yönetimi", 2000m },
-                    { new Guid("ea389ff1-7115-47e8-95eb-936abd48eb26"), "Üretim Yönetimi", 2000m },
-                    { new Guid("fb8e4f3e-8275-4fbe-bf12-aa08f9c6c6c2"), "Stok Yönetimi", 2000m }
+                    { new Guid("19bc8f11-bb94-403c-906d-237a5aa8ecdd"), "Personel Yönetimi", 2000m },
+                    { new Guid("647744ac-827f-486c-866c-42c2a0a5e891"), "Stok Yönetimi", 2000m },
+                    { new Guid("92b9a6df-8337-4786-8de3-d2af275bc90a"), "Proje Yönetimi", 2000m },
+                    { new Guid("b10cdd61-9b22-40b7-a14b-49109a303d4b"), "Finans ve Muhasebe Yönetimi", 2000m },
+                    { new Guid("be23d233-bfd9-4b1e-b118-fbb63b1e8122"), "Kalite Yönetimi", 2000m },
+                    { new Guid("c5437855-8f61-489e-aafd-63c750ee6911"), "Satın Alma Yönetimi", 0m },
+                    { new Guid("cb2ea3d1-be21-4de9-9df7-d85419b1e0fe"), "Üretim Yönetimi", 2000m }
                 });
 
             migrationBuilder.CreateIndex(

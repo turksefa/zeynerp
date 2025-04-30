@@ -8,7 +8,7 @@ namespace zeynerp.Core.Entities
         public DateTime? ExpiryDate  { get; set; }
         public bool IsActive { get; set; }
 
-        public Tenant Tenant { get; set; } = new Tenant();
-        public Plan Plan { get; set; } = new Plan();
+        public Tenant? Tenant { get; set; }
+        public Plan? Plan { get; set; }
     }
 }

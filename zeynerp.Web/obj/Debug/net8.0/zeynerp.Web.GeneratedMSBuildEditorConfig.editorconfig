@@ -46,8 +46,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRW50aXR5Tm90Rm91bmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Home/about.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxhYm91dC5jc2h0bWw=
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Home/About.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Home/Index.cshtml]
@@ -74,6 +74,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY3VyZW1lbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Project/CreateOffer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxDcmVhdGVPZmZlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Project/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -88,6 +96,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Subscription/Plans.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3Vic2NyaXB0aW9uXFBsYW5zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/_ViewImports.cshtml]

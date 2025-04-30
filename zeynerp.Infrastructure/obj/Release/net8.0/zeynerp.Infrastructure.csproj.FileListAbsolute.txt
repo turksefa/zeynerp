@@ -13,3 +13,6 @@ C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\obj\Release\net8.0\zeyner
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\obj\Release\net8.0\refint\zeynerp.Infrastructure.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\obj\Release\net8.0\zeynerp.Infrastructure.pdb
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\obj\Release\net8.0\ref\zeynerp.Infrastructure.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\bin\Release\net8.0\zeynerp.Application.dll
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\bin\Release\net8.0\zeynerp.Application.pdb
+C:\Users\IT\Desktop\zeynerp\src\zeynerp.Infrastructure\obj\Release\net8.0\zeynerp.Infrastructure.sourcelink.json

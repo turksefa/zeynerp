@@ -29,8 +29,15 @@
                     @if (plan.Name != "Tedarik Yönetimi")
                     {
                         <h2 class="fw-bold text-start text-dark">@plan.Price.ToString("C") <span class="fs-6">/ aylık</span></h2>
-                        <a href="@Url.Action("Checkout", "Payment", new { planId = plan.Id })" class="btn btn-dark w-100 my-3">Abone
+                        @if(plan.Name == "Proje Yönetimi")
+                        {
+                            <a href="@Url.Action("Checkout", "Payment", new { planId = plan.Id })" class="btn btn-dark w-100 my-3">Abone
                             Ol</a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Checkout", "Payment", new { planId = plan.Id })" class="btn btn-dark w-100 my-3 disabled">Yakında</a>
+                        }
                         <ul class="list-unstyled text-center">
                             <li class="py-1">✔ Stok Yönetimi</li>
                             <li class="py-1">✔ Personel Yönetimi</li>

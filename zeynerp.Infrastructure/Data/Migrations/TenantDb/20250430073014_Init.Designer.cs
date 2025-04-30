@@ -11,7 +11,7 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250425112527_Init")]
+    [Migration("20250430073014_Init")]
     partial class Init
     {
         /// <inheritdoc />

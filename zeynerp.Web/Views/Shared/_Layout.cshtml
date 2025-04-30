@@ -330,7 +330,52 @@
 										<span>Güncel Durum</span>
 									</a>
 								</li>
+								<li>
+									<a class="nav-link" asp-controller="User" asp-action="Index">
+										<i class="bx bx-user" aria-hidden="true"></i>
+										<span>Kullanıcılar</span>
+									</a>
+								</li>
+								@* <li class="nav-parent">
+									<a class="nav-link" href="#">
+										<i class="bx bx-package" aria-hidden="true"></i>
+										<span>Stok Yönetimi</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a class="nav-link" asp-controller="Inventory" asp-action="Index">
+												Index
+											</a>
+										</li>
+									</ul>
+								</li> *@
 								<li class="nav-parent">
+									<a class="nav-link" href="#">
+										<i class="bx bx-file" aria-hidden="true"></i>
+										<span>Proje Yönetimi</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a class="nav-link" asp-controller="Project" asp-action="Index">
+												Teklifler
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="nav-parent">
+									<a class="nav-link" href="#">
+										<i class="bx bx-cart" aria-hidden="true"></i>
+										<span>Tedarik Yönetimi</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a class="nav-link" asp-controller="Procurement" asp-action="Index">
+												Index
+											</a>
+										</li>
+									</ul>
+								</li>
+								@* <li class="nav-parent">
 									<a class="nav-link" href="#">
 										<i class="bx bx-group" aria-hidden="true"></i>
 										<span>Personel Yönetimi</span>
@@ -357,45 +402,13 @@
 											</a>
 										</li>
 									</ul>
-								</li>
-								<li class="nav-parent">
-									<a class="nav-link" href="#">
-										<i class="bx bx-package" aria-hidden="true"></i>
-										<span>Stok Yönetimi</span>
-									</a>
-									<ul class="nav nav-children">
-										<li>
-											<a class="nav-link" asp-controller="Inventory" asp-action="Index">
-												Index
-											</a>
-										</li>
-									</ul>
-								</li>
-								<li class="nav-parent">
-									<a class="nav-link" href="#">
-										<i class="bx bx-cart" aria-hidden="true"></i>
-										<span>Tedarik Yönetimi</span>
-									</a>
-									<ul class="nav nav-children">
-										<li>
-											<a class="nav-link" asp-controller="Procurement" asp-action="Index">
-												Index
-											</a>
-										</li>
-									</ul>
-								</li>
+								</li>*@
 								<li>
 									<a class="nav-link" asp-controller="Subscription" asp-action="Index">
 										<i class="bx bx-dollar-circle" aria-hidden="true"></i>
 										<span>Plan & Abonelik</span>
 									</a>
-								</li>
-								@* <li>
-									<a class="nav-link" asp-controller="User" asp-action="Index">
-										<i class="bx bx-user" aria-hidden="true"></i>
-										<span>Kullanıcılar</span>
-									</a>
-								</li> *@
+								</li>								
 							</ul>
 						</nav>
 					</div>
