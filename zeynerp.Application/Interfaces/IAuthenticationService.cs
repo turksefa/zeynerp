@@ -1,3 +1,4 @@
+using zeynerp.Application.DTOs;
 using zeynerp.Application.DTOs.Authentication;
 
 namespace zeynerp.Application.Services
@@ -9,5 +10,6 @@ namespace zeynerp.Application.Services
         Task LogoutAsync();
         Task<(bool Success, string Error)> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto);
         Task<(bool Success, string Error)> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
+        Task<(bool Success, string Error)> AcceptInvitationAsync(InvitationAcceptDto invitationAcceptDto);
     }
 }

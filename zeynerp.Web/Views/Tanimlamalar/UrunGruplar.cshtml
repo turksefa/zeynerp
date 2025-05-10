@@ -1,0 +1,183 @@
+@model IReadOnlyList<StokGrupViewModel>
+@{
+    ViewData["LayoutTitle"] = "Stok Gruplar";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li>
+                <a asp-action="Index"><span>Tanımlamalar</span></a>
+            </li>
+
+            <li>
+                <a asp-action="StokTanimlar"><span>Stok Tanımlar</span></a>
+            </li>
+
+            <li><span class="text-light">Stok Gruplar</span></li>
+        </ol>
+    </div>
+</header>
+
+<div class="row">
+    <div class="col">
+
+        <div class="card card-modern">
+            <div class="card-body">
+                <div class="datatables-header-footer-wrapper">
+                    <div class="datatable-header">
+                        <div class="row align-items-center mb-3">
+                            <div class="col-12 col-lg-auto mb-3 mb-lg-0">
+                                <a asp-action="UrunGrupEkle"
+                                    class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Stok Grup
+                                    Oluştur</a>
+                            </div>
+                            <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
+                                <div class="d-flex align-items-lg-center flex-column flex-lg-row">
+                                    <label class="ws-nowrap me-3 mb-0"></label>
+                                    <select class="form-control select-style-1 filter-by" name="filter-by">
+                                        <option value="all" selected>All</option>
+                                        <option value="1">ID</option>
+                                        <option value="2">Name</option>
+                                        <option value="3">Phone</option>
+                                        <option value="4">E-mail</option>
+                                        <option value="5">Orders</option>
+                                        <option value="6">Total Amount</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4 col-lg-auto ps-lg-1 mb-3 mb-lg-0">
+                                <div class="d-flex align-items-lg-center flex-column flex-lg-row">
+                                    <label class="ws-nowrap me-3 mb-0"></label>
+                                    <select class="form-control select-style-1 results-per-page"
+                                        name="results-per-page">
+                                        <option value="12" selected>12</option>
+                                        <option value="24">24</option>
+                                        <option value="36">36</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-auto ps-lg-1">
+                                <div class="search search-style-1 search-style-1-lg mx-lg-auto">
+                                    <div class="input-group">
+                                        <input type="text" class="search-term form-control" name="search-term"
+                                            id="search-term" placeholder="Stok Grup Ara">
+                                        <button class="btn btn-default" type="submit"><i
+                                                class="bx bx-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list"
+                        style="min-width: 750px;">
+
+                        <thead>
+                            <tr>
+                                <th width="3%">Sıra</th>
+                                <th>Stok Grup Adı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var stokGrup in Model)
+                            {
+                                <tr>
+                                    <td>@stokGrup.Order</td>
+                                    <td class="d-flex justify-content-between align-items-center">
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"><strong>@stokGrup.Name</strong></a><span
+                                            class="ecommerce-status completed"></span>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <form>
+                                                            <div class="form-row">
+                                                                <div class="form-group">
+                                                                    <label for="inputEmail4">Stok Grup Adı</label>
+                                                                    <input type="email" class="form-control"
+                                                                        id="inputEmail4" value="Hammadde">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <label for="inputEmail4">Sıra</label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="inputEmail4" value="191">
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <label for="inputEmail4">Durum</label>
+                                                                            <select class="form-control">
+                                                                                <option>Aktif</option>
+                                                                                <option>Pasif</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary"><i
+                                                                class="fas fa-save"></i> Kaydet</button>
+                                                        <button type="button" class="btn btn-default"
+                                                            data-bs-dismiss="modal">İptal</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <hr class="solid mt-5 opacity-4">
+                    <div class="datatable-footer">
+                        <div class="row align-items-center justify-content-between mt-3">
+                            <div class="col-md-auto order-1 mb-3 mb-lg-0">
+                                @* <div class="d-flex align-items-stretch">
+                                    <div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
+                                        <select class="form-control select-style-1 bulk-action" name="bulk-action"
+                                            style="min-width: 170px;">
+                                            <option value="" selected>Bulk Actions</option>
+                                            <option value="delete">Delete</option>
+                                        </select>
+                                        <a href="#"
+                                            class="bulk-action-apply btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Apply</a>
+                                    </div>
+
+                                </div> *@
+                            </div>
+                            <div class="col-lg-auto text-center order-3 order-lg-2">
+                                <div class="results-info-wrapper"></div>
+                            </div>
+                            <div class="col-lg-auto order-2 order-lg-3 mb-3 mb-lg-0">
+                                <div class="pagination-wrapper"></div>
+                            </div>
+                        </div>
+                    </div>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+}
+
+@section VendorScripts {
+    <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+}
+
+@section Scripts {
+    <script src="~/js/examples/examples.header.menu.js"></script>
+    <script src="~/js/examples/examples.ecommerce.datatables.list.js"></script>
+}

@@ -20,25 +20,7 @@ namespace zeynerp.Infrastructure.Services
             {
                 Id = u.Id,
                 FullName = u.FullName,
-                Email = u.Email,
-                Status = u.Status
+                Email = u.Email
             }).ToListAsync();
-
-        public async Task<(bool Success, string Error)> InvitationAsync(InvitationDto invitationDto)
-        {
-            var email = await _userManager.FindByEmailAsync(invitationDto.Email);
-            if (email != null)
-                return (false, "Email already exists.");
-
-            var user = new ApplicationUser
-            {
-                UserName = invitationDto.Email,
-                Email = invitationDto.Email,
-                TenantId = invitationDto.TenantId,
-                Status = false
-            };
-            await _userManager.CreateAsync(user);
-            return (true, string.Empty);
-        }
     }
 }

@@ -15,6 +15,7 @@ namespace zeynerp.Infrastructure.Data.Contexts
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<TenantPlan> TenantPlans { get; set; }
+        public DbSet<Invitation> Invitations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -155,6 +155,27 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("zeynerp.Core.Entities.Invitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvitationStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Invitations");
+                });
+
             modelBuilder.Entity("zeynerp.Core.Entities.Plan", b =>
                 {
                     b.Property<Guid>("Id")
@@ -175,43 +196,43 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c5437855-8f61-489e-aafd-63c750ee6911"),
+                            Id = new Guid("2b01c8f1-6240-4593-8aeb-f048d3fe3050"),
                             Name = "Satın Alma Yönetimi",
                             Price = 0m
                         },
                         new
                         {
-                            Id = new Guid("b10cdd61-9b22-40b7-a14b-49109a303d4b"),
+                            Id = new Guid("07ddafab-3a72-45a4-9320-ea6ff4ad600b"),
                             Name = "Finans ve Muhasebe Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("19bc8f11-bb94-403c-906d-237a5aa8ecdd"),
+                            Id = new Guid("a5d8adae-0bdf-41e8-8a80-e78e23378797"),
                             Name = "Personel Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("be23d233-bfd9-4b1e-b118-fbb63b1e8122"),
+                            Id = new Guid("6a8f83fc-cd94-4ea1-8c42-7b82852901d9"),
                             Name = "Kalite Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("cb2ea3d1-be21-4de9-9df7-d85419b1e0fe"),
+                            Id = new Guid("60502735-2aa5-4e52-8189-603ac82e0465"),
                             Name = "Üretim Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("92b9a6df-8337-4786-8de3-d2af275bc90a"),
+                            Id = new Guid("169f897e-072f-47fa-bd0e-68eec1d9e064"),
                             Name = "Proje Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("647744ac-827f-486c-866c-42c2a0a5e891"),
+                            Id = new Guid("49ff61b7-05de-4ceb-8c6e-ac94bc7c45e7"),
                             Name = "Stok Yönetimi",
                             Price = 2000m
                         });
@@ -311,9 +332,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
 
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uniqueidentifier");

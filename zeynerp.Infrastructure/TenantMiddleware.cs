@@ -24,6 +24,7 @@ namespace zeynerp.Infrastructure
                 if (tenant != null)
                 {
                     context.Items["TenantId"] = tenant.Id;
+                    context.Items["UserId"] = userId;
                 }
             }
 

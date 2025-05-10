@@ -11,12 +11,14 @@ namespace zeynerp.Web.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IInvitationService _invitationService;
         private readonly IEmailSender _emailSender;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IEmailSender emailSender, IMapper mapper)
+        public UserController(IUserService userService, IInvitationService invitationService, IEmailSender emailSender, IMapper mapper)
         {
             _userService = userService;
+            _invitationService = invitationService;
             _emailSender = emailSender;
             _mapper = mapper;
         }
@@ -33,11 +35,11 @@ namespace zeynerp.Web.Controllers
             }
 
             var tenantId = (Guid)HttpContext.Items["TenantId"];
-            var users = await _userService.GetUsersAsync(tenantId);
             var userViewModel = new UserViewModel
             {
-                Users = users,
-                InvitationDto = new InvitationDto()
+                Users = await _userService.GetUsersAsync(tenantId),
+                InvitationDtos = await _invitationService.GetInvitationsByTenantIdAsync(tenantId),
+                InvitationViewModel = new InvitationViewModel()
                 {
                     TenantId = tenantId
                 }
@@ -46,23 +48,23 @@ namespace zeynerp.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendInvitation(UserViewModel userViewModel)
+        public async Task<IActionResult> SendInvitation(UserViewModel model)
         {
-            var result = await _userService.InvitationAsync(userViewModel.InvitationDto);
-            if (!result.Success)
+            var result = await _invitationService.SendInvitationAsync(_mapper.Map<InvitationDto>(model.InvitationViewModel));
+            if (result.Success)
             {
-                TempData["ErrorMessages"] = result.Error;
+                var callbackUrl = Url.Action(
+                action: "AcceptInvitation",
+                controller: "Account",
+                values: new { token = result.invitationDto.Id },
+                protocol: Request.Scheme);
+                await _emailSender.SendInvitationAsync(model.InvitationViewModel.Email, callbackUrl);
+
+                TempData["SuccessMessage"] = $"{model.InvitationViewModel.Email} adresine davetiye başarıyla gönderildi.";
             }
             else
             {
-                var callbackUrl = Url.Action(
-                action: "Register",
-                controller: "Account",
-                values: new { email = userViewModel.InvitationDto.Email },
-                protocol: Request.Scheme);
-                await _emailSender.SendInvitationAsync(userViewModel.InvitationDto.Email, callbackUrl);
-
-                TempData["SuccessMessage"] = $"{userViewModel.InvitationDto.Email} adresine davetiye başarıyla gönderildi.";
+                TempData["ErrorMessages"] = result.Error;
             }
 
             return RedirectToAction("Index");

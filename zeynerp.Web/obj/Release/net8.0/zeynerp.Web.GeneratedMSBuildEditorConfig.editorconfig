@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\IT\Desktop\zeynerp\src\zeynerp.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Account/AcceptInvitation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2NlcHRJbnZpdGF0aW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -38,10 +42,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Employee/Employees.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbG95ZWVcRW1wbG95ZWVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Error/EntityNotFound.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRW50aXR5Tm90Rm91bmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,10 +58,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxfTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Inventory/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Payment/Checkout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxDaGVja291dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,8 +66,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF5bWVudFxSZWRpcmVjdDNELmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Procurement/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvY3VyZW1lbnRcSW5kZXguY3NodG1s
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Project/CreateOffer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxDcmVhdGVPZmZlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Project/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvamVjdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/SatinalmaYonetimi/MalzemeTalepler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2F0aW5hbG1hWW9uZXRpbWlcTWFsemVtZVRhbGVwbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/SatinalmaYonetimi/MalzemeTalepleri.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2F0aW5hbG1hWW9uZXRpbWlcTWFsemVtZVRhbGVwbGVyaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Shared/Error.cshtml]
@@ -88,6 +96,34 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Subscription/Plans.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3Vic2NyaXB0aW9uXFBsYW5zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/StokTanimlar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFN0b2tUYW5pbWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/UrunGrupEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFVydW5HcnVwRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/UrunGruplar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFVydW5HcnVwbGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/UrunOzellikEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFVydW5PemVsbGlrRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/Tanimlamalar/UrunOzellikler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFVydW5PemVsbGlrbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/IT/Desktop/zeynerp/src/zeynerp.Web/Views/_ViewImports.cshtml]

@@ -7,7 +7,6 @@ namespace zeynerp.Infrastructure.Identity.Models
     {
         public string FullName { get; set; } = string.Empty;
         public string CompanyName { get; set; } = string.Empty;
-        public bool Status { get; set; } = false;
         public Guid? TenantId { get; set; }
         public Tenant? Tenant { get; set; }
     }

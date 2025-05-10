@@ -1,7 +1,9 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using zeynerp.Application.DTOs;
 using zeynerp.Application.DTOs.Authentication;
 using zeynerp.Application.Services;
+using zeynerp.Web.Models;
 using zeynerp.Web.Models.Authentication;
 
 namespace zeynerp.Web.Controllers
@@ -84,6 +86,30 @@ namespace zeynerp.Web.Controllers
                 if(!success)
                     ModelState.AddModelError(string.Empty, error);
             }
+            return View(model);
+        }
+
+        public IActionResult AcceptInvitation([FromQuery] Guid token)
+        {
+            AcceptInvitationViewModel model = new AcceptInvitationViewModel
+            {
+                InvitationId = token
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AcceptInvitation([FromForm] AcceptInvitationViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+        
+            var result = await _authenticationService.AcceptInvitationAsync(_mapper.Map<InvitationAcceptDto>(model));
+            if (result.Success)
+                return RedirectToAction("Login");
+
+            ModelState.AddModelError(string.Empty, result.Error);
+            
             return View(model);
         }
     }

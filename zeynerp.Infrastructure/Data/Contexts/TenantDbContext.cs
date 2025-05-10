@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using zeynerp.Core.Entities.Tanimlamalar;
 
 namespace zeynerp.Infrastructure.Data.Contexts
 {
@@ -8,5 +9,7 @@ namespace zeynerp.Infrastructure.Data.Contexts
         {
             
         }
+
+        public DbSet<StokGrup> StokGrups { get; set; }
     }
 }

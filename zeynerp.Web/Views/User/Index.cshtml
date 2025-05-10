@@ -1,21 +1,10 @@
 @model UserViewModel
 @{
-    ViewData["LayoutTitle"] = "Personel Yönetimi";
+    ViewData["LayoutTitle"] = "Kullanıcılar";
 }
 
 <header class="page-header">
     <h2>@ViewData["LayoutTitle"]</h2>
-
-    <div class="right-wrapper text-end">
-        <ol class="breadcrumbs me-3">
-            <li>
-                <span>Personel Yönetimi</span>
-            </li>
-
-            <li><span class="text-light">Personeller</span></li>
-
-        </ol>
-    </div>
 </header>
 
 <div class="row">
@@ -33,7 +22,7 @@
                                 <div id="modalForm" class="modal-block modal-block-primary modal-block-sm mfp-hide">
                                     <section class="card">
                                         <form id="form" asp-action="SendInvitation" method="post">
-                                            <input type="hidden" asp-for="@Model.InvitationDto.TenantId" />
+                                            <input type="hidden" asp-for="InvitationViewModel.TenantId" />
                                             <header class="card-header">
                                                 <h2 class="card-title">Kullanıcı Davet</h2>
                                             </header>
@@ -41,7 +30,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="form-floating">
-                                                            <input type="email" asp-for="@Model.InvitationDto.Email"
+                                                            <input type="email" asp-for="InvitationViewModel.Email"
                                                                 class="form-control form-control-md"
                                                                 id="floatingInputGroupEmail" placeholder="E-Posta"
                                                                 required>
@@ -111,15 +100,7 @@
                                 <th width="60%">Yetkiler</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#"><strong>John Doe</strong></a></td>
-                                <td><a href="#"><strong>John Doe</strong></a></td>
-                                <td class="d-flex justify-content-between">
-                                    <p class="m-0"><span class="badge text-bg-success me-1">Personel Yönetimi</span></p>
-                                    <span class="ecommerce-status completed"></span>
-                                </td>
-                            </tr>
+                        <tbody>                            
                             @foreach (var user in Model.Users)
                             {
                                 <tr>
@@ -128,14 +109,19 @@
                                     <td class="d-flex justify-content-between">
                                         <p class="m-0"><span class="badge text-bg-primary me-1">Stok Yönetimi</span><span
                                                 class="badge text-bg-danger">Tedarik Yönetimi</span></p>
-                                        @if (user.Status == true)
-                                        {
-                                            <span class="ecommerce-status completed"></span>
-                                        }
-                                        else
-                                        {
-                                            <span class="ecommerce-status on-hold"></span>
-                                        }
+                                        <span class="ecommerce-status completed"></span>
+                                    </td>
+                                </tr>
+                            }
+                            @foreach (var invitationDto in Model.InvitationDtos)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@invitationDto.Email</td>
+                                    <td class="d-flex justify-content-between">
+                                        <p class="m-0"><span class="badge text-bg-primary me-1">Stok Yönetimi</span><span
+                                                class="badge text-bg-danger">Tedarik Yönetimi</span></p>
+                                        <span class="ecommerce-status on-hold"></span>
                                     </td>
                                 </tr>
                             }
@@ -199,21 +185,23 @@
             });
         }
         else {
-            var msg = 'asdasda';
-            var notice = new PNotify({
-                text: msg,
-                type: 'success',
-                addclass: 'click-2-close',
-                hide: true,
-                buttons: {
-                    closer: false,
-                    sticker: false
-                }
-            });
+            var successMessage = @Html.Raw(Json.Serialize(ViewBag.SuccessMessage));
+            if (successMessage.length > 0) {
+                var notice = new PNotify({
+                    text: successMessage,
+                    type: 'success',
+                    addclass: 'click-2-close',
+                    hide: true,
+                    buttons: {
+                        closer: false,
+                        sticker: false
+                    }
+                });
 
-            notice.get().click(function () {
-                notice.remove();
-            });
+                notice.get().click(function () {
+                    notice.remove();
+                });
+            }
         }
     </script>
 }

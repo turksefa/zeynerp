@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using zeynerp.Application.DTOs;
 using zeynerp.Application.DTOs.Authentication;
 using zeynerp.Application.Services;
+using zeynerp.Core.Entities;
+using zeynerp.Core.Interfaces;
+using zeynerp.Core.Repositories;
 using zeynerp.Infrastructure.Identity.Models;
 using zeynerp.Infrastructure.Services;
 
@@ -13,13 +17,15 @@ namespace zeynerp.Infrastructure.Identity.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ITenantService _tenantService;
         private readonly IEmailSender _emailSender;
+        private readonly IApplicationUnitOfWork _applicationUnitOfWork;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITenantService tenantService, IEmailSender emailSender)
+        public AuthenticationService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ITenantService tenantService, IEmailSender emailSender, IInvitationRepository invitationRepository, IApplicationUnitOfWork applicationUnitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _tenantService = tenantService;
             _emailSender = emailSender;
+            _applicationUnitOfWork = applicationUnitOfWork;
         }
 
         public async Task<(bool Success, string Error)> LoginAsync(LoginDto loginDto)
@@ -67,7 +73,7 @@ namespace zeynerp.Infrastructure.Identity.Services
             if (user != null && !string.IsNullOrEmpty(user.Email))
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var resetLink = $"http://localhost:5208/ResetPassword?email={forgotPasswordDto.Email}&token={Uri.EscapeDataString(token)}";
+                var resetLink = $"http://zeynerp.com/ResetPassword?email={forgotPasswordDto.Email}&token={Uri.EscapeDataString(token)}";
                 await _emailSender.SendEmailAsync(user.Email, "Reset Password", $"Please reset your password by <a href='{resetLink}'>clicking here</a>.");
             }
             else
@@ -80,6 +86,30 @@ namespace zeynerp.Infrastructure.Identity.Services
         public Task<(bool Success, string Error)> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<(bool Success, string Error)> AcceptInvitationAsync(InvitationAcceptDto invitationAcceptDto)
+        {
+            var invitation = await _applicationUnitOfWork.InvitationRepository.GetByIdAsync(invitationAcceptDto.InvitationId);
+            if (invitation == null)
+                return (false, "Davetiye bulunamadı.");
+
+            if(invitation.InvitationStatus == InvitationStatus.Accepted)
+                return (false, "Bu davetiye zaten kabul edilmiştir.");
+
+            var user = new ApplicationUser
+            {
+                FullName = invitationAcceptDto.FullName,
+                UserName = invitation.Email,
+                Email = invitation.Email,
+                TenantId = invitation.TenantId
+            };
+            await _userManager.CreateAsync(user, invitationAcceptDto.Password);
+
+            invitation.InvitationStatus = Core.Entities.InvitationStatus.Accepted;
+            _applicationUnitOfWork.InvitationRepository.Update(invitation);
+            await _applicationUnitOfWork.SaveChangesAsync();
+            return (true, string.Empty);
         }
     }
 }

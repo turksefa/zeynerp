@@ -33,7 +33,7 @@ namespace zeynerp.Infrastructure.Services
                 BasketId = paymentDto.PlanId.ToString(),
                 PaymentChannel = PaymentChannel.WEB.ToString(),
                 PaymentGroup = PaymentGroup.PRODUCT.ToString(),
-                CallbackUrl = $"http://localhost:5208/Payment/Callback?planId={paymentDto.PlanId}&tenantId={paymentDto.TenantId}"
+                CallbackUrl = $"http://zeynerp.com/Payment/Callback?planId={paymentDto.PlanId}&tenantId={paymentDto.TenantId}"
             };
 
             PaymentCard paymentCard = new PaymentCard

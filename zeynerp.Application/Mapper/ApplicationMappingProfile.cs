@@ -1,6 +1,8 @@
 using AutoMapper;
 using zeynerp.Application.DTOs;
+using zeynerp.Application.DTOs.Tanimlamalar;
 using zeynerp.Core.Entities;
+using zeynerp.Core.Entities.Tanimlamalar;
 
 namespace zeynerp.Application.Mapper
 {
@@ -10,6 +12,8 @@ namespace zeynerp.Application.Mapper
         {
             CreateMap<Plan, PlanDto>();
             CreateMap<TenantPlan, TenantPlanDto>();
+            CreateMap<Invitation, InvitationDto>().ReverseMap();
+            CreateMap<StokGrup, StokGrupDto>();
         }
     }
 }

@@ -1,0 +1,218 @@
+@{
+    ViewData["LayoutTitle"] = "Malzeme Oluştur";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li>
+                <a asp-action="Index"><span>Tanımlamalar</span></a>
+            </li>
+
+            <li>
+                <a asp-action="StokTanimlar"><span>Stok Tanımlar</span></a>
+            </li>
+
+            <li>
+                <a asp-action="Urunler"><span>Malzemeler</span></a>
+            </li>
+
+            <li><span class="text-light">Malzeme Oluştur</span></li>
+        </ol>
+    </div>
+</header>
+
+<form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+    <section class="card">
+        <div class="card-body">
+            <div class="row form-group pb-3">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Malzeme Adı</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Stok Grup</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Boyut Kutu Sayısı</label>
+                        <select id="kutuSayisi" class="form-control">
+                            <option value="0">Yok</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Birim</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="inputContainer" class="form-group pb-3" style="display: none;"></div>
+            <div class="form-group pb-3">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">KG Formül</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">M2 Formül</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">MM Formül</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">M Formül</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div id="fireContainer" class="row form-group pb-3" style="display: none;"></div>
+            <div id="siralamaContainer" class="row form-group pb-3" style="display: none;"></div>
+            <div class="row form-group pb-3">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Birim Fiyat Hesaplama Yöntemi</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Sertifika</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Direkt Satınalma</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Malzeme Sorumlusu</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <label class="col-form-label" for="formGroupExampleInput">Durum</label>
+                        <select class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="row action-buttons justify-content-end">
+        <div class="col-12 col-md-auto order-lg-1">
+            <button type="submit"
+                class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
+                data-loading-text="Loading...">
+                <i class="bx bx-save text-4 me-2"></i> Kaydet
+            </button>
+        </div>
+        <div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
+            <a asp-action="Urunler"
+                class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">İptal</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#kutuSayisi').change(function () {
+                var selectedValue = $(this).val();
+
+                $('#inputContainer').empty();
+                $('#inputContainer').css('display', 'none');
+
+                $('#fireContainer').empty();
+                $('#fireContainer').css('display', 'none');
+
+                $('#siralamaContainer').empty();
+                $('#siralamaContainer').css('display', 'none');
+
+                if (selectedValue > 0) {
+                    $('#inputContainer').css('display', 'block');
+                    $('#fireContainer').css('display', 'flex');
+                    $('#siralamaContainer').css('display', 'flex');
+
+                    $('#inputContainer').append('<div id="onculContainer" class="row"></div>');
+                    $('#inputContainer').append('<div id="ayracContainer" class="row"></div>');
+                    $('#inputContainer').append('<div id="boyutContainer" class="row"></div>');
+
+                    for (var i = 0; i < selectedValue; i++) {
+                        $('#onculContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label" for="formGroupExampleInput">Öncül</label>' +
+                            '<input type="text" class="form-control" />' +
+                            '</div>' +
+                            '</div>');
+
+                        $('#ayracContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label" for="formGroupExampleInput">Ayraç</label>' +
+                            '<input type="text" class="form-control" />' +
+                            '</div>' +
+                            '</div>');
+
+                        $('#boyutContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label" for="formGroupExampleInput">Boyut</label>' +
+                            '<input type="text" class="form-control" />' +
+                            '</div>' +
+                            '</div>');
+
+                        $('#fireContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label" for="formGroupExampleInput">Fire</label>' +
+                            '<input type="text" class="form-control" />' +
+                            '</div>' +
+                            '</div>');
+
+                        $('#siralamaContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label" for="formGroupExampleInput">Sıralama</label>' +
+                            '<select class="form-control"></select>' +
+                            '</div>' +
+                            '</div>');
+                    }
+                }
+            });
+        });
+    </script>
+}
