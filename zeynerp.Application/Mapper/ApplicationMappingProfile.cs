@@ -13,7 +13,7 @@ namespace zeynerp.Application.Mapper
             CreateMap<Plan, PlanDto>();
             CreateMap<TenantPlan, TenantPlanDto>();
             CreateMap<Invitation, InvitationDto>().ReverseMap();
-            CreateMap<StokGrup, StokGrupDto>();
+            CreateMap<StokGrup, StokGrupDto>().ReverseMap();
         }
     }
 }

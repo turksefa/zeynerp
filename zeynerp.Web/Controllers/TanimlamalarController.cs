@@ -40,10 +40,16 @@ namespace zeynerp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult UrunGrupEkle([FromForm] List<StokGrupViewModel> model)
+        public async Task<IActionResult> UrunGrupEkle([FromForm] List<StokGrupViewModel> model)
         {
-            // await _stokGrupService.CreateStokGrupAsync(_mapper.Map<StokGrupDto>(model));
-            return View();
+            if(!ModelState.IsValid)
+                return View(model);
+
+            var result = await _stokGrupService.CreateStokGrupAsync(_mapper.Map<IReadOnlyList<StokGrupDto>>(model));
+            if(result.Success)
+                return RedirectToAction("UrunGruplar");
+
+            return View(model);
         }
 
         public IActionResult Urunler()

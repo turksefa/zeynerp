@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj": {}
+    "C:\\Users\\Sturk\\Desktop\\zeynerp\\zeynerp.Core\\zeynerp.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj": {
+    "C:\\Users\\Sturk\\Desktop\\zeynerp\\zeynerp.Core\\zeynerp.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Sturk\\Desktop\\zeynerp\\zeynerp.Core\\zeynerp.Core.csproj",
         "projectName": "zeynerp.Core",
-        "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\zeynerp.Core.csproj",
-        "packagesPath": "C:\\Users\\IT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IT\\Desktop\\zeynerp\\src\\zeynerp.Core\\obj\\",
+        "projectPath": "C:\\Users\\Sturk\\Desktop\\zeynerp\\zeynerp.Core\\zeynerp.Core.csproj",
+        "packagesPath": "C:\\Users\\Sturk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Sturk\\Desktop\\zeynerp\\zeynerp.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\IT\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Sturk\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

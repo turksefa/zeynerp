@@ -24,7 +24,7 @@
     </div>
 </header>
 
-<form class="ecommerce-form action-buttons-fixed" asp-action="UrunGrupEkle" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="UrunGrupEkle" method="post">
     <section class="card">
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -37,7 +37,7 @@
                 </thead>
                 <tbody>
                 </tbody>
-            </table>            
+            </table>
         </div>
     </section>
     <div class="row action-buttons">
@@ -74,9 +74,24 @@
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#form").validate({
+                errorPlacement: function (error, element) {
+                },
+                highlight: function (element) {
+                    $(element).css("border", "1px solid red");
+                },
+                unhighlight: function (element) {
+                    $(element).css("border", "");
+                }
+            });
+        });
+    </script>
     <script>
         (function ($) {
             "use strict";
@@ -200,11 +215,11 @@
                             var inputType = "text";
                             var inputClass = "form-control input-block";
                             var content = data[i];
-                            var inputName = "Model[" + (rowIndex - 1) + "].StokGrupViewModel.Name";
+                            var inputName = "Model[" + (rowIndex - 1) + "].Name";
 
                             if (i === 0) {
                                 inputType = "number";
-                                inputName = "Model[" + (rowIndex - 1) + "].StokGrupViewModel.Order";
+                                inputName = "Model[" + (rowIndex - 1) + "].Order";
                             } else if (i === 1) {
                                 inputType = "text";
                                 content = data[i];
@@ -220,7 +235,7 @@
                                 inputClass +
                                 '" value="' +
                                 data[i] +
-                                '"/>';
+                                '" required />';
 
                             $this.html(inputElement);
                         }

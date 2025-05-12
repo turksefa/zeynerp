@@ -5,6 +5,6 @@ namespace zeynerp.Application.Interfaces.Tanimlamalar
     public interface IStokGrupService
     {
         Task<IReadOnlyList<StokGrupDto>> GetStokGrupsAsync();
-        Task CreateStokGrupAsync(StokGrupDto stokGrupDto);
+        Task<(bool Success, string Error)> CreateStokGrupAsync(IReadOnlyList<StokGrupDto> stokGrupDtos);
     }
 }

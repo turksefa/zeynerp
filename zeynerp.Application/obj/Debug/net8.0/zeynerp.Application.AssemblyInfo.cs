@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("zeynerp.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dff9f891cb653d3930f4d5b8d787591d814f28d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b7441028987ecab2fbc5ed803535f3aadd17bdff")]
 [assembly: System.Reflection.AssemblyProductAttribute("zeynerp.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("zeynerp.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

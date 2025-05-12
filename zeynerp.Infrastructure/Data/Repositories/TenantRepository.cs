@@ -23,6 +23,8 @@ namespace zeynerp.Infrastructure.Data.Repositories
             return entity;
         }
 
+        public async Task AddRangeAsync(IReadOnlyList<T> entities) => await _context.Set<T>().AddRangeAsync();
+
         public void Delete(T entity) => _context.Set<T>().Remove(entity);
 
         public void Update(T entity) => _context.Set<T>().Update(entity);

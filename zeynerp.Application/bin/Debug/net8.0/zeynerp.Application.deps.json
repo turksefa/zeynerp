@@ -56,7 +56,10 @@
       },
       "zeynerp.Core/1.0.0": {
         "runtime": {
-          "zeynerp.Core.dll": {}
+          "zeynerp.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       }
     }

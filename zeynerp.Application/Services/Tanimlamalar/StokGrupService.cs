@@ -19,6 +19,11 @@ namespace zeynerp.Application.Services.Tanimlamalar
 
         public async Task<IReadOnlyList<StokGrupDto>> GetStokGrupsAsync() => _mapper.Map<IReadOnlyList<StokGrupDto>>(await _tenantUnitOfWork.StokGrupRepository.GetAllAsync());
 
-        public Task CreateStokGrupAsync(StokGrupDto stokGrupDto) => _tenantUnitOfWork.StokGrupRepository.AddAsync(_mapper.Map<StokGrup>(stokGrupDto));
+        public async Task<(bool Success, string Error)> CreateStokGrupAsync(IReadOnlyList<StokGrupDto> stokGrupDtos)
+        {
+            await _tenantUnitOfWork.StokGrupRepository.AddRangeAsync(_mapper.Map<IReadOnlyList<StokGrup>>(stokGrupDtos));
+            await _tenantUnitOfWork.SaveChangesAsync();
+            return (true, string.Empty);
+        }
     }
 }

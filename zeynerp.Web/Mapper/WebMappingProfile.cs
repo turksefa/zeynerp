@@ -20,7 +20,7 @@ namespace zeynerp.Web.Mapper
             CreateMap<UserDto, UserViewModel>();
             CreateMap<InvitationViewModel, InvitationDto>();
             CreateMap<AcceptInvitationViewModel, InvitationAcceptDto>();
-            CreateMap<StokGrupDto, StokGrupViewModel>();
+            CreateMap<StokGrupDto, StokGrupViewModel>().ReverseMap();
         }
     }
 }
