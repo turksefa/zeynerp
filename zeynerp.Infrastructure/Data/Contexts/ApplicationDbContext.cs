@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using zeynerp.Core.Entities;
-using zeynerp.Infrastructure.Identity.Models;
 
 namespace zeynerp.Infrastructure.Data.Contexts
 {

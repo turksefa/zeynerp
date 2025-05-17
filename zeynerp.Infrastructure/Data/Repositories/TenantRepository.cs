@@ -7,26 +7,60 @@ namespace zeynerp.Infrastructure.Data.Repositories
 {
     public class TenantRepository<T> : IRepository<T> where T : class
     {
-        private readonly TenantDbContext _context;
-        
+        private readonly TenantDbContextFactory _tenantDbContextFactory;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
         public TenantRepository(TenantDbContextFactory tenantDbContextFactory, IHttpContextAccessor httpContextAccessor)
         {
-            _context = tenantDbContextFactory.CreateDbContextAsync(httpContextAccessor.HttpContext.Items["UserId"].ToString()).Result;
+            _tenantDbContextFactory = tenantDbContextFactory;
+            _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<IReadOnlyList<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
-        public async Task<T?> GetByIdAsync(Guid id) => await _context.Set<T>().FindAsync(id);
+        public async Task<IReadOnlyList<T>> GetAllAsync()
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            return await context.Set<T>().ToListAsync();
+        }
+
+        public async Task<T?> GetByIdAsync(Guid id)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            return await context.Set<T>().FindAsync(id);
+        }
 
         public async Task<T> AddAsync(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            await context.Set<T>().AddAsync(entity);
+            await context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task AddRangeAsync(IReadOnlyList<T> entities) => await _context.Set<T>().AddRangeAsync();
+        public async Task AddRangeAsync(IReadOnlyList<T> entities)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            await context.Set<T>().AddRangeAsync(entities);
+            await context.SaveChangesAsync();
+        }
 
-        public void Delete(T entity) => _context.Set<T>().Remove(entity);
+        public async Task DeleteAsync(T entity)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            context.Set<T>().Remove(entity);
+            await context.SaveChangesAsync();
+        }
 
-        public void Update(T entity) => _context.Set<T>().Update(entity);
+        public async Task UpdateAsync(T entity)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            context.Set<T>().Update(entity);
+            await context.SaveChangesAsync();
+        }
     }
 }

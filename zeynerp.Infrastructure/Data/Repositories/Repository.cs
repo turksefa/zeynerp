@@ -20,12 +20,26 @@ namespace zeynerp.Infrastructure.Data.Repositories
         public async Task<T> AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task AddRangeAsync(IReadOnlyList<T> entities) => await _context.Set<T>().AddRangeAsync();
-        public void Delete(T entity) => _context.Set<T>().Remove(entity);
+        public async Task AddRangeAsync(IReadOnlyList<T> entities)
+        {
+            await _context.Set<T>().AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+        }
+        
+        public async Task DeleteAsync(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            await _context.SaveChangesAsync();
+        }
 
-        public void Update(T entity) => _context.Set<T>().Update(entity);
+        public async Task UpdateAsync(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

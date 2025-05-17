@@ -237,13 +237,13 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("07ddafab-3a72-45a4-9320-ea6ff4ad600b"), "Finans ve Muhasebe Yönetimi", 2000m },
-                    { new Guid("169f897e-072f-47fa-bd0e-68eec1d9e064"), "Proje Yönetimi", 2000m },
-                    { new Guid("2b01c8f1-6240-4593-8aeb-f048d3fe3050"), "Satın Alma Yönetimi", 0m },
-                    { new Guid("49ff61b7-05de-4ceb-8c6e-ac94bc7c45e7"), "Stok Yönetimi", 2000m },
-                    { new Guid("60502735-2aa5-4e52-8189-603ac82e0465"), "Üretim Yönetimi", 2000m },
-                    { new Guid("6a8f83fc-cd94-4ea1-8c42-7b82852901d9"), "Kalite Yönetimi", 2000m },
-                    { new Guid("a5d8adae-0bdf-41e8-8a80-e78e23378797"), "Personel Yönetimi", 2000m }
+                    { new Guid("19cce44d-1400-44a6-8a84-2f9596631d62"), "Proje Yönetimi", 2000m },
+                    { new Guid("59cfdf3f-0c78-4b76-b4a1-435ac1fe04e5"), "Finans ve Muhasebe Yönetimi", 2000m },
+                    { new Guid("73e531e2-b3b4-45f9-898f-b57c929cd3b7"), "Üretim Yönetimi", 2000m },
+                    { new Guid("8e4b127c-fd93-40cd-82fa-5361b0be8835"), "Stok Yönetimi", 2000m },
+                    { new Guid("ab607577-edbd-48f9-bf3c-42e5e686737a"), "Kalite Yönetimi", 2000m },
+                    { new Guid("d21f133b-2354-4aa6-a0d5-2ed392f0aa04"), "Satın Alma Yönetimi", 0m },
+                    { new Guid("d62baf5a-aa5f-4c19-b30f-838c2f2ecd7a"), "Personel Yönetimi", 2000m }
                 });
 
             migrationBuilder.CreateIndex(

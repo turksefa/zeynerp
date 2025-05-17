@@ -30,7 +30,6 @@ namespace zeynerp.Application.Services
             };
 
             await _applicationUnitOfWork.TenantPlanRepository.AddAsync(tenantPlan);
-            await _applicationUnitOfWork.SaveChangesAsync();
         }
     }
 }

@@ -6,8 +6,6 @@ using zeynerp.Application.Services;
 using zeynerp.Core.Entities;
 using zeynerp.Core.Interfaces;
 using zeynerp.Core.Repositories;
-using zeynerp.Infrastructure.Identity.Models;
-using zeynerp.Infrastructure.Services;
 
 namespace zeynerp.Infrastructure.Identity.Services
 {
@@ -106,9 +104,8 @@ namespace zeynerp.Infrastructure.Identity.Services
             };
             await _userManager.CreateAsync(user, invitationAcceptDto.Password);
 
-            invitation.InvitationStatus = Core.Entities.InvitationStatus.Accepted;
-            _applicationUnitOfWork.InvitationRepository.Update(invitation);
-            await _applicationUnitOfWork.SaveChangesAsync();
+            invitation.InvitationStatus = InvitationStatus.Accepted;
+            await _applicationUnitOfWork.InvitationRepository.UpdateAsync(invitation);
             return (true, string.Empty);
         }
     }

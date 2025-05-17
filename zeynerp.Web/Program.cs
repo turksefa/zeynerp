@@ -7,6 +7,7 @@ using zeynerp.Application.Interfaces.Tanimlamalar;
 using zeynerp.Application.Mapper;
 using zeynerp.Application.Services;
 using zeynerp.Application.Services.Tanimlamalar;
+using zeynerp.Core.Entities;
 using zeynerp.Core.Interfaces;
 using zeynerp.Core.Repositories;
 using zeynerp.Core.Repositories.Tanimlamalar;
@@ -16,7 +17,6 @@ using zeynerp.Infrastructure.Data.Contexts;
 using zeynerp.Infrastructure.Data.Repositories;
 using zeynerp.Infrastructure.Data.Repositories.Tanimlamalar;
 using zeynerp.Infrastructure.Identity;
-using zeynerp.Infrastructure.Identity.Models;
 using zeynerp.Infrastructure.Identity.Services;
 using zeynerp.Infrastructure.Services;
 using zeynerp.Web.Mapper;
@@ -57,11 +57,17 @@ builder.Services.AddScoped<ITenantPlanService, TenantPlanService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 builder.Services.AddScoped<IStokGrupService, StokGrupService>();
+builder.Services.AddScoped<IStokOzellikService, StokOzellikService>();
+builder.Services.AddScoped<IBirimService, BirimService>();
+builder.Services.AddScoped<IStokService, StokService>();
 
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ITenantPlanRepository, TenantPlanRepository>();
 builder.Services.AddScoped<IInvitationRepository, InvitationRepository>();
 builder.Services.AddScoped<IStokGrupRepository, StokGrupRepository>();
+builder.Services.AddScoped<IStokOzellikRepository, StokOzellikRepository>();
+builder.Services.AddScoped<IBirimRepository, BirimRepository>();
+builder.Services.AddScoped<IStokRepository, StokRepository>();
 
 var app = builder.Build();
 

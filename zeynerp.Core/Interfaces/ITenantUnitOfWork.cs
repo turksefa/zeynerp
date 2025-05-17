@@ -5,6 +5,8 @@ namespace zeynerp.Core.Interfaces
     public interface ITenantUnitOfWork
     {
         IStokGrupRepository StokGrupRepository { get; }
-        Task<int> SaveChangesAsync();
+        IStokOzellikRepository StokOzellikRepository { get; }
+        IBirimRepository BirimRepository { get; }
+        IStokRepository StokRepository { get; }
     }
 }

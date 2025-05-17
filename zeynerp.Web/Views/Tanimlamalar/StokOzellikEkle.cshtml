@@ -1,5 +1,5 @@
 @{
-    ViewData["LayoutTitle"] = "Malzeme Özellik Oluştur";
+    ViewData["LayoutTitle"] = "Stok Özellik Oluştur";
 }
 
 <header class="page-header">
@@ -16,15 +16,15 @@
             </li>
 
             <li>
-                <a asp-action="UrunOzellikler"><span>Malzeme Özellikler</span></a>
+                <a asp-action="StokOzellikler"><span>Stok Özellikler</span></a>
             </li>
 
-            <li><span class="text-light">Malzeme Özellik Oluştur</span></li>
+            <li><span class="text-light">Stok Özellik Oluştur</span></li>
         </ol>
     </div>
 </header>
 
-<form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="StokOzellikEkle" method="post">
     <section class="card">
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -56,7 +56,7 @@
             </button>
         </div>
         <div class="col-12 col-md-auto ms-lg-auto px-md-0 mt-3 mt-md-0">
-            <a asp-action="UrunOzellikler"
+            <a asp-action="StokOzellikler"
                 class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">İptal</a>
         </div>
     </div>
@@ -64,6 +64,7 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
     <style>
         table th,
         table td {
@@ -73,12 +74,27 @@
 }
 
 @section VendorScripts {
-    <script src="~/vendor/select2/js/select2.js"></script>
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#form").validate({
+                errorPlacement: function (error, element) {
+                },
+                highlight: function (element) {
+                    $(element).css("border", "1px solid red");
+                },
+                unhighlight: function (element) {
+                    $(element).css("border", "");
+                }
+            });
+        });
+    </script>
     <script>
         (function ($) {
             "use strict";
@@ -202,9 +218,18 @@
                             var inputType = "text";
                             var inputClass = "form-control input-block";
                             var content = data[i];
+                            var inputName = "Model[" + (rowIndex - 1) + "].Name";
 
                             if (i === 0 || i === 2) {
                                 inputType = "number";
+                                if(i === 0)
+                                {
+                                    inputName = "Model[" + (rowIndex - 1) + "].Order";
+                                }
+                                else
+                                {
+                                    inputName = "Model[" + (rowIndex - 1) + "].OzgulAgirlik";
+                                }
                             } else if (i === 1) {
                                 inputType = "text";
                                 content = data[i];
@@ -214,11 +239,13 @@
                             var inputElement =
                                 '<input type="' +
                                 inputType +
+                                '" name="' +
+                                inputName +
                                 '" class="' +
                                 inputClass +
                                 '" value="' +
                                 data[i] +
-                                '"/>';
+                                '" required />';
 
                             $this.html(inputElement);
                         }
@@ -288,5 +315,25 @@
             });
         }).apply(this, [jQuery]);
 
+    </script>
+    <script>
+        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
+                            e.ErrorMessage).ToList()));
+        if (errorMessages.length > 0) {
+            var notice = new PNotify({
+                text: errorMessages.join('<br>'),
+                type: 'error',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
     </script>
 }

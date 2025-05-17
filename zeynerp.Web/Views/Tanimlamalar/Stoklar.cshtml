@@ -1,5 +1,5 @@
 @{
-    ViewData["LayoutTitle"] = "Malzeme Özellikler";
+    ViewData["LayoutTitle"] = "Stoklar";
 }
 
 <header class="page-header">
@@ -15,7 +15,7 @@
                 <a asp-action="StokTanimlar"><span>Stok Tanımlar</span></a>
             </li>
 
-            <li><span class="text-light">Malzeme Özellikler</span></li>
+            <li><span class="text-light">Stoklar</span></li>
         </ol>
     </div>
 </header>
@@ -29,8 +29,8 @@
                     <div class="datatable-header">
                         <div class="row align-items-center mb-3">
                             <div class="col-12 col-lg-auto mb-3 mb-lg-0">
-                                <a asp-action="UrunOzellikEkle"
-                                    class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Malzeme Özellik
+                                <a asp-action="StokEkle"
+                                    class="btn btn-primary btn-md font-weight-semibold btn-py-2 px-4">+ Stok
                                     Oluştur</a>
                             </div>
                             <div class="col-8 col-lg-auto ms-auto ml-auto mb-3 mb-lg-0">
@@ -63,7 +63,7 @@
                                 <div class="search search-style-1 search-style-1-lg mx-lg-auto">
                                     <div class="input-group">
                                         <input type="text" class="search-term form-control" name="search-term"
-                                            id="search-term" placeholder="Malzeme Özellik Ara">
+                                            id="search-term" placeholder="Malzeme Ara">
                                         <button class="btn btn-default" type="submit"><i
                                                 class="bx bx-search"></i></button>
                                     </div>
@@ -79,15 +79,15 @@
                             <tr>
                                 <th width="3%">Sıra</th>
                                 <th>Stok Grup Adı</th>
-                                <th width="15%">Özgül Ağırlık</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>191</td>
-                                <td>
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><strong>303
-                                            Paslanmaz</strong></a>
+                                <td class="d-flex justify-content-between align-items-center">
+                                    <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><strong>Hammadde</strong></a><span
+                                        class="ecommerce-status completed"></span>
                                     <div class="modal fade" id="exampleModal" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -96,14 +96,9 @@
                                                     <form>
                                                         <div class="form-row">
                                                             <div class="form-group">
-                                                                <label for="inputEmail4">Malzeme Özellik Adı</label>
+                                                                <label for="inputEmail4">Stok Grup Adı</label>
                                                                 <input type="email" class="form-control"
-                                                                    id="inputEmail4" value="303 Paslanmaz">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="inputEmail4">Özgül Ağırlık</label>
-                                                                <input type="number" class="form-control"
-                                                                    id="inputEmail4" value="303 Paslanmaz">
+                                                                    id="inputEmail4" value="Hammadde">
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="row">
@@ -134,8 +129,6 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="d-flex justify-content-between align-items-center">8 <span
-                                        class="ecommerce-status completed"></span></td>
                             </tr>
                         </tbody>
                     </table>

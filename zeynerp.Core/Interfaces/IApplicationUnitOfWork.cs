@@ -7,6 +7,5 @@ namespace zeynerp.Core.Interfaces
         IPlanRepository PlanRepository { get; }
         ITenantPlanRepository TenantPlanRepository { get; }
         IInvitationRepository InvitationRepository { get; }
-        Task<int> SaveChangesAsync();
     }
 }

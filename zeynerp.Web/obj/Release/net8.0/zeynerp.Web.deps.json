@@ -741,6 +741,9 @@
         }
       },
       "zeynerp.Core/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "8.0.0"
+        },
         "runtime": {
           "zeynerp.Core.dll": {}
         }
@@ -750,7 +753,6 @@
           "Iyzipay": "2.1.67",
           "MailKit": "4.11.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
-          "Microsoft.AspNetCore.Identity.UI": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
           "zeynerp.Application": "1.0.0"
         },

@@ -34,7 +34,6 @@ namespace zeynerp.Application.Services
                     IsActive = true
                 };
                 await _applicationUnitOfWork.TenantPlanRepository.AddAsync(tenantPlan);
-                await _applicationUnitOfWork.SaveChangesAsync();
             }
             
             return (false, "Payment failed");

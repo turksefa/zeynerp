@@ -9,7 +9,6 @@ namespace zeynerp.Infrastructure.Data
         private readonly IPlanRepository _planRepository;
         private readonly ITenantPlanRepository _tenantPlanRepository;
         private readonly IInvitationRepository _invitationRepository;
-        private readonly ApplicationDbContext _context;
 
         public ApplicationUnitOfWork(IPlanRepository planRepository,
             ITenantPlanRepository tenantPlanRepository,
@@ -19,7 +18,6 @@ namespace zeynerp.Infrastructure.Data
             _planRepository = planRepository;
             _tenantPlanRepository = tenantPlanRepository;
             _invitationRepository = invitationRepository;
-            _context = context;
         }
         
         public IPlanRepository PlanRepository => _planRepository;
@@ -27,7 +25,5 @@ namespace zeynerp.Infrastructure.Data
         public ITenantPlanRepository TenantPlanRepository => _tenantPlanRepository;
 
         public IInvitationRepository InvitationRepository => _invitationRepository;
-
-        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
     }
 }

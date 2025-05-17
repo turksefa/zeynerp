@@ -63,6 +63,7 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
     <style>
         table th,
         table td {
@@ -74,6 +75,7 @@
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
     <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
@@ -305,5 +307,25 @@
             });
         }).apply(this, [jQuery]);
 
+    </script>
+    <script>
+        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
+                            e.ErrorMessage).ToList()));
+        if (errorMessages.length > 0) {
+            var notice = new PNotify({
+                text: errorMessages.join('<br>'),
+                type: 'error',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
     </script>
 }

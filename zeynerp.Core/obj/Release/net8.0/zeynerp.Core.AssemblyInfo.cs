@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dff9f891cb653d3930f4d5b8d787591d814f28d8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+047ef918f9c9a17f15e5dff8f606d0b11701e881")]
 [assembly: System.Reflection.AssemblyProductAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

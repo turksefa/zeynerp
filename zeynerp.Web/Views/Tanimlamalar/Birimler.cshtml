@@ -1,3 +1,4 @@
+@model IReadOnlyList<BirimViewModel>
 @{
     ViewData["LayoutTitle"] = "Birimler";
 }
@@ -83,150 +84,92 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>
-                                    <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"><strong>Adet</strong></a>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-row">
-                                                            <div class="form-group">
-                                                                <label for="inputEmail4">Stok Grup Adı</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="inputEmail4" value="Hammadde">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <label for="inputEmail4">Sıra</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="inputEmail4" value="191">
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <form id="form" asp-action="BirimGuncelle" method="post">
+                                        <input type="hidden" name="Id" value="@Model[i].Id">
+                                        <td>@Model[i].Order</td>
+                                        <td>
+                                            @if(Model[i].Id == 1)
+                                            {
+                                                <span>@Model[i].Name</span>   
+                                            }
+                                            else
+                                            {
+                                                <a href="#" data-bs-toggle="modal"
+                                                data-bs-target="#modal-@Model[i].Id"><strong>@Model[i].Name</strong></a>
+                                                <div class="modal fade" id="modal-@Model[i].Id" tabindex="-1"
+                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body">
+                                                                <div class="form-row">
+                                                                    <div class="form-group">
+                                                                        <label for="stokGrup.Name">Birim Adı</label>
+                                                                        <input type="text" class="form-control" name="Name"
+                                                                            value="@Model[i].Name" required>
                                                                     </div>
-                                                                    <div class="col-8">
-                                                                        <label for="inputEmail4">Durum</label>
-                                                                        <select class="form-control">
-                                                                            <option>Aktif</option>
-                                                                            <option>Pasif</option>
-                                                                        </select>
+                                                                    <div class="form-group">
+                                                                        <label for="inputEmail4">Birim</label>
+                                                                        <input type="text" class="form-control" name="Unit"
+                                                                            value="@Model[i].Unit" required>
                                                                     </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary"><i
-                                                            class="fas fa-save"></i> Kaydet</button>
-                                                    <button type="button" class="btn btn-default"
-                                                        data-bs-dismiss="modal">İptal</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="d-flex justify-content-between">adet <span class="ecommerce-status completed"></span></td>                                
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"><strong>Kilogram</strong></a>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-row">
-                                                            <div class="form-group">
-                                                                <label for="inputEmail4">Stok Grup Adı</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="inputEmail4" value="Hammadde">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <label for="inputEmail4">Sıra</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="inputEmail4" value="191">
-                                                                    </div>
-                                                                    <div class="col-8">
-                                                                        <label for="inputEmail4">Durum</label>
-                                                                        <select class="form-control">
-                                                                            <option>Aktif</option>
-                                                                            <option>Pasif</option>
-                                                                        </select>
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                            <div class="col-4">
+                                                                                <label for="inputEmail4">Sıra</label>
+                                                                                <input type="number" class="form-control"
+                                                                                    name="Order" value="@Model[i].Order"
+                                                                                    required>
+                                                                            </div>
+                                                                            <div class="col-8">
+                                                                                <label for="inputEmail4">Durum</label> 
+                                                                                <select name="Status" class="form-control">
+                                                                                    @foreach (Status status in Enum.GetValues(typeof(Status)))
+                                                                                    {
+                                                                                        var statusValue = (int)status;
+                                                                                        var isSelected = statusValue == (int)Model[i].Status ? "selected" : "";
+                                                                                        if(!string.IsNullOrEmpty(isSelected))
+                                                                                        {
+                                                                                            <option value="@statusValue" selected>@status</option>
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <option value="@statusValue">@status</option>
+                                                                                        }
+                                                                                    }
+                                                                                </select>                                                                   
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary"><i
-                                                            class="fas fa-save"></i> Kaydet</button>
-                                                    <button type="button" class="btn btn-default"
-                                                        data-bs-dismiss="modal">İptal</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="d-flex justify-content-between">kg <span class="ecommerce-status completed"></span></td>  
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>
-                                    <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"><strong>Metre</strong></a>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-row">
-                                                            <div class="form-group">
-                                                                <label for="inputEmail4">Stok Grup Adı</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="inputEmail4" value="Hammadde">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <label for="inputEmail4">Sıra</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="inputEmail4" value="191">
-                                                                    </div>
-                                                                    <div class="col-8">
-                                                                        <label for="inputEmail4">Durum</label>
-                                                                        <select class="form-control">
-                                                                            <option>Aktif</option>
-                                                                            <option>Pasif</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary"><i
+                                                                        class="fas fa-save"></i> Kaydet</button>
+                                                                <button type="button" class="btn btn-default"
+                                                                    data-bs-dismiss="modal">İptal</button>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary"><i
-                                                            class="fas fa-save"></i> Kaydet</button>
-                                                    <button type="button" class="btn btn-default"
-                                                        data-bs-dismiss="modal">İptal</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="d-flex justify-content-between">m <span class="ecommerce-status completed"></span></td>
-                            </tr>
+                                            }
+                                        </td>
+                                        <td class="d-flex justify-content-between align-items-center">
+                                            @Model[i].Unit
+                                            @if(Model[i].Status == 0)
+                                            {
+                                                <span class="ecommerce-status failed"></span>
+                                            }
+                                            else
+                                            {
+                                                <span class="ecommerce-status completed"></span>
+                                            }
+                                        </td>
+                                    </form>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <hr class="solid mt-5 opacity-4">
@@ -263,14 +206,38 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
 }
 
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
+    <script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
 }
 
 @section Scripts {
-    <script src="~/js/examples/examples.header.menu.js"></script>
     <script src="~/js/examples/examples.ecommerce.datatables.list.js"></script>
+    <script src="~/js/examples/examples.validation.js"></script>
+
+    <script>
+        var successMessage = @Html.Raw(Json.Serialize(ViewBag.SuccessMessage));
+        if (successMessage.length > 0) {
+            var notice = new PNotify({
+                text: successMessage,
+                type: 'success',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
+    </script>
 }

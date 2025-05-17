@@ -1,23 +1,29 @@
-using Microsoft.AspNetCore.Http;
 using zeynerp.Core.Interfaces;
 using zeynerp.Core.Repositories.Tanimlamalar;
-using zeynerp.Infrastructure.Data.Contexts;
 
 namespace zeynerp.Infrastructure.Data
 {
     public class TenantUnitOfWork : ITenantUnitOfWork
     {
         private readonly IStokGrupRepository _stokGrupRepository;
-        private readonly TenantDbContext _context;
+        private readonly IStokOzellikRepository _stokOzellikRepository;
+        private readonly IBirimRepository _birimRepository;
+        private readonly IStokRepository _stokRepository;
 
-        public TenantUnitOfWork(IStokGrupRepository stokGrupRepository, TenantDbContextFactory tenantDbContextFactory, IHttpContextAccessor httpContextAccessor)
+        public TenantUnitOfWork(IStokGrupRepository stokGrupRepository, IStokOzellikRepository stokOzellikRepository, IBirimRepository birimRepository, IStokRepository stokRepository)
         {
             _stokGrupRepository = stokGrupRepository;
-            _context = tenantDbContextFactory.CreateDbContextAsync(httpContextAccessor.HttpContext.Items["UserId"].ToString()).Result;
+            _stokOzellikRepository = stokOzellikRepository;
+            _birimRepository = birimRepository;
+            _stokRepository = stokRepository;
         }
 
         public IStokGrupRepository StokGrupRepository => _stokGrupRepository;
 
-        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+        public IStokOzellikRepository StokOzellikRepository => _stokOzellikRepository;
+
+        public IBirimRepository BirimRepository => _birimRepository;
+
+        public IStokRepository StokRepository => _stokRepository;
     }
 }

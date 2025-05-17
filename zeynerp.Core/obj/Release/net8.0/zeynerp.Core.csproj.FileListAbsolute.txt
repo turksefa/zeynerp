@@ -10,3 +10,16 @@ C:\Users\IT\Desktop\zeynerp\src\zeynerp.Core\obj\Release\net8.0\refint\zeynerp.C
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.pdb
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Core\obj\Release\net8.0\ref\zeynerp.Core.dll
 C:\Users\IT\Desktop\zeynerp\src\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.sourcelink.json
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\bin\Release\net8.0\zeynerp.Core.deps.json
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\bin\Release\net8.0\zeynerp.Core.dll
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\bin\Release\net8.0\zeynerp.Core.pdb
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.AssemblyInfoInputs.cache
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.AssemblyInfo.cs
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.csproj.CoreCompileInputs.cache
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.sourcelink.json
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.dll
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\refint\zeynerp.Core.dll
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.pdb
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\ref\zeynerp.Core.dll
+C:\Users\IT\Desktop\zeynerp\zeynerp.Core\obj\Release\net8.0\zeynerp.Core.csproj.AssemblyReference.cache

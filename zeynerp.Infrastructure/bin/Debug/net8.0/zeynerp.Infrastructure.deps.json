@@ -11,7 +11,6 @@
           "Iyzipay": "2.1.67",
           "MailKit": "4.11.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
-          "Microsoft.AspNetCore.Identity.UI": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
           "zeynerp.Application": "1.0.0"
         },
@@ -490,7 +489,14 @@
           }
         }
       },
-      "System.Formats.Asn1/8.0.1": {},
+      "System.Formats.Asn1/8.0.1": {
+        "runtime": {
+          "lib/net8.0/System.Formats.Asn1.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.724.31311"
+          }
+        }
+      },
       "System.IdentityModel.Tokens.Jwt/6.24.0": {
         "dependencies": {
           "Microsoft.IdentityModel.JsonWebTokens": "6.24.0",
@@ -638,18 +644,15 @@
           "zeynerp.Core": "1.0.0"
         },
         "runtime": {
-          "zeynerp.Application.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "zeynerp.Application.dll": {}
         }
       },
       "zeynerp.Core/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.UI": "8.0.0"
+        },
         "runtime": {
-          "zeynerp.Core.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.0.0.0"
-          }
+          "zeynerp.Core.dll": {}
         }
       }
     }

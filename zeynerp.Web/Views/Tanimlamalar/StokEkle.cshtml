@@ -1,5 +1,6 @@
+@model StokViewModel
 @{
-    ViewData["LayoutTitle"] = "Malzeme Oluştur";
+    ViewData["LayoutTitle"] = "Stok Oluştur";
 }
 
 <header class="page-header">
@@ -16,29 +17,33 @@
             </li>
 
             <li>
-                <a asp-action="Urunler"><span>Malzemeler</span></a>
+                <a asp-action="Stoklar"><span>Stoklar</span></a>
             </li>
 
-            <li><span class="text-light">Malzeme Oluştur</span></li>
+            <li><span class="text-light">Stok Oluştur</span></li>
         </ol>
     </div>
 </header>
 
-<form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="StokEkle" method="post">
     <section class="card">
         <div class="card-body">
             <div class="row form-group pb-3">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">Malzeme Adı</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <label class="col-form-label">Stok Adı</label>
+                        <input asp-for="Name" type="text" class="form-control" placeholder="" required>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Stok Grup</label>
-                        <select class="form-control">
-
+                        @{
+                            var stokGrupSelectedList = new SelectList(Model.StokGrups, "Id", "Name");
+                        }
+                        <select asp-for="StokGrupId" asp-items="stokGrupSelectedList"
+                            class="form-control" required>
+                            <option value="">Seç</option>
                         </select>
                     </div>
                 </div>
@@ -57,8 +62,12 @@
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Birim</label>
-                        <select class="form-control">
-
+                        @{
+                            var birimSelectedList = new SelectList(Model.Birims, "Id", "Name");
+                        }
+                        <select asp-for="BirimId" asp-items="birimSelectedList"
+                            class="form-control" required>
+                            <option value="">Seç</option>
                         </select>
                     </div>
                 </div>
@@ -67,69 +76,73 @@
             <div class="form-group pb-3">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">KG Formül</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <label class="col-form-label">KG Formül</label>
+                        <input asp-for="KGFormül" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">M2 Formül</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <label class="col-form-label">M2 Formül</label>
+                        <input asp-for="M2Formül" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">MM Formül</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <label class="col-form-label">MM Formül</label>
+                        <input asp-for="MMFormül" type="text" class="form-control">
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">M Formül</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+                        <label class="col-form-label">M Formül</label>
+                        <input asp-for="MFormül" type="text" class="form-control">
                     </div>
                 </div>
             </div>
             <div id="fireContainer" class="row form-group pb-3" style="display: none;"></div>
             <div id="siralamaContainer" class="row form-group pb-3" style="display: none;"></div>
             <div class="row form-group pb-3">
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Birim Fiyat Hesaplama Yöntemi</label>
-                        <select class="form-control">
-
+                        @{
+                            var birimSelectedList2 = new SelectList(Model.Birims, "Id", "Name");
+                        }
+                        <select asp-for="BirimFiyatHesaplama" asp-items="birimSelectedList2"
+                            class="form-control" required>
+                            <option value="">Seç</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Sertifika</label>
-                        <select class="form-control">
-
+                        <select asp-for="Sertifika" class="form-control" required>
+                            <option value="">Seç</option>
+                            <option value="false">Yok</option>
+                            <option value="true">Var</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Direkt Satınalma</label>
-                        <select class="form-control">
-
+                        <select asp-for="SatinAlma" class="form-control" required>
+                            <option value="">Seç</option>
+                            <option value="false">Yok</option>
+                            <option value="true">Var</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Malzeme Sorumlusu</label>
-                        <select class="form-control">
-
-                        </select>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="form-group">
-                        <label class="col-form-label" for="formGroupExampleInput">Durum</label>
-                        <select class="form-control">
-
+                        @{
+                            var userSelectedList = new SelectList(Model.Users, "Id", "FullName");
+                        }
+                        <select asp-for="StokSorumluId" asp-items="userSelectedList"
+                            class="form-control" required>
+                            <option value="">Seç</option>
                         </select>
                     </div>
                 </div>
@@ -145,13 +158,19 @@
             </button>
         </div>
         <div class="col-12 col-md-auto px-md-0 mt-3 mt-md-0">
-            <a asp-action="Urunler"
+            <a asp-action="Stoklar"
                 class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">İptal</a>
         </div>
     </div>
 </form>
 
+@section VendorScripts {
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
+	<script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
+}
+
 @section Scripts {
+    <script src="~/js/examples/examples.validation.js"></script>
     <script>
         $(document).ready(function () {
             $('#kutuSayisi').change(function () {
@@ -178,36 +197,44 @@
                     for (var i = 0; i < selectedValue; i++) {
                         $('#onculContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
-                            '<label class="col-form-label" for="formGroupExampleInput">Öncül</label>' +
-                            '<input type="text" class="form-control" />' +
+                            '<label class="col-form-label">Öncül</label>' +
+                            '<input id="Oncul'+(i + 1)+'" name="Oncul'+(i + 1)+'" type="text" class="form-control" required />' +
                             '</div>' +
                             '</div>');
 
                         $('#ayracContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
-                            '<label class="col-form-label" for="formGroupExampleInput">Ayraç</label>' +
-                            '<input type="text" class="form-control" />' +
+                            '<label class="col-form-label">Ayraç</label>' +
+                            '<input id="Ayrac'+(i + 1)+'" name="Ayrac'+(i + 1)+'" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
                         $('#boyutContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
-                            '<label class="col-form-label" for="formGroupExampleInput">Boyut</label>' +
-                            '<input type="text" class="form-control" />' +
+                            '<label class="col-form-label">Boyut</label>' +
+                            '<input id="Boyut'+(i + 1)+'" name="Boyut'+(i + 1)+'" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
                         $('#fireContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
-                            '<label class="col-form-label" for="formGroupExampleInput">Fire</label>' +
-                            '<input type="text" class="form-control" />' +
+                            '<label class="col-form-label">Fire</label>' +
+                            '<select id="Fire'+(i + 1)+'" name="Fire'+(i + 1)+'" class="form-control" required>' +
+                            '<option value="">Seç</option>' +
+                            '<option value="0">Yok</option>' +
+                            '<option value="1">Var</option>' +
+                            '</select>' +
                             '</div>' +
                             '</div>');
 
                         $('#siralamaContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
-                            '<label class="col-form-label" for="formGroupExampleInput">Sıralama</label>' +
-                            '<select class="form-control"></select>' +
+                            '<label class="col-form-label">Sıralama</label>' +
+                            '<select id="Siralama'+(i + 1)+'" name="Siralama'+(i + 1)+'" class="form-control" required>' +
+                            '<option value="">Seç</option>' +
+                            '<option value="0">Yok</option>' +
+                            '<option value="1">Var</option>' +
+                            '</select>' +
                             '</div>' +
                             '</div>');
                     }

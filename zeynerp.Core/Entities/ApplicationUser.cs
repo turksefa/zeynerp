@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
-using zeynerp.Core.Entities;
 
-namespace zeynerp.Infrastructure.Identity.Models
+namespace zeynerp.Core.Entities
 {
     public class ApplicationUser : IdentityUser
     {

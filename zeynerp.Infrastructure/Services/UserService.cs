@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using zeynerp.Application.DTOs;
 using zeynerp.Application.Interfaces;
-using zeynerp.Infrastructure.Identity.Models;
+using zeynerp.Core.Entities;
 
 namespace zeynerp.Infrastructure.Services
 {

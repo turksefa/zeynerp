@@ -24,7 +24,7 @@
     </div>
 </header>
 
-<form class="ecommerce-form action-buttons-fixed" action="#" method="post">
+<form id="form" asp-action="BirimEkle" class="ecommerce-form action-buttons-fixed" method="post">
     <section class="card">
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -64,6 +64,7 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
     <style>
         table th,
         table td {
@@ -75,9 +76,25 @@
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
 @section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#form").validate({
+                errorPlacement: function (error, element) {
+                },
+                highlight: function (element) {
+                    $(element).css("border", "1px solid red");
+                },
+                unhighlight: function (element) {
+                    $(element).css("border", "");
+                }
+            });
+        });
+    </script>
     <script>
         (function ($) {
             "use strict";
@@ -103,7 +120,7 @@
                 build: function () {
                     this.datatable = this.$table.DataTable({
                         dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
-                        aoColumns: [{ targets: 0, width: '8%' }, null,  { targets: 2, width: '15%' }, { targets: 3, width: '5%' }],
+                        aoColumns: [{ targets: 0, width: '8%' }, null, { targets: 2, width: '10%' }, { targets: 3, width: '5%' }],
                         ordering: false
                     });
 
@@ -201,23 +218,32 @@
                             var inputType = "text";
                             var inputClass = "form-control input-block";
                             var content = data[i];
+                            var inputName = "Model[" + (rowIndex - 1) + "].Name";
 
                             if (i === 0) {
                                 inputType = "number";
-                            } else if (i === 1) {
+                                inputName = "Model[" + (rowIndex - 1) + "].Order";
+                            } else if (i === 1 || i === 2) {
                                 inputType = "text";
                                 content = data[i];
                                 $this.addClass("text-center align-content-center");
+
+                                if(i === 2)
+                                {
+                                    inputName = "Model[" + (rowIndex - 1) + "].Unit";
+                                }
                             }
 
                             var inputElement =
                                 '<input type="' +
                                 inputType +
+                                '" name="' +
+                                inputName +
                                 '" class="' +
                                 inputClass +
                                 '" value="' +
                                 data[i] +
-                                '"/>';
+                                '" required />';
 
                             $this.html(inputElement);
                         }
@@ -287,5 +313,25 @@
             });
         }).apply(this, [jQuery]);
 
+    </script>
+    <script>
+        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
+                            e.ErrorMessage).ToList()));
+        if (errorMessages.length > 0) {
+            var notice = new PNotify({
+                text: errorMessages.join('<br>'),
+                type: 'error',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
     </script>
 }

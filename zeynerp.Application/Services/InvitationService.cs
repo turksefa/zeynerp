@@ -29,7 +29,6 @@ namespace zeynerp.Application.Services
                 return (false, $"{invitationDto.Email} e-posta adresine zaten bir davetiye gönderildi.", null);
 
             var invitation = await _applicationUnitOfWork.InvitationRepository.AddAsync(_mapper.Map<Invitation>(invitationDto));
-            await _applicationUnitOfWork.SaveChangesAsync();
             return (true, string.Empty, _mapper.Map<InvitationDto>(invitation));
         }
     }

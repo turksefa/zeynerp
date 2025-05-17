@@ -155,132 +155,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("zeynerp.Core.Entities.Invitation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("InvitationStatus")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Invitations");
-                });
-
-            modelBuilder.Entity("zeynerp.Core.Entities.Plan", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Plans");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("2b01c8f1-6240-4593-8aeb-f048d3fe3050"),
-                            Name = "Satın Alma Yönetimi",
-                            Price = 0m
-                        },
-                        new
-                        {
-                            Id = new Guid("07ddafab-3a72-45a4-9320-ea6ff4ad600b"),
-                            Name = "Finans ve Muhasebe Yönetimi",
-                            Price = 2000m
-                        },
-                        new
-                        {
-                            Id = new Guid("a5d8adae-0bdf-41e8-8a80-e78e23378797"),
-                            Name = "Personel Yönetimi",
-                            Price = 2000m
-                        },
-                        new
-                        {
-                            Id = new Guid("6a8f83fc-cd94-4ea1-8c42-7b82852901d9"),
-                            Name = "Kalite Yönetimi",
-                            Price = 2000m
-                        },
-                        new
-                        {
-                            Id = new Guid("60502735-2aa5-4e52-8189-603ac82e0465"),
-                            Name = "Üretim Yönetimi",
-                            Price = 2000m
-                        },
-                        new
-                        {
-                            Id = new Guid("169f897e-072f-47fa-bd0e-68eec1d9e064"),
-                            Name = "Proje Yönetimi",
-                            Price = 2000m
-                        },
-                        new
-                        {
-                            Id = new Guid("49ff61b7-05de-4ceb-8c6e-ac94bc7c45e7"),
-                            Name = "Stok Yönetimi",
-                            Price = 2000m
-                        });
-                });
-
-            modelBuilder.Entity("zeynerp.Core.Entities.Tenant", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConnectionString")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tenants");
-                });
-
-            modelBuilder.Entity("zeynerp.Core.Entities.TenantPlan", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ExpiryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("PlanId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlanId");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("TenantPlans");
-                });
-
-            modelBuilder.Entity("zeynerp.Infrastructure.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("zeynerp.Core.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -358,6 +233,131 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("zeynerp.Core.Entities.Invitation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InvitationStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Invitations");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Plan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Plans");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d21f133b-2354-4aa6-a0d5-2ed392f0aa04"),
+                            Name = "Satın Alma Yönetimi",
+                            Price = 0m
+                        },
+                        new
+                        {
+                            Id = new Guid("59cfdf3f-0c78-4b76-b4a1-435ac1fe04e5"),
+                            Name = "Finans ve Muhasebe Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("d62baf5a-aa5f-4c19-b30f-838c2f2ecd7a"),
+                            Name = "Personel Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("ab607577-edbd-48f9-bf3c-42e5e686737a"),
+                            Name = "Kalite Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("73e531e2-b3b4-45f9-898f-b57c929cd3b7"),
+                            Name = "Üretim Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("19cce44d-1400-44a6-8a84-2f9596631d62"),
+                            Name = "Proje Yönetimi",
+                            Price = 2000m
+                        },
+                        new
+                        {
+                            Id = new Guid("8e4b127c-fd93-40cd-82fa-5361b0be8835"),
+                            Name = "Stok Yönetimi",
+                            Price = 2000m
+                        });
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tenant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConnectionString")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.TenantPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("PlanId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlanId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("TenantPlans");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -369,7 +369,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("zeynerp.Infrastructure.Identity.Models.ApplicationUser", null)
+                    b.HasOne("zeynerp.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -378,7 +378,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("zeynerp.Infrastructure.Identity.Models.ApplicationUser", null)
+                    b.HasOne("zeynerp.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -393,7 +393,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("zeynerp.Infrastructure.Identity.Models.ApplicationUser", null)
+                    b.HasOne("zeynerp.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -402,11 +402,20 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("zeynerp.Infrastructure.Identity.Models.ApplicationUser", null)
+                    b.HasOne("zeynerp.Core.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.ApplicationUser", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.TenantPlan", b =>
@@ -424,15 +433,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Navigation("Plan");
-
-                    b.Navigation("Tenant");
-                });
-
-            modelBuilder.Entity("zeynerp.Infrastructure.Identity.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("zeynerp.Core.Entities.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId");
 
                     b.Navigation("Tenant");
                 });
