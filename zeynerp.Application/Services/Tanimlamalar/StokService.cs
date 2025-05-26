@@ -17,8 +17,8 @@ namespace zeynerp.Application.Services.Tanimlamalar
             _mapper = mapper;
         }
 
-        public async Task<IReadOnlyList<StokDto>> StoklarAsync() =>
-            _mapper.Map<IReadOnlyList<StokDto>>(await _tenantUnitOfWork.StokRepository.GetAllAsync());
+        public async Task<IReadOnlyList<StokDto>> GetStoklarAsync() =>
+            _mapper.Map<IReadOnlyList<StokDto>>(await _tenantUnitOfWork.StokRepository.GetStoklarAsync());
 
         public async Task<(bool Success, string Message)> StokOlusturAsync(StokDto stokDto)
         {

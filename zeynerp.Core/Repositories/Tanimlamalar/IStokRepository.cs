@@ -4,6 +4,6 @@ namespace zeynerp.Core.Repositories.Tanimlamalar
 {
     public interface IStokRepository : IRepository<Stok>
     {
-        
+        Task<IReadOnlyList<Stok>> GetStoklarAsync();
     }
 }

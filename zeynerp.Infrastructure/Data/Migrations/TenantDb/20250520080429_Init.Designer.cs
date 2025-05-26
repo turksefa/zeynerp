@@ -12,7 +12,7 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250517095117_Init")]
+    [Migration("20250520080429_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -169,6 +169,8 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StokGrupId");
+
                     b.ToTable("Stoklar");
                 });
 
@@ -219,6 +221,17 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasKey("Id");
 
                     b.ToTable("StokOzellikler");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
+                        .WithMany()
+                        .HasForeignKey("StokGrupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("StokGrup");
                 });
 #pragma warning restore 612, 618
         }

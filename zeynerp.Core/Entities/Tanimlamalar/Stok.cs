@@ -4,6 +4,7 @@ namespace zeynerp.Core.Entities.Tanimlamalar
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public int? KutuSayisi { get; set; }
         public string? Oncul1 { get; set; }
         public string? Oncul2 { get; set; }
         public string? Oncul3 { get; set; }
@@ -32,6 +33,7 @@ namespace zeynerp.Core.Entities.Tanimlamalar
         public bool SatinAlma { get; set; }
         public Status Status { get; set; }
         public int StokGrupId { get; set; }
+        public StokGrup StokGrup { get; set; }
         public int BirimId { get; set; }
         public int BirimFiyatHesaplama { get; set; }
         public Guid StokSorumluId { get; set; }

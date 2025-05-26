@@ -43,6 +43,22 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 });
 
             migrationBuilder.CreateTable(
+                name: "StokOzellikler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    OzgulAgirlik = table.Column<double>(type: "float", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StokOzellikler", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Stoklar",
                 columns: table => new
                 {
@@ -84,28 +100,23 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Stoklar", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StokOzellikler",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Order = table.Column<int>(type: "int", nullable: false),
-                    OzgulAgirlik = table.Column<double>(type: "float", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StokOzellikler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stoklar_StokGruplar_StokGrupId",
+                        column: x => x.StokGrupId,
+                        principalTable: "StokGruplar",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "Birimler",
                 columns: new[] { "Id", "Name", "Order", "Status", "Unit" },
                 values: new object[] { 1, "Yok", 1, 1, "Yok" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stoklar_StokGrupId",
+                table: "Stoklar",
+                column: "StokGrupId");
         }
 
         /// <inheritdoc />
@@ -115,13 +126,13 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "Birimler");
 
             migrationBuilder.DropTable(
-                name: "StokGruplar");
-
-            migrationBuilder.DropTable(
                 name: "Stoklar");
 
             migrationBuilder.DropTable(
                 name: "StokOzellikler");
+
+            migrationBuilder.DropTable(
+                name: "StokGruplar");
         }
     }
 }

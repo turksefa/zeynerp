@@ -50,7 +50,7 @@
                 <div class="col-lg-2">
                     <div class="form-group">
                         <label class="col-form-label" for="formGroupExampleInput">Boyut Kutu Sayısı</label>
-                        <select id="kutuSayisi" class="form-control">
+                        <select asp-for="KutuSayisi" id="kutuSayisi" class="form-control">
                             <option value="0">Yok</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -198,7 +198,7 @@
                         $('#onculContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Öncül</label>' +
-                            '<input id="Oncul'+(i + 1)+'" name="Oncul'+(i + 1)+'" type="text" class="form-control" required />' +
+                            '<input id="Oncul'+(i + 1)+'" name="Oncul'+(i + 1)+'" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
@@ -221,8 +221,8 @@
                             '<label class="col-form-label">Fire</label>' +
                             '<select id="Fire'+(i + 1)+'" name="Fire'+(i + 1)+'" class="form-control" required>' +
                             '<option value="">Seç</option>' +
-                            '<option value="0">Yok</option>' +
-                            '<option value="1">Var</option>' +
+                            '<option value="false">Yok</option>' +
+                            '<option value="true">Var</option>' +
                             '</select>' +
                             '</div>' +
                             '</div>');
@@ -233,7 +233,10 @@
                             '<select id="Siralama'+(i + 1)+'" name="Siralama'+(i + 1)+'" class="form-control" required>' +
                             '<option value="">Seç</option>' +
                             '<option value="0">Yok</option>' +
-                            '<option value="1">Var</option>' +
+                            '<option value="1">1. Kutu</option>' +
+                            '<option value="2">2. Kutu</option>' +
+                            '<option value="3">3. Kutu</option>' +
+                            '<option value="4">4. Kutu</option>' +
                             '</select>' +
                             '</div>' +
                             '</div>');

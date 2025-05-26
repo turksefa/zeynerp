@@ -1,5 +1,6 @@
+@model MalzemeTaleplerViewModel
 @{
-    ViewData["LayoutTitle"] = "Stok Özellik Oluştur";
+    ViewData["LayoutTitle"] = "Malzeme Talep Oluştur";
 }
 
 <header class="page-header">
@@ -8,31 +9,27 @@
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs me-3">
             <li>
-                <a asp-action="Index"><span>Tanımlamalar</span></a>
+                <a asp-action="MalzemeTalepler"><span>Malzeme Talepler</span></a>
             </li>
 
-            <li>
-                <a asp-action="StokTanimlar"><span>Stok Tanımlar</span></a>
-            </li>
-
-            <li>
-                <a asp-action="StokOzellikler"><span>Stok Özellikler</span></a>
-            </li>
-
-            <li><span class="text-light">Stok Özellik Oluştur</span></li>
+            <li><span class="text-light">Malzeme Talep Oluştur</span></li>
         </ol>
     </div>
 </header>
 
-<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="StokOzellikEkle" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="UrunGrupEkle" method="post">
     <section class="card">
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-editable">
                 <thead>
                     <tr>
-                        <th>Sıra</th>
-                        <th>Malzeme Özellik Adı</th>
-                        <th>Özgül Ağırlık</th>
+                        <th>Birim</th>
+                        <th>Stok Grup</th>
+                        <th>Stok</th>
+                        <th>Stok Özellik</th>
+                        <th>Açıklama</th>
+                        <th>Boyutlar</th>
+                        <th>Birimler</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -56,7 +53,7 @@
             </button>
         </div>
         <div class="col-12 col-md-auto ms-lg-auto px-md-0 mt-3 mt-md-0">
-            <a asp-action="StokOzellikler"
+            <a asp-action="UrunGruplar"
                 class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">İptal</a>
         </div>
     </div>
@@ -82,20 +79,10 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $("#form").validate({
-                errorPlacement: function (error, element) {
-                },
-                highlight: function (element) {
-                    $(element).css("border", "1px solid red");
-                },
-                unhighlight: function (element) {
-                    $(element).css("border", "");
-                }
-            });
-        });
-    </script>
-    <script>
+        var stokGrups = @Html.Raw(Json.Serialize(Model.StokGrups));
+        var stoks = @Html.Raw(Json.Serialize(Model.Stoks));
+        var stokOzelliks = @Html.Raw(Json.Serialize(Model.StokOzelliks));
+
         (function ($) {
             "use strict";
 
@@ -120,8 +107,7 @@
                 build: function () {
                     this.datatable = this.$table.DataTable({
                         dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
-                        aoColumns: [{ targets: 0, width: '8%' }, null, { targets: 2, width: '10%' }, { targets: 3, width: '5%' }],
-                        ordering: false
+                        aoColumns: [null, null, null, null, null, null, null, { bSortable: false }]
                     });
 
                     window.dt = this.datatable;
@@ -143,11 +129,6 @@
                         _self.rowAdd();
                     });
 
-                    $(this.options.saveButton).on("click", function (e) {
-                        e.preventDefault();
-                        _self.saveAllRows();
-                    });
-
                     return this;
                 },
 
@@ -157,24 +138,17 @@
                     var actions, data, $row;
 
                     actions = [
-                        '<a href="#" class="hidden on-editing cancel-row text-danger"><i class="fas fa-trash-can fa-xl"></i></a>',
+                        '<a href="#" class="hidden on-editing cancel-row text-danger"><i class="fas fa-trash-can fa-xl"></i></a>'
                     ].join(" ");
 
-                    data = this.datatable.row.add(["", "", "", actions]);
+                    data = this.datatable.row.add(["", "", "", "", "", "", "", actions]);
                     $row = this.datatable.row(data[0]).nodes().to$();
-                    console.log(_self);
+
                     $row.addClass("adding").find("td:last").addClass("actions");
 
                     this.rowEdit($row);
 
                     this.datatable.order([0, "asc"]).draw();
-                },
-
-                saveAllRows: function () {
-                    var _self = this;
-                    this.$table.find("tbody tr").each(function () {
-                        _self.rowSave($(this));
-                    });
                 },
 
                 rowCancel: function ($row) {
@@ -210,104 +184,72 @@
                     $row.children("td").each(function (i) {
                         var $this = $(this);
 
-                        $this.addClass("text-center align-content-center");
+                        $this.addClass("align-content-center");
 
                         if ($this.hasClass("actions")) {
                             _self.rowSetActionsEditing($row);
                         } else {
-                            var inputElement = "";
+                            var element = "";
                             var inputType = "text";
                             var inputClass = "form-control input-block";
                             var content = data[i];
-                            var inputName = "Model[" + (rowIndex - 1) + "].Name";
 
-                            if (i === 0 || i === 2) {
+                            if (i === 0) {
                                 inputType = "number";
-                                if (i === 0) {
-                                    inputName = "Model[" + (rowIndex - 1) + "].Order";
-
-                                    inputElement =
-                                        '<input type="' +
-                                        inputType +
-                                        '" name="' +
-                                        inputName +
-                                        '" class="' +
-                                        inputClass +
-                                        '" value="' +
-                                        data[i] +
-                                        '" required />';
-                                }
-                                else {
-                                    inputName = "Model[" + (rowIndex - 1) + "].OzgulAgirlik";
-
-                                    inputElement =
-                                        '<input type="' +
-                                        inputType +
-                                        '" name="' +
-                                        inputName +
-                                        '" step="any" class="' +
-                                        inputClass +
-                                        '" required />';
-                                }
-                            } else if (i === 1) {
-                                inputType = "text";
-                                content = data[i];
-                                $this.addClass("text-center align-content-center");
-
-                                inputElement =
+                                element =
                                     '<input type="' +
                                     inputType +
-                                    '" name="' +
-                                    inputName +
                                     '" class="' +
                                     inputClass +
                                     '" value="' +
                                     data[i] +
-                                    '" required />';
+                                    '"/>';
+                            } else if (i === 1) {
+                                element = '<select class="' + inputClass + ' stok-grup-select" data-row-index="' + (rowIndex - 1) + '">';
+
+                                for (var j = 0; j < stokGrups.length; j++) {
+                                    var stokGrup = stokGrups[j];
+                                    element += "<option value='" + stokGrup.id + "'>" + stokGrup.name + "</option>";
+                                }
+
+                                element += "</select>";
+                            } else if (i === 2) {
+                                element = '<select class="' + inputClass + ' stok-select" data-row-index="' + (rowIndex - 1) + '">';
+
+                                for (var j = 0; j < stoks.length; j++) {
+                                    var stok = stoks[j];
+                                    if (stok.stokGrupId == 1)
+                                        element += "<option value='" + stok.id + "'>" + stok.name + "</option>";
+                                }
+
+                                element += "</select>";
+                            } else if (i === 3) {
+                                element = '<select class="' + inputClass + ' stok-ozellik" data-row-index="' + (rowIndex - 1) + '">';
+
+                                for (var j = 0; j < stokOzelliks.length; j++) {
+                                    var stokOzellik = stokOzelliks[j];
+                                    element += "<option value='" + stokOzellik.id + "'>" + stokOzellik.name + "</option>";
+                                }
+
+                                element += "</select>";
+                            } else if (i === 4) {
+                                element =
+                                    '<input type="' +
+                                    inputType +
+                                    '" class="' +
+                                    inputClass +
+                                    '" value="' +
+                                    data[i] +
+                                    '"/>';
+                            } else if (i === 5) {
+                                element = '<div class="boyutlarDiv" data-row-index="' + (rowIndex - 1) + '">#Boyutlar</div>';
+                            } else if (i === 6) {
+                                element = '<div>#Birimler</div>';
                             }
 
-                            $this.html(inputElement);
+                            $this.html(element);
                         }
                     });
-                },
-
-                rowSave: function ($row) {
-                    var _self = this,
-                        $actions,
-                        values = [];
-
-                    if ($row.hasClass("adding")) {
-                        this.$addButton.removeAttr("disabled");
-                        $row.removeClass("adding");
-                    }
-
-                    values = $row
-                        .find("td")
-                        .map(function (i) {
-                            var $this = $(this);
-
-                            if ($this.hasClass("actions")) {
-                                _self.rowSetActionsDefault($row);
-                                return _self.datatable.cell(this).data();
-                            } else {
-                                var $input = $this.find("input");
-                                if ($input.length) {
-                                    return $.trim($input.val());
-                                } else {
-                                    return $.trim($this.text());
-                                }
-                            }
-                        })
-                        .get();
-
-                    this.datatable.row($row.get(0)).data(values);
-
-                    $actions = $row.find("td.actions");
-                    if ($actions.get(0)) {
-                        this.rowSetActionsDefault($row);
-                    }
-
-                    this.datatable.draw();
                 },
 
                 rowRemove: function ($row) {
@@ -334,25 +276,41 @@
             });
         }).apply(this, [jQuery]);
 
-    </script>
-    <script>
-        var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
-                                                                                                                                                                                                                                                            e.ErrorMessage).ToList()));
-    if (errorMessages.length > 0) {
-        var notice = new PNotify({
-            text: errorMessages.join('<br>'),
-            type: 'error',
-            addclass: 'click-2-close',
-            hide: true,
-            buttons: {
-                closer: false,
-                sticker: false
-            }
-        });
+        $(document).on('change', '.stok-grup-select', function () {
+            var $stokGrupSelect = $(this);
+            var rowIndex = $stokGrupSelect.data('row-index');
 
-            notice.get().click(function () {
-                notice.remove();
+            $('.stok-select[data-row-index="' + rowIndex + '"]').empty();
+
+            var stoksArr = stoks.filter(function (stok) {
+                return stok.stokGrupId == $stokGrupSelect.val();
             });
-        }
+
+            for (var i = 0; i < stoksArr.length; i++) {
+                var stok = stoksArr[i];
+                $('.stok-select[data-row-index="' + rowIndex + '"]').append('<option value="' + stok.id + '">' + stok.name + '</option>');
+            }
+
+            @* var lastRowIndex = Math.max.apply(null,
+                $('.stok-grup-select').map(function () {
+                    return parseInt($(this).data('row-index'), 10);
+                }).get()
+            );
+
+            $(".stok-select[data-row-index='" + lastRowIndex + "']").trigger('change'); *@
+            });
+
+        $(document).on('change', '.stok-select', function () {
+            var $stokSelect = $(this);
+            var rowIndex = $stokSelect.data('row-index');
+
+            $('.boyutlarDiv[data-row-index="' + rowIndex + '"]').empty();
+
+            var stok = stoks.filter(function (item) {
+                return item.id == $stokSelect.val();
+            });
+
+            @* if (str && str.trim() !== "") { *@
+        });
     </script>
 }

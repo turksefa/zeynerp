@@ -94,9 +94,15 @@ namespace zeynerp.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Stoklar()
+        public async Task<IActionResult> Stoklar()
         {
-            return View();
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
+            var stoks = _mapper.Map<IReadOnlyList<StokViewModel>>(await _stokService.GetStoklarAsync());
+            return View(stoks);
         }
 
         public async Task<IActionResult> StokEkle()
@@ -116,6 +122,7 @@ namespace zeynerp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.Status = Status.Aktif;
                 var result = await _stokService.StokOlusturAsync(_mapper.Map<StokDto>(model));
                 if (result.Success)
                 {

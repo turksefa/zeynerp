@@ -274,43 +274,43 @@ namespace zeynerp.Infrastructure.Data.Migrations.ApplicationDb
                     b.HasData(
                         new
                         {
-                            Id = new Guid("d21f133b-2354-4aa6-a0d5-2ed392f0aa04"),
+                            Id = new Guid("545db9eb-8c34-4f6f-bbf6-1306804b9d3b"),
                             Name = "Satın Alma Yönetimi",
                             Price = 0m
                         },
                         new
                         {
-                            Id = new Guid("59cfdf3f-0c78-4b76-b4a1-435ac1fe04e5"),
+                            Id = new Guid("789a40b6-ff3b-4cb8-9c2b-4ce4ebb857e3"),
                             Name = "Finans ve Muhasebe Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("d62baf5a-aa5f-4c19-b30f-838c2f2ecd7a"),
+                            Id = new Guid("e0f43511-9a1e-442c-afcb-ba53da66f41a"),
                             Name = "Personel Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("ab607577-edbd-48f9-bf3c-42e5e686737a"),
+                            Id = new Guid("9d21a80e-ce71-4ca2-92a1-c7cef43c78a0"),
                             Name = "Kalite Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("73e531e2-b3b4-45f9-898f-b57c929cd3b7"),
+                            Id = new Guid("74ed1190-5eea-493c-a3d0-40794526a110"),
                             Name = "Üretim Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("19cce44d-1400-44a6-8a84-2f9596631d62"),
+                            Id = new Guid("d8467de3-2234-4e66-907e-d4ea4d50e95f"),
                             Name = "Proje Yönetimi",
                             Price = 2000m
                         },
                         new
                         {
-                            Id = new Guid("8e4b127c-fd93-40cd-82fa-5361b0be8835"),
+                            Id = new Guid("06180cca-4c51-4045-b90b-3cb04603b3f7"),
                             Name = "Stok Yönetimi",
                             Price = 2000m
                         });

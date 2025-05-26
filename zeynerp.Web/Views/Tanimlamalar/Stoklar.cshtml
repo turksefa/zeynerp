@@ -1,3 +1,4 @@
+@model IReadOnlyList<StokViewModel>
 @{
     ViewData["LayoutTitle"] = "Stoklar";
 }
@@ -63,7 +64,7 @@
                                 <div class="search search-style-1 search-style-1-lg mx-lg-auto">
                                     <div class="input-group">
                                         <input type="text" class="search-term form-control" name="search-term"
-                                            id="search-term" placeholder="Malzeme Ara">
+                                            id="search-term" placeholder="Stok Ara">
                                         <button class="btn btn-default" type="submit"><i
                                                 class="bx bx-search"></i></button>
                                     </div>
@@ -74,62 +75,32 @@
 
                     <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list"
                         style="min-width: 750px;">
-
                         <thead>
                             <tr>
-                                <th width="3%">Sıra</th>
+                                <th>Stok Adı</th>
                                 <th>Stok Grup Adı</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>191</td>
-                                <td class="d-flex justify-content-between align-items-center">
-                                    <a href="#" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"><strong>Hammadde</strong></a><span
-                                        class="ecommerce-status completed"></span>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-body">
-                                                    <form>
-                                                        <div class="form-row">
-                                                            <div class="form-group">
-                                                                <label for="inputEmail4">Stok Grup Adı</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="inputEmail4" value="Hammadde">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <div class="col-4">
-                                                                        <label for="inputEmail4">Sıra</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="inputEmail4" value="191">
-                                                                    </div>
-                                                                    <div class="col-8">
-                                                                        <label for="inputEmail4">Durum</label>
-                                                                        <select class="form-control">
-                                                                            <option>Aktif</option>
-                                                                            <option>Pasif</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary"><i
-                                                            class="fas fa-save"></i> Kaydet</button>
-                                                    <button type="button" class="btn btn-default"
-                                                        data-bs-dismiss="modal">İptal</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach (var stok in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a href="#"><strong>@stok.Name</strong></a>
+                                    </td>
+                                    <td class="d-flex justify-content-between align-items-center">
+                                        @stok.StokGrup.Name
+                                        @if (stok.Status == 0)
+                                        {
+                                            <span class="ecommerce-status failed"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="ecommerce-status completed"></span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <hr class="solid mt-5 opacity-4">
