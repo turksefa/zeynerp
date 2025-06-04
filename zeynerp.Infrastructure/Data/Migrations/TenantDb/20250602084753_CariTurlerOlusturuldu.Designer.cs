@@ -12,8 +12,8 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250520080429_Init")]
-    partial class Init
+    [Migration("20250602084753_CariTurlerOlusturuldu")]
+    partial class CariTurlerOlusturuldu
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,64 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Aciklama")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Birim")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Boyut1")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Boyut2")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Boyut3")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Boyut4")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Kg")
+                        .HasColumnType("float");
+
+                    b.Property<double>("M")
+                        .HasColumnType("float");
+
+                    b.Property<double>("M2")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Mm")
+                        .HasColumnType("float");
+
+                    b.Property<int>("StokGrupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StokId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StokOzellikId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StokGrupId");
+
+                    b.HasIndex("StokId");
+
+                    b.HasIndex("StokOzellikId");
+
+                    b.ToTable("MalzemeTalepler");
+                });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Birim", b =>
                 {
@@ -60,6 +118,29 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                             Status = 1,
                             Unit = "Yok"
                         });
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariTur", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CariTurler");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>
@@ -114,6 +195,9 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
                     b.Property<string>("KGFormül")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("KutuSayisi")
+                        .HasColumnType("int");
 
                     b.Property<string>("M2Formül")
                         .HasColumnType("nvarchar(max)");
@@ -221,6 +305,33 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasKey("Id");
 
                     b.ToTable("StokOzellikler");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
+                        .WithMany()
+                        .HasForeignKey("StokGrupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Stok", "Stok")
+                        .WithMany()
+                        .HasForeignKey("StokId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokOzellik", "StokOzellik")
+                        .WithMany()
+                        .HasForeignKey("StokOzellikId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Stok");
+
+                    b.Navigation("StokGrup");
+
+                    b.Navigation("StokOzellik");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>

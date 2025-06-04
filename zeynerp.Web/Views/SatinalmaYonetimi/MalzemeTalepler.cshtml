@@ -1,3 +1,4 @@
+@model IReadOnlyList<MalzemeTalepViewModel>
 @{
     ViewData["LayoutTitle"] = "Malzeme Talepler";
 }
@@ -69,7 +70,6 @@
                         style="min-width: 750px;">
                         <thead>
                             <tr>
-                                <th>Proje No</th>
                                 <th>Stok Adı</th>
                                 <th>Stok Özellik Adı</th>
                                 <th>Boyutlar</th>
@@ -83,7 +83,66 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            @foreach (var malzemeTalep in Model)
+                            {
+                                <tr>
+                                    <td>@malzemeTalep.Stok.Name</td>
+                                    <td>@malzemeTalep.StokOzellik.Name</td>
+                                    <td>
+                                        @if (malzemeTalep.Boyut1 != "0")
+                                        {
+                                            <span>@malzemeTalep.Stok.Oncul1</span>
+                                            <span>@malzemeTalep.Boyut1</span>
+                                            <span>@malzemeTalep.Stok.Ayrac1</span>
+                                        }
+                                        @if (malzemeTalep.Boyut2 != "0")
+                                        {
+                                            <span>@malzemeTalep.Stok.Oncul2</span>
+                                            <span>@malzemeTalep.Boyut2</span>
+                                            <span>@malzemeTalep.Stok.Ayrac2</span>
+                                        }
+                                        @if (malzemeTalep.Boyut3 != "0")
+                                        {
+                                            <span>@malzemeTalep.Stok.Oncul3</span>
+                                            <span>@malzemeTalep.Boyut3</span>
+                                            <span>@malzemeTalep.Stok.Ayrac3</span>
+                                        }
+                                        @if (malzemeTalep.Boyut4 != "0")
+                                        {
+                                            <span>@malzemeTalep.Stok.Oncul4</span>
+                                            <span>@malzemeTalep.Boyut4</span>
+                                            <span>@malzemeTalep.Stok.Ayrac4</span>
+                                        }
+                                    </td>
+                                    <td>@malzemeTalep.Birim</td>
+                                    <td>
+                                        @if (malzemeTalep.Kg != "0")
+                                        {
+                                            @double.Parse(malzemeTalep.Kg).ToString("N2")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (malzemeTalep.M2 != "0")
+                                        {
+                                            @double.Parse(malzemeTalep.M2).ToString("N2")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (malzemeTalep.Mm != "0")
+                                        {
+                                            @double.Parse(malzemeTalep.Mm).ToString("N2")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (malzemeTalep.M != "0")
+                                        {
+                                            @double.Parse(malzemeTalep.M).ToString("N2")
+                                        }
+                                    </td>
+                                    <td>#</td>
+                                    <td>#</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <hr class="solid mt-5 opacity-4">

@@ -27,7 +27,7 @@
 <form id="form" class="ecommerce-form action-buttons-fixed" asp-action="UrunGrupEkle" method="post">
     <section class="card">
         <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable" style="min-width: 550px;">
                 <thead>
                     <tr>
                         <th>Sıra</th>
@@ -68,6 +68,12 @@
         table th,
         table td {
             border: none !important;
+        }
+
+        @@media only screen and (max-width: 576px) {
+            table th:nth-child(1) {
+                min-width: 80px !important;
+            }
         }
     </style>
 }

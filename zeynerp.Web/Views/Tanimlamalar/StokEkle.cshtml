@@ -41,8 +41,7 @@
                         @{
                             var stokGrupSelectedList = new SelectList(Model.StokGrups, "Id", "Name");
                         }
-                        <select asp-for="StokGrupId" asp-items="stokGrupSelectedList"
-                            class="form-control" required>
+                        <select asp-for="StokGrupId" asp-items="stokGrupSelectedList" class="form-control" required>
                             <option value="">Seç</option>
                         </select>
                     </div>
@@ -65,8 +64,7 @@
                         @{
                             var birimSelectedList = new SelectList(Model.Birims, "Id", "Name");
                         }
-                        <select asp-for="BirimId" asp-items="birimSelectedList"
-                            class="form-control" required>
+                        <select asp-for="BirimId" asp-items="birimSelectedList" class="form-control" required>
                             <option value="">Seç</option>
                         </select>
                     </div>
@@ -108,8 +106,8 @@
                         @{
                             var birimSelectedList2 = new SelectList(Model.Birims, "Id", "Name");
                         }
-                        <select asp-for="BirimFiyatHesaplama" asp-items="birimSelectedList2"
-                            class="form-control" required>
+                        <select asp-for="BirimFiyatHesaplama" asp-items="birimSelectedList2" class="form-control"
+                            required>
                             <option value="">Seç</option>
                         </select>
                     </div>
@@ -140,8 +138,7 @@
                         @{
                             var userSelectedList = new SelectList(Model.Users, "Id", "FullName");
                         }
-                        <select asp-for="StokSorumluId" asp-items="userSelectedList"
-                            class="form-control" required>
+                        <select asp-for="StokSorumluId" asp-items="userSelectedList" class="form-control" required>
                             <option value="">Seç</option>
                         </select>
                     </div>
@@ -166,7 +163,7 @@
 
 @section VendorScripts {
     <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
-	<script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
+    <script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
 }
 
 @section Scripts {
@@ -198,28 +195,28 @@
                         $('#onculContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Öncül</label>' +
-                            '<input id="Oncul'+(i + 1)+'" name="Oncul'+(i + 1)+'" type="text" class="form-control" />' +
+                            '<input id="Oncul' + (i + 1) + '" name="Oncul' + (i + 1) + '" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
                         $('#ayracContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Ayraç</label>' +
-                            '<input id="Ayrac'+(i + 1)+'" name="Ayrac'+(i + 1)+'" type="text" class="form-control" />' +
+                            '<input id="Ayrac' + (i + 1) + '" name="Ayrac' + (i + 1) + '" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
                         $('#boyutContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Boyut</label>' +
-                            '<input id="Boyut'+(i + 1)+'" name="Boyut'+(i + 1)+'" type="text" class="form-control" />' +
+                            '<input id="Boyut' + (i + 1) + '" name="Boyut' + (i + 1) + '" type="text" class="form-control" />' +
                             '</div>' +
                             '</div>');
 
                         $('#fireContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Fire</label>' +
-                            '<select id="Fire'+(i + 1)+'" name="Fire'+(i + 1)+'" class="form-control" required>' +
+                            '<select id="Fire' + (i + 1) + '" name="Fire' + (i + 1) + '" class="form-control" required>' +
                             '<option value="">Seç</option>' +
                             '<option value="false">Yok</option>' +
                             '<option value="true">Var</option>' +
@@ -227,19 +224,60 @@
                             '</div>' +
                             '</div>');
 
-                        $('#siralamaContainer').append('<div class="col-lg-3">' +
-                            '<div class="form-group">' +
-                            '<label class="col-form-label">Sıralama</label>' +
-                            '<select id="Siralama'+(i + 1)+'" name="Siralama'+(i + 1)+'" class="form-control" required>' +
-                            '<option value="">Seç</option>' +
-                            '<option value="0">Yok</option>' +
-                            '<option value="1">1. Kutu</option>' +
-                            '<option value="2">2. Kutu</option>' +
-                            '<option value="3">3. Kutu</option>' +
-                            '<option value="4">4. Kutu</option>' +
-                            '</select>' +
-                            '</div>' +
-                            '</div>');
+                        if (selectedValue == 1) {
+                            $('#siralamaContainer').append('<div class="col-lg-3">' +
+                                '<div class="form-group">' +
+                                '<label class="col-form-label">Sıralama</label>' +
+                                '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
+                                '<option value="">Seç</option>' +
+                                '<option value="0">Yok</option>' +
+                                '<option value="1">1. Kutu</option>' +
+                                '</select>' +
+                                '</div>' +
+                                '</div>');
+                        }
+                        else if (selectedValue == 2) {
+                            $('#siralamaContainer').append('<div class="col-lg-3">' +
+                                '<div class="form-group">' +
+                                '<label class="col-form-label">Sıralama</label>' +
+                                '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
+                                '<option value="">Seç</option>' +
+                                '<option value="0">Yok</option>' +
+                                '<option value="1">1. Kutu</option>' +
+                                '<option value="2">2. Kutu</option>' +
+                                '</select>' +
+                                '</div>' +
+                                '</div>');
+                        }
+                        else if (selectedValue == 3) {
+                            $('#siralamaContainer').append('<div class="col-lg-3">' +
+                                '<div class="form-group">' +
+                                '<label class="col-form-label">Sıralama</label>' +
+                                '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
+                                '<option value="">Seç</option>' +
+                                '<option value="0">Yok</option>' +
+                                '<option value="1">1. Kutu</option>' +
+                                '<option value="2">2. Kutu</option>' +
+                                '<option value="3">3. Kutu</option>' +
+                                '</select>' +
+                                '</div>' +
+                                '</div>');
+                        }
+                        else {
+                            $('#siralamaContainer').append('<div class="col-lg-3">' +
+                                '<div class="form-group">' +
+                                '<label class="col-form-label">Sıralama</label>' +
+                                '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
+                                '<option value="">Seç</option>' +
+                                '<option value="0">Yok</option>' +
+                                '<option value="1">1. Kutu</option>' +
+                                '<option value="2">2. Kutu</option>' +
+                                '<option value="3">3. Kutu</option>' +
+                                '<option value="4">4. Kutu</option>' +
+                                '</select>' +
+                                '</div>' +
+                                '</div>');
+                        }
                     }
                 }
             });

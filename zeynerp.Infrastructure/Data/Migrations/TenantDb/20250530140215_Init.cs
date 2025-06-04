@@ -65,6 +65,7 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KutuSayisi = table.Column<int>(type: "int", nullable: true),
                     Oncul1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Oncul2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Oncul3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -108,10 +109,68 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "MalzemeTalepler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Birim = table.Column<int>(type: "int", nullable: false),
+                    StokGrupId = table.Column<int>(type: "int", nullable: false),
+                    StokId = table.Column<int>(type: "int", nullable: false),
+                    StokOzellikId = table.Column<int>(type: "int", nullable: false),
+                    Aciklama = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Boyut1 = table.Column<double>(type: "float", nullable: false),
+                    Boyut2 = table.Column<double>(type: "float", nullable: false),
+                    Boyut3 = table.Column<double>(type: "float", nullable: false),
+                    Boyut4 = table.Column<double>(type: "float", nullable: false),
+                    Kg = table.Column<double>(type: "float", nullable: false),
+                    M2 = table.Column<double>(type: "float", nullable: false),
+                    Mm = table.Column<double>(type: "float", nullable: false),
+                    M = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MalzemeTalepler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepler_StokGruplar_StokGrupId",
+                        column: x => x.StokGrupId,
+                        principalTable: "StokGruplar",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepler_StokOzellikler_StokOzellikId",
+                        column: x => x.StokOzellikId,
+                        principalTable: "StokOzellikler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepler_Stoklar_StokId",
+                        column: x => x.StokId,
+                        principalTable: "Stoklar",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Birimler",
                 columns: new[] { "Id", "Name", "Order", "Status", "Unit" },
                 values: new object[] { 1, "Yok", 1, 1, "Yok" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepler_StokGrupId",
+                table: "MalzemeTalepler",
+                column: "StokGrupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepler_StokId",
+                table: "MalzemeTalepler",
+                column: "StokId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepler_StokOzellikId",
+                table: "MalzemeTalepler",
+                column: "StokOzellikId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stoklar_StokGrupId",
@@ -126,10 +185,13 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "Birimler");
 
             migrationBuilder.DropTable(
-                name: "Stoklar");
+                name: "MalzemeTalepler");
 
             migrationBuilder.DropTable(
                 name: "StokOzellikler");
+
+            migrationBuilder.DropTable(
+                name: "Stoklar");
 
             migrationBuilder.DropTable(
                 name: "StokGruplar");

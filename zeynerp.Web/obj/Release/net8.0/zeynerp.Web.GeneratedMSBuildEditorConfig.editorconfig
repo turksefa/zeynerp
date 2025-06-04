@@ -114,6 +114,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXEJpcmltbGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/CariEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXENhcmlFa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/CariTanimlar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXENhcmlUYW5pbWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/CariTurEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXENhcmlUdXJFa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/CariTurTanimlar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXENhcmlUdXJUYW5pbWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/GenelTanimlar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXEdlbmVsVGFuaW1sYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -140,6 +160,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/StokTanimlar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFN0b2tUYW5pbWxhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/Test.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFuaW1sYW1hbGFyXFRlc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/IT/Desktop/zeynerp/zeynerp.Web/Views/Tanimlamalar/UrunGrupEkle.cshtml]

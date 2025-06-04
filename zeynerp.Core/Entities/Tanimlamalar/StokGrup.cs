@@ -1,3 +1,5 @@
+using zeynerp.Core.Entities.SatinalmaYonetimi;
+
 namespace zeynerp.Core.Entities.Tanimlamalar
 {
     public class StokGrup

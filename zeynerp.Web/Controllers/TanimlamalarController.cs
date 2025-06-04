@@ -6,6 +6,7 @@ using zeynerp.Application.DTOs.Tanimlamalar;
 using zeynerp.Application.Interfaces.Tanimlamalar;
 using zeynerp.Core.Entities;
 using zeynerp.Core.Entities.Tanimlamalar;
+using zeynerp.Web.Models;
 using zeynerp.Web.Models.Tanimlamalar;
 
 namespace zeynerp.Web.Controllers
@@ -16,6 +17,7 @@ namespace zeynerp.Web.Controllers
         private readonly IStokOzellikService _stokOzellikService;
         private readonly IBirimService _birimService;
         private readonly IStokService _stokService;
+        private readonly ICariTurService _cariTurService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
@@ -23,6 +25,7 @@ namespace zeynerp.Web.Controllers
             IStokOzellikService stokOzellikService,
             IBirimService birimService,
             IStokService stokService,
+            ICariTurService cariTurService,
             UserManager<ApplicationUser> userManager,
             IMapper mapper)
         {
@@ -30,6 +33,7 @@ namespace zeynerp.Web.Controllers
             _stokOzellikService = stokOzellikService;
             _birimService = birimService;
             _stokService = stokService;
+            _cariTurService = cariTurService;
             _userManager = userManager;
             _mapper = mapper;
         }
@@ -37,6 +41,80 @@ namespace zeynerp.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult GenelTanimlar()
+        {
+            return View();
+        }
+
+        public IActionResult CariTanimlar()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CariEkle()
+        {
+            CariViewModel cariViewModel = new CariViewModel
+            {
+                CariTurViewModels = _mapper.Map<IReadOnlyList<CariTurViewModel>>(await _cariTurService.GetCariTurlerAsync())
+            };
+            return View(cariViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult CariEkle([FromForm] CariViewModel model, int[] SelectedCariTurIds)
+        {
+            return View(model);
+        }
+
+        public async Task<IActionResult> CariTurTanimlar()
+        {
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
+            return View(_mapper.Map<IReadOnlyList<CariTurViewModel>>(await _cariTurService.GetCariTurlerAsync()));
+        }
+
+        public IActionResult CariTurEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CariTurEkle([FromForm] List<CariTurViewModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ForEach(item => item.Status = Status.Aktif);
+
+                var result = await _cariTurService.CariTurOlusturAsync(_mapper.Map<IReadOnlyList<CariTurDto>>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("CariTurTanimlar");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CariTurGuncelle([FromForm] CariTurViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _cariTurService.CariTurGuncelleAsync(_mapper.Map<CariTurDto>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("CariTurTanimlar");
+                }
+            }
+
+            return View(model);
         }
 
         public IActionResult StokTanimlar()
@@ -236,6 +314,11 @@ namespace zeynerp.Web.Controllers
             }
 
             return View(model);
+        }
+
+        public IActionResult Test()
+        {
+            return View();
         }
     }
 }

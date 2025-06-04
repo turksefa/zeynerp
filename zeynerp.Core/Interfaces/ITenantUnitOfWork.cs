@@ -1,3 +1,4 @@
+using zeynerp.Core.Repositories.SatinalmaYonetimi;
 using zeynerp.Core.Repositories.Tanimlamalar;
 
 namespace zeynerp.Core.Interfaces
@@ -8,5 +9,7 @@ namespace zeynerp.Core.Interfaces
         IStokOzellikRepository StokOzellikRepository { get; }
         IBirimRepository BirimRepository { get; }
         IStokRepository StokRepository { get; }
+        IMalzemeTalepRepository MalzemeTalepRepository { get; }
+        ICariTurRepository CariTurRepository { get; }
     }
 }

@@ -1,0 +1,105 @@
+@{
+    ViewData["LayoutTitle"] = "Stoklar";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li>
+                <a asp-action="Index"><span>Tanımlamalar</span></a>
+            </li>
+
+            <li>
+                <a asp-action="StokTanimlar"><span>Stok Tanımlar</span></a>
+            </li>
+
+            <li><span class="text-light">Stoklar</span></li>
+        </ol>
+    </div>
+</header>
+
+<section class="card">
+    <header class="card-header">
+        <div class="card-actions">
+            <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+            <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+        </div>
+
+        <h2 class="card-title">Default</h2>
+    </header>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <button id="addToTable" class="btn btn-primary">Add <i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+            <thead>
+                <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-item-id="1">
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 4.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td class="actions">
+                        <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
+                        <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
+                        <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                <tr data-item-id="2">
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.0
+                    </td>
+                    <td>Win 95+</td>
+                    <td class="actions">
+                        <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
+                        <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
+                        <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+                <tr data-item-id="3">
+                    <td>Trident</td>
+                    <td>Internet
+                        Explorer 5.5
+                    </td>
+                    <td>Win 95+</td>
+                    <td class="actions">
+                        <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
+                        <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
+                        <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
+                        <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+}
+
+@section VendorScripts {
+    <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+}
+
+@section Scripts {
+    <script src="~/js/examples/examples.datatables.editable.js"></script>
+}

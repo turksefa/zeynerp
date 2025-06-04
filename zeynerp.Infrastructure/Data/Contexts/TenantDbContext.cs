@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using zeynerp.Core.Entities.SatinalmaYonetimi;
 using zeynerp.Core.Entities.Tanimlamalar;
 
 namespace zeynerp.Infrastructure.Data.Contexts
@@ -14,6 +15,11 @@ namespace zeynerp.Infrastructure.Data.Contexts
         public DbSet<StokOzellik> StokOzellikler { get; set; }
         public DbSet<Birim> Birimler { get; set; }
         public DbSet<Stok> Stoklar { get; set; }
+        public DbSet<MalzemeTalep> MalzemeTalepler { get; set; }
+        public DbSet<CariTur> CariTurler { get; set; }
+        public DbSet<Cari> Cariler { get; set; }
+        public DbSet<CariYetkili> CariYetkililer { get; set; }
+        public DbSet<TeslimatAdres> TeslimatAdresleri { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +28,24 @@ namespace zeynerp.Infrastructure.Data.Contexts
             modelBuilder.Entity<Birim>().HasData(
                 new Birim { Id = 1, Name = "Yok", Unit = "Yok", Order = 1, Status = Status.Aktif }
             );
+
+            modelBuilder.Entity<MalzemeTalep>()
+                .HasOne(mt => mt.Stok)
+                .WithMany()
+                .HasForeignKey(mt => mt.StokId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MalzemeTalep>()
+                .HasOne(mt => mt.StokGrup)
+                .WithMany()
+                .HasForeignKey(mt => mt.StokGrupId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MalzemeTalep>()
+                .HasOne(mt => mt.StokOzellik)
+                .WithMany()
+                .HasForeignKey(mt => mt.StokOzellikId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

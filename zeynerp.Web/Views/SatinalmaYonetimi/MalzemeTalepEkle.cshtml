@@ -1,4 +1,4 @@
-@model MalzemeTaleplerViewModel
+@model MalzemeTalepViewModel
 @{
     ViewData["LayoutTitle"] = "Malzeme Talep Oluştur";
 }
@@ -17,7 +17,7 @@
     </div>
 </header>
 
-<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="UrunGrupEkle" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="MalzemeTalepEkle" method="post">
     <section class="card">
         <div class="card-body">
             <table class="table table-bordered table-striped mb-0" id="datatable-editable">
@@ -53,7 +53,7 @@
             </button>
         </div>
         <div class="col-12 col-md-auto ms-lg-auto px-md-0 mt-3 mt-md-0">
-            <a asp-action="UrunGruplar"
+            <a asp-action="MalzemeTalepler"
                 class="cancel-button btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">İptal</a>
         </div>
     </div>
@@ -66,6 +66,30 @@
         table th,
         table td {
             border: none !important;
+        }
+
+        @@media only screen and (max-width: 576px) {
+            table th:nth-child(1) {
+                min-width: 80px !important;
+            }
+
+            table th:nth-child(2),
+            table th:nth-child(3),
+            table th:nth-child(4) {
+                min-width: 120px !important;
+            }
+
+            table th:nth-child(5) {
+                min-width: 200px !important;
+            }
+
+            table th:nth-child(6) {
+                min-width: 300px !important;
+            }
+
+            table th:nth-child(7) {
+                min-width: 200px !important;
+            }
         }
     </style>
 }
@@ -107,7 +131,8 @@
                 build: function () {
                     this.datatable = this.$table.DataTable({
                         dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
-                        aoColumns: [null, null, null, null, null, null, null, { bSortable: false }]
+                        aoColumns: [{ width: '7%' }, { width: '10%' }, { width: '10%' }, { width: '10%' }, { width: '18%' }, { width: '24%' }, { width: '18%' }, { width: '3%' }],
+                        ordering: false
                     });
 
                     window.dt = this.datatable;
@@ -197,15 +222,15 @@
                             if (i === 0) {
                                 inputType = "number";
                                 element =
-                                    '<input type="' +
+                                    '<input name="Model[' + (rowIndex - 1) + '].Birim" type="' +
                                     inputType +
                                     '" class="' +
                                     inputClass +
-                                    '" value="' +
-                                    data[i] +
-                                    '"/>';
+                                    ' birim" value="' +
+                                    1 +
+                                    '" data-row-index="' + (rowIndex - 1) + '""/>';
                             } else if (i === 1) {
-                                element = '<select class="' + inputClass + ' stok-grup-select" data-row-index="' + (rowIndex - 1) + '">';
+                                element = '<select name="Model[' + (rowIndex - 1) + '].StokGrupId" class="' + inputClass + ' stok-grup-select" data-row-index="' + (rowIndex - 1) + '">';
 
                                 for (var j = 0; j < stokGrups.length; j++) {
                                     var stokGrup = stokGrups[j];
@@ -214,7 +239,7 @@
 
                                 element += "</select>";
                             } else if (i === 2) {
-                                element = '<select class="' + inputClass + ' stok-select" data-row-index="' + (rowIndex - 1) + '">';
+                                element = '<select name="Model[' + (rowIndex - 1) + '].StokId" class="' + inputClass + ' stok-select" data-row-index="' + (rowIndex - 1) + '">';
 
                                 for (var j = 0; j < stoks.length; j++) {
                                     var stok = stoks[j];
@@ -224,7 +249,7 @@
 
                                 element += "</select>";
                             } else if (i === 3) {
-                                element = '<select class="' + inputClass + ' stok-ozellik" data-row-index="' + (rowIndex - 1) + '">';
+                                element = '<select name="Model[' + (rowIndex - 1) + '].StokOzellikId" class="' + inputClass + ' stok-ozellik-select" data-row-index="' + (rowIndex - 1) + '">';
 
                                 for (var j = 0; j < stokOzelliks.length; j++) {
                                     var stokOzellik = stokOzelliks[j];
@@ -234,7 +259,7 @@
                                 element += "</select>";
                             } else if (i === 4) {
                                 element =
-                                    '<input type="' +
+                                    '<input name="Model[' + (rowIndex - 1) + '].Aciklama" type="' +
                                     inputType +
                                     '" class="' +
                                     inputClass +
@@ -242,9 +267,67 @@
                                     data[i] +
                                     '"/>';
                             } else if (i === 5) {
-                                element = '<div class="boyutlarDiv" data-row-index="' + (rowIndex - 1) + '">#Boyutlar</div>';
+                                element = '<div class="d-flex align-items-center boyutlarDiv" data-row-index="' + (rowIndex - 1) + '">';
+
+                                for (var j = 0; j < stoks.length; j++) {
+                                    var stok = stoks[j];
+                                    if (stok.id == 1) {
+                                        if (stok.kutuSayisi > 0) {
+                                            stok.oncul1 = stok.oncul1 || "";
+                                            stok.boyut1 = stok.boyut1 || "";
+                                            stok.ayrac1 = stok.ayrac1 || "";
+                                            stok.oncul2 = stok.oncul2 || "";
+                                            stok.boyut2 = stok.boyut2 || "";
+                                            stok.ayrac2 = stok.ayrac2 || "";
+                                            stok.oncul3 = stok.oncul3 || "";
+                                            stok.boyut3 = stok.boyut3 || "";
+                                            stok.ayrac3 = stok.ayrac3 || "";
+                                            stok.oncul4 = stok.oncul4 || "";
+                                            stok.boyut4 = stok.boyut4 || "";
+                                            stok.ayrac4 = stok.ayrac4 || "";
+
+                                            if (stok.kutuSayisi === 1) {
+                                                element += '<span>' + stok.oncul1 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok.boyut1 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span>' + stok.ayrac1 + '</span>';
+                                            } else if (stok.kutuSayisi === 2) {
+                                                element += '<span>' + stok.oncul1 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok.boyut1 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac1 + '</span>';
+                                                element += '<span>' + stok.oncul2 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok.boyut2 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span>' + stok.ayrac2 + '</span>';
+                                            } else if (stok.kutuSayisi === 3) {
+                                                element += '<span>' + stok.oncul1 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok.boyut1 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac1 + '</span>';
+                                                element += '<span>' + stok.oncul2 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok.boyut2 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac2 + '</span>';
+                                                element += '<span>' + stok.oncul3 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut3" type="number" step="any" class="form-control input-block boyut3" placeholder="' + stok.boyut3 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span>' + stok.ayrac3 + '</span>';
+                                            } else {
+                                                element += '<span>' + stok.oncul1 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok.boyut1 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac1 + '</span>';
+                                                element += '<span>' + stok.oncul2 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok.boyut2 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac2 + '</span>';
+                                                element += '<span>' + stok.oncul3 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut3" type="number" step="any" class="form-control input-block boyut3" placeholder="' + stok.boyut3 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span class="mx-1">' + stok.ayrac3 + '</span>';
+                                                element += '<span>' + stok.oncul4 + '</span>';
+                                                element += '<input name="Model[' + (rowIndex - 1) + '].Boyut4" type="number" step="any" class="form-control input-block boyut4" placeholder="' + stok.boyut4 + '" data-row-index="' + (rowIndex - 1) + '"/>';
+                                                element += '<span>' + stok.ayrac4 + '</span>';
+                                            }
+                                        }
+                                    }
+                                }
+
+                                element += '</div>';
                             } else if (i === 6) {
-                                element = '<div>#Birimler</div>';
+                                element = '<div class="d-flex align-items-center birimlerDiv" data-row-index="' + (rowIndex - 1) + '"></div>';
                             }
 
                             $this.html(element);
@@ -281,6 +364,8 @@
             var rowIndex = $stokGrupSelect.data('row-index');
 
             $('.stok-select[data-row-index="' + rowIndex + '"]').empty();
+            $('.boyutlarDiv[data-row-index="' + rowIndex + '"]').empty();
+            $('.birimlerDiv[data-row-index="' + rowIndex + '"]').empty();
 
             var stoksArr = stoks.filter(function (stok) {
                 return stok.stokGrupId == $stokGrupSelect.val();
@@ -291,26 +376,127 @@
                 $('.stok-select[data-row-index="' + rowIndex + '"]').append('<option value="' + stok.id + '">' + stok.name + '</option>');
             }
 
-            @* var lastRowIndex = Math.max.apply(null,
-                $('.stok-grup-select').map(function () {
-                    return parseInt($(this).data('row-index'), 10);
-                }).get()
-            );
-
-            $(".stok-select[data-row-index='" + lastRowIndex + "']").trigger('change'); *@
-            });
+            $(".stok-select[data-row-index='" + rowIndex + "']").trigger('change');
+        });
 
         $(document).on('change', '.stok-select', function () {
             var $stokSelect = $(this);
             var rowIndex = $stokSelect.data('row-index');
 
             $('.boyutlarDiv[data-row-index="' + rowIndex + '"]').empty();
+            $('.birimlerDiv[data-row-index="' + rowIndex + '"]').empty();
 
             var stok = stoks.filter(function (item) {
                 return item.id == $stokSelect.val();
             });
 
-            @* if (str && str.trim() !== "") { *@
+            if (stok[0].kutuSayisi > 0) {
+                stok[0].oncul1 = stok[0].oncul1 || "";
+                stok[0].boyut1 = stok[0].boyut1 || "";
+                stok[0].ayrac1 = stok[0].ayrac1 || "";
+                stok[0].oncul2 = stok[0].oncul2 || "";
+                stok[0].boyut2 = stok[0].boyut2 || "";
+                stok[0].ayrac2 = stok[0].ayrac2 || "";
+                stok[0].oncul3 = stok[0].oncul3 || "";
+                stok[0].boyut3 = stok[0].boyut3 || "";
+                stok[0].ayrac3 = stok[0].ayrac3 || "";
+                stok[0].oncul4 = stok[0].oncul4 || "";
+                stok[0].boyut4 = stok[0].boyut4 || "";
+                stok[0].ayrac4 = stok[0].ayrac4 || "";
+
+                var element = '';
+
+                if (stok[0].kutuSayisi === 1) {
+                    element += '<span>' + stok[0].oncul1 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok[0].boyut1 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac1 + '</span>';
+                } else if (stok[0].kutuSayisi === 2) {
+                    element += '<span>' + stok[0].oncul1 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok[0].boyut1 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac1 + '</span>';
+                    element += '<span>' + stok[0].oncul2 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok[0].boyut2 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac2 + '</span>';
+                } else if (stok[0].kutuSayisi === 3) {
+                    element += '<span>' + stok[0].oncul1 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok[0].boyut1 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac1 + '</span>';
+                    element += '<span>' + stok[0].oncul2 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok[0].boyut2 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac2 + '</span>';
+                    element += '<span>' + stok[0].oncul3 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut3" type="number" step="any" class="form-control input-block boyut3" placeholder="' + stok[0].boyut3 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac3 + '</span>';
+                } else {
+                    element += '<span>' + stok[0].oncul1 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut1" type="number" step="any" class="form-control input-block boyut1" placeholder="' + stok[0].boyut1 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac1 + '</span>';
+                    element += '<span>' + stok[0].oncul2 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut2" type="number" step="any" class="form-control input-block boyut2" placeholder="' + stok[0].boyut2 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac2 + '</span>';
+                    element += '<span>' + stok[0].oncul3 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut3" type="number" step="any" class="form-control input-block boyut3" placeholder="' + stok[0].boyut3 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac3 + '</span>';
+                    element += '<span>' + stok[0].oncul4 + '</span>';
+                    element += '<input name="Model[' + rowIndex + '].Boyut4" type="number" step="any" class="form-control input-block boyut4" placeholder="' + stok[0].boyut4 + '" data-row-index="' + rowIndex + '"/>';
+                    element += '<span>' + stok[0].ayrac4 + '</span>';
+                }
+
+                $('.boyutlarDiv[data-row-index="' + rowIndex + '"]').append(element);
+            }
+        });
+
+        $(document).on('input', '.birim, .stok-ozellik-select, .boyut1, .boyut2, .boyut3, .boyut4', function () {
+            var $select = $(this);
+            var rowIndex = $select.data('row-index');
+
+            $('.birimlerDiv[data-row-index="' + rowIndex + '"]').empty();
+
+            var kutu1 = parseFloat($('input.boyut1[data-row-index="' + rowIndex + '"]').val()) || 0;
+            var kutu2 = parseFloat($('input.boyut2[data-row-index="' + rowIndex + '"]').val()) || 0;
+            var kutu3 = parseFloat($('input.boyut3[data-row-index="' + rowIndex + '"]').val()) || 0;
+            var kutu4 = parseFloat($('input.boyut4[data-row-index="' + rowIndex + '"]').val()) || 0;
+
+            var stokSelect = $('select.stok-select[data-row-index="' + rowIndex + '"]').val();
+            var stok = stoks.filter(function (item) {
+                return item.id == stokSelect;
+            });
+
+            var stokOzellikSelect = $('select.stok-ozellik-select[data-row-index="' + rowIndex + '"]').val();
+            var stokOzellik = stokOzelliks.filter(function (item) {
+                return item.id == stokOzellikSelect;
+            });
+
+            var birim = $('input.birim[data-row-index="' + rowIndex + '"]').val();
+
+            $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('<span>');
+
+            if (stok[0].kgFormül) {
+                var kgFormül = stok[0].kgFormül.replace(/Kutu1/g, kutu1).replace(/Kutu2/g, kutu2).replace(/Kutu3/g, kutu3).replace(/Kutu4/g, kutu4).replace(/OzgulAgirlik/g, stokOzellik[0].ozgulAgirlik || 1);
+                var kgSonuc = eval(kgFormül + "*" + birim);
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('(' + kgSonuc.toFixed(2) + '<strong>KG</strong>)');
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('<input type="hidden" name="Model[' + rowIndex + '].Kg" value="' + kgSonuc + '"/>');
+            }
+            if (stok[0].m2Formül) {
+                var m2Formül = stok[0].m2Formül.replace(/Kutu1/g, kutu1).replace(/Kutu2/g, kutu2).replace(/Kutu3/g, kutu3).replace(/Kutu4/g, kutu4).replace(/OzgulAgirlik/g, stokOzellik[0].ozgulAgirlik || 1);
+                var m2Sonuc = eval(m2Formül + "*" + birim);
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('(' + m2Sonuc.toFixed(2) + '<strong>M2</strong>)');
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('<input type="hidden" name="Model[' + rowIndex + '].M2" value="' + m2Sonuc + '"/>');
+            }
+            if (stok[0].mmFormül) {
+                var mmFormül = stok[0].mmFormül.replace(/Kutu1/g, kutu1).replace(/Kutu2/g, kutu2).replace(/Kutu3/g, kutu3).replace(/Kutu4/g, kutu4).replace(/OzgulAgirlik/g, stokOzellik[0].ozgulAgirlik || 1);
+                var mmSonuc = eval(mmFormül + "*" + birim);
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('(' + mmSonuc.toFixed(2) + '<strong>MM</strong>)');
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('<input type="hidden" name="Model[' + rowIndex + '].Mm" value="' + mmSonuc + '"/>');
+            }
+            if (stok[0].mFormül) {
+                var mFormül = stok[0].mFormül.replace(/Kutu1/g, kutu1).replace(/Kutu2/g, kutu2).replace(/Kutu3/g, kutu3).replace(/Kutu4/g, kutu4).replace(/OzgulAgirlik/g, stokOzellik[0].ozgulAgirlik || 1);
+                var mSonuc = eval(mFormül + "*" + birim);
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('(' + mSonuc.toFixed(2) + '<strong>M</strong>)');
+                $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('<input type="hidden" name="Model[' + rowIndex + '].M" value="' + mSonuc + '"/>');
+            }
+
+            $('.birimlerDiv[data-row-index="' + rowIndex + '"]').append('</span>');
         });
     </script>
 }
