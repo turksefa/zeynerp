@@ -12,8 +12,9 @@ namespace zeynerp.Infrastructure.Data
         private readonly IStokRepository _stokRepository;
         private readonly IMalzemeTalepRepository _malzemeTalepRepository;
         private readonly ICariTurRepository _cariTurRepository;
+        private readonly ICariRepository _cariRepository;
 
-        public TenantUnitOfWork(IStokGrupRepository stokGrupRepository, IStokOzellikRepository stokOzellikRepository, IBirimRepository birimRepository, IStokRepository stokRepository, IMalzemeTalepRepository malzemeTalepRepository, ICariTurRepository cariTurRepository)
+        public TenantUnitOfWork(IStokGrupRepository stokGrupRepository, IStokOzellikRepository stokOzellikRepository, IBirimRepository birimRepository, IStokRepository stokRepository, IMalzemeTalepRepository malzemeTalepRepository, ICariTurRepository cariTurRepository, ICariRepository cariRepository)
         {
             _stokGrupRepository = stokGrupRepository;
             _stokOzellikRepository = stokOzellikRepository;
@@ -21,6 +22,7 @@ namespace zeynerp.Infrastructure.Data
             _stokRepository = stokRepository;
             _malzemeTalepRepository = malzemeTalepRepository;
             _cariTurRepository = cariTurRepository;
+            _cariRepository = cariRepository;
         }
 
         public IStokGrupRepository StokGrupRepository => _stokGrupRepository;
@@ -34,5 +36,7 @@ namespace zeynerp.Infrastructure.Data
         public IMalzemeTalepRepository MalzemeTalepRepository => _malzemeTalepRepository;
 
         public ICariTurRepository CariTurRepository => _cariTurRepository;
+
+        public ICariRepository CariRepository => _cariRepository;
     }
 }

@@ -12,6 +12,7 @@ namespace zeynerp.Web.Models.Tanimlamalar
         public string VergiDairesi { get; set; } = string.Empty;
         public string VergiNumarasi { get; set; } = string.Empty;
         public string FaturaAdresi { get; set; } = string.Empty;
+        public int[] SelectedCariTurIds { get; set; } = null!;
         public IReadOnlyList<CariTurViewModel> CariTurViewModels { get; set; } = null!;
         public IReadOnlyList<CariYetkiliViewModel> CariYetkiliViewModels { get; set; } = null!;
         public IReadOnlyList<TeslimatAdresViewModel> TeslimatAdresViewModels { get; set; } = null!;

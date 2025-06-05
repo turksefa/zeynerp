@@ -18,6 +18,7 @@ namespace zeynerp.Web.Controllers
         private readonly IBirimService _birimService;
         private readonly IStokService _stokService;
         private readonly ICariTurService _cariTurService;
+        private readonly ICariService _cariService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
@@ -26,6 +27,7 @@ namespace zeynerp.Web.Controllers
             IBirimService birimService,
             IStokService stokService,
             ICariTurService cariTurService,
+            ICariService cariService,
             UserManager<ApplicationUser> userManager,
             IMapper mapper)
         {
@@ -34,6 +36,7 @@ namespace zeynerp.Web.Controllers
             _birimService = birimService;
             _stokService = stokService;
             _cariTurService = cariTurService;
+            _cariService = cariService;
             _userManager = userManager;
             _mapper = mapper;
         }
@@ -63,8 +66,18 @@ namespace zeynerp.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CariEkle([FromForm] CariViewModel model, int[] SelectedCariTurIds)
+        public async Task<IActionResult> CariEkle([FromForm] CariViewModel model)
         {
+            if (ModelState.IsValid)
+            {
+                var result = await _cariService.CariOlusturAsync(_mapper.Map<CariDto>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("CariTanimlar");
+                }
+            }
+
             return View(model);
         }
 

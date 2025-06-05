@@ -21,6 +21,7 @@ namespace zeynerp.Application.Mapper
             CreateMap<Stok, StokDto>().ReverseMap();
             CreateMap<MalzemeTalep, MalzemeTalepDto>().ReverseMap();
             CreateMap<CariTur, CariTurDto>().ReverseMap();
+            CreateMap<Cari, CariDto>().ReverseMap();
         }
     }
 }

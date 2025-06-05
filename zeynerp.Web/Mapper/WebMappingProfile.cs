@@ -99,6 +99,7 @@ namespace zeynerp.Web.Mapper
                             : double.Parse(src.M, CultureInfo.InvariantCulture)
                     ));
             CreateMap<CariTurDto, CariTurViewModel>().ReverseMap();
+            CreateMap<CariDto, CariViewModel>().ReverseMap();
         }
     }
 }

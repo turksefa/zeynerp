@@ -1,10 +1,7 @@
-namespace zeynerp.Core.Entities.Tanimlamalar
+namespace zeynerp.Application.DTOs.Tanimlamalar
 {
-    public class CariYetkili
+    public class CariYetkiliDto
     {
-        public int Id { get; set; }
-        public int CariId { get; set; }
-        public Cari Cari { get; set; } = null!;
         public string AdiSoyadi { get; set; } = string.Empty;
         public string Telefon { get; set; } = string.Empty;
         public string? Fax { get; set; } = string.Empty;

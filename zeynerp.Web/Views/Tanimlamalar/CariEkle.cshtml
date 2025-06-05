@@ -51,7 +51,7 @@
                                         @{
                                             var cariTurler = new SelectList(Model.CariTurViewModels, "Id", "Name");
                                         }
-                                        <select name="SelectedCariTurIds" class="form-control" asp-items="cariTurler"
+                                        <select name="Model.SelectedCariTurIds" class="form-control" asp-items="cariTurler"
                                             multiple="multiple" data-plugin-multiselect
                                             data-plugin-options='{ "maxHeight": 200 }' required>
                                         </select>
@@ -334,7 +334,7 @@
                             var inputName = "";
 
                             if (i === 0) {
-                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].AdSoyad";
+                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].AdSoyadi";
                             } else if (i === 1) {
                                 inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].Telefon";
                             } else if (i === 2) {
