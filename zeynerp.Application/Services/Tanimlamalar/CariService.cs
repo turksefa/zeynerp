@@ -1,5 +1,4 @@
 using AutoMapper;
-using Microsoft.VisualBasic;
 using zeynerp.Application.DTOs.Tanimlamalar;
 using zeynerp.Application.Interfaces.Tanimlamalar;
 using zeynerp.Core.Entities.Tanimlamalar;
@@ -18,32 +17,54 @@ namespace zeynerp.Application.Services.Tanimlamalar
             _mapper = mapper;
         }
 
+        public async Task<IReadOnlyList<CariDto>> GetCarilerAsync() => _mapper.Map<IReadOnlyList<CariDto>>(await _tenantUnitOfWork.CariRepository.GetCarilerAsync());
+
+        public async Task<CariDto> GetCariByIdAsync(int id) => _mapper.Map<CariDto>(await _tenantUnitOfWork.CariRepository.GetCariByIdAsync(id));
+
         public async Task<(bool Success, string Message)> CariOlusturAsync(CariDto cariDto)
         {
-            var cari = _mapper.Map<Cari>(cariDto);
-
-            if (cariDto.CariYetkiliDtos.Count > 0)
-                cari.CariYetkililer = _mapper.Map<ICollection<CariYetkili>>(cariDto.CariYetkiliDtos);
-
-            if (cariDto.TeslimatAdresDtos.Count > 0)
-                cari.TeslimatAdresler = _mapper.Map<ICollection<TeslimatAdres>>(cariDto.TeslimatAdresDtos);
-
+            List<CariTur> cariTurs = new List<CariTur>();
             if (cariDto.SelectedCariTurIds.Count() > 0)
             {
                 foreach (var cariTurId in cariDto.SelectedCariTurIds)
                 {
-                    var cariTur = await _tenantUnitOfWork.CariTurRepository.GetCariTurByIdAsync(cariTurId);
-                    cari.CariTurler.Add(cariTur);
+                    cariTurs.Add(await _tenantUnitOfWork.CariTurRepository.GetCariTurByIdAsync(cariTurId));
                 }
             }
 
-            await _tenantUnitOfWork.CariRepository.AddAsync(_mapper.Map<Cari>(cariDto));
+            var cari = new Cari
+            {
+                Adi = cariDto.Adi,
+                KisaAdi = cariDto.KisaAdi,
+                Telefon = cariDto.Telefon,
+                Fax = cariDto.Fax,
+                EPosta = cariDto.EPosta,
+                VergiDairesi = cariDto.VergiDairesi,
+                VergiNumarasi = cariDto.VergiNumarasi,
+                FaturaAdresi = cariDto.FaturaAdresi,
+                CariYetkililer = _mapper.Map<ICollection<CariYetkili>>(cariDto.CariYetkiliDtos),
+                TeslimatAdresler = _mapper.Map<ICollection<TeslimatAdres>>(cariDto.TeslimatAdresDtos),
+            };
+            await _tenantUnitOfWork.CariRepository.AddAsync(cari);
+
+            cari.CariTurler = cariTurs;
+            await _tenantUnitOfWork.CariRepository.UpdateAsync(cari);
+
             return (true, "Cari oluşturuldu.");
         }
 
-        public Task<IReadOnlyList<CariDto>> GetCarilerAsync()
+        public async Task<(bool Success, string Message)> CariGuncelleAsync(CariDto cariDto)
         {
-            throw new NotImplementedException();
-        }        
+            var existingCari = await _tenantUnitOfWork.CariRepository.GetCariByIdAsync(cariDto.Id);
+            cariDto.CariTurDtos = new List<CariTurDto>();
+            foreach (var cariTurId in cariDto.SelectedCariTurIds)
+            {
+                cariDto.CariTurDtos.Add(_mapper.Map<CariTurDto>(await _tenantUnitOfWork.CariTurRepository.GetCariTurByIdAsync(cariTurId)));
+            }
+
+            _mapper.Map(cariDto, existingCari);
+            await _tenantUnitOfWork.CariRepository.UpdateAsync(existingCari);
+            return (true, $"{cariDto.Adi} cari güncelleştirildi.");
+        }
     }
 }

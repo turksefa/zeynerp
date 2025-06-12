@@ -1,3 +1,4 @@
+@model IReadOnlyList<CariViewModel>
 @{
     ViewData["LayoutTitle"] = "Cari Tanımlar";
 }
@@ -73,33 +74,49 @@
                     </div>
 
                     <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list"
-                        style="min-width: 550px;">
+                        style="min-width: 1200px;">
                         <thead>
                             <tr>
-                                <th>Stok Adı</th>
-                                <th width="15%">Stok Grup Adı</th>
+                                <th>Kısa Adı</th>
+                                <th>Adı</th>
+                                <th>Türler</th>
+                                <th width="15%">Telefon</th>
+                                <th width="15%">E-Posta</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @* @foreach (var stok in Model)
+                            @foreach (var cari in Model)
                             {
                                 <tr>
                                     <td>
-                                        <a href="#"><strong>@stok.Name</strong></a>
+                                        <a asp-action="CariGuncelle" asp-route-id="@cari.Id" ><strong>@cari.KisaAdi</strong></a>
                                     </td>
-                                    <td class="d-flex justify-content-between align-items-center">
-                                        @stok.StokGrup.Name
-                                        @if (stok.Status == 0)
+                                    <td>
+                                        <a asp-action="CariGuncelle" asp-route-id="@cari.Id"><strong>@cari.Adi</strong></a>
+                                    </td>
+                                    <td>
+                                        @foreach(var cariTur in cari.CariTurViewModels)
+                                        {
+                                            <span class="badge text-bg-success me-1">@cariTur.Name</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @cari.Telefon
+                                    </td>
+                                    @* class="d-flex justify-content-between align-items-center" *@
+                                    <td>
+                                        @cari.EPosta
+                                        @* @if (cari.Status == 0)
                                         {
                                             <span class="ecommerce-status failed"></span>
                                         }
                                         else
                                         {
                                             <span class="ecommerce-status completed"></span>
-                                        }
-                                    </td>
+                                        } *@
+                                    </td>                                                                        
                                 </tr>
-                            } *@
+                            }
                         </tbody>
                     </table>
                     <hr class="solid mt-5 opacity-4">

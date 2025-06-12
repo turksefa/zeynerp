@@ -1,6 +1,6 @@
 @model CariViewModel
 @{
-    ViewData["LayoutTitle"] = "Cari Oluştur";
+    ViewData["LayoutTitle"] = "Cari Güncelle";
 }
 
 <header class="page-header">
@@ -20,12 +20,13 @@
                 <a asp-action="CariTanimlar"><span>Cari Tanımlar</span></a>
             </li>
 
-            <li><span class="text-light">Cari Oluştur</span></li>
+            <li><span class="text-light">Cari Güncelle</span></li>
         </ol>
     </div>
 </header>
 
-<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="CariEkle" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="CariGuncelle" method="post">
+    <input name="Model.Id" type="hidden" value="@Model.Id">
     <div class="row">
         <div class="col">
             <section class="card card-modern">
@@ -34,13 +35,13 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="col-form-label">Cari Adı</label>
-                                <input name="Model.Adi" type="text" class="form-control" placeholder="" required>
+                                <input name="Model.Adi" type="text" class="form-control" value="@Model.Adi" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label class="col-form-label">Cari Kısa Adı</label>
-                                <input name="Model.KisaAdi" type="text" class="form-control" placeholder="" required>
+                                <input name="Model.KisaAdi" type="text" class="form-control" value="@Model.KisaAdi" required>
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -49,7 +50,12 @@
                                     <label class="col-form-label">Cari Tür</label>
                                     <div class="input-group input-group-select-append">
                                         @{
-                                            var cariTurler = new SelectList(Model.CariTurViewModels, "Id", "Name");
+                                            var cariTurler = Model.CariTurViewModels?.Select(c => new SelectListItem
+                                            {
+                                                Value = c.Id.ToString(),
+                                                Text = c.Name,
+                                                Selected = Model.SelectedCariTurIds.Contains(c.Id)
+                                            }).ToList();
                                         }
                                         <select name="Model.SelectedCariTurIds" class="form-control" asp-items="cariTurler"
                                             multiple="multiple" data-plugin-multiselect
@@ -65,32 +71,32 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label">Cari Telefon</label>
-                                <input name="Model.Telefon" type="text" class="form-control" placeholder="" required>
+                                <input name="Model.Telefon" type="text" class="form-control" value="@Model.Telefon" required>
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label">Cari Fax</label>
-                                <input name="Model.Fax" type="text" class="form-control" placeholder="" required>
+                                <input name="Model.Fax" type="text" class="form-control" value="@Model.Fax" required>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="col-form-label">Cari E-Posta</label>
-                                <input name="Model.EPosta" type="email" class="form-control" placeholder="" required>
+                                <input name="Model.EPosta" type="email" class="form-control" value="@Model.EPosta" required>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label class="col-form-label">Vergi Dairesi</label>
-                                <input name="Model.VergiDairesi" type="text" class="form-control" placeholder=""
+                                <input name="Model.VergiDairesi" type="text" class="form-control" value="@Model.VergiDairesi"
                                     required>
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label class="col-form-label">Vergi Numarası</label>
-                                <input name="Model.VergiNumarasi" type="text" class="form-control" placeholder=""
+                                <input name="Model.VergiNumarasi" type="text" class="form-control" value="@Model.VergiNumarasi"
                                     required>
                             </div>
                         </div>
@@ -98,7 +104,7 @@
                     <div class="form-group row">
                         <div class="col">
                         <label class="col-form-label">Fatura Adresi</label>
-                        <textarea name="Model.FaturaAdresi" class="form-control" rows="3" name="" id="" required></textarea>
+                        <textarea name="Model.FaturaAdresi" class="form-control" rows="3" required>@Model.FaturaAdresi</textarea>
                         </div>
                     </div>
                 </div>
@@ -121,6 +127,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @for(int i = 0; i < Model.CariYetkiliViewModels.Count(); i++)
+                            {
+                                <tr>
+                                    <input name="Model.CariYetkiliViewModels[@i].Id" type="hidden" value="@Model.CariYetkiliViewModels[i].Id">
+                                    <input name="Model.CariYetkiliViewModels[@i].CariId" type="hidden" value="@Model.CariYetkiliViewModels[i].CariId">
+                                    <td><input name="Model.CariYetkiliViewModels[@i].AdiSoyadi" type="text" class="form-control" value="@Model.CariYetkiliViewModels[i].AdiSoyadi" /></td>
+                                    <td><input name="Model.CariYetkiliViewModels[@i].Telefon" type="text" class="form-control" value="@Model.CariYetkiliViewModels[i].Telefon" /></td>
+                                    <td><input name="Model.CariYetkiliViewModels[@i].Fax" type="text" class="form-control" value="@Model.CariYetkiliViewModels[i].Fax" /></td>
+                                    <td><input name="Model.CariYetkiliViewModels[@i].EPosta" type="text" class="form-control" value="@Model.CariYetkiliViewModels[i].EPosta" /></td>
+                                    <td class="text-center align-content-center">
+                                        <a href="#" class="on-editing cancel-row text-danger"><i class="fas fa-trash-can fa-xl"></i></a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -141,6 +161,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @for(int i = 0; i < Model.TeslimatAdresViewModels.Count(); i++)
+                            {
+                                <tr>
+                                    <input name="Model.TeslimatAdresViewModels[@i].Id" type="hidden" value="@Model.TeslimatAdresViewModels[i].Id">
+                                    <input name="Model.TeslimatAdresViewModels[@i].CariId" type="hidden" value="@Model.TeslimatAdresViewModels[i].CariId">
+                                    <td><input name="Model.TeslimatAdresViewModels[@i].Baslik" type="text" class="form-control" value="@Model.TeslimatAdresViewModels[i].Baslik" /></td>
+                                    <td><input name="Model.TeslimatAdresViewModels[@i].Adres" type="text" class="form-control" value="@Model.TeslimatAdresViewModels[i].Adres" /></td>
+                                    <td class="text-center align-content-center">
+                                        <a href="#" class="on-editing cancel-row text-danger"><i class="fas fa-trash-can fa-xl"></i></a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -211,7 +243,6 @@
 
                 initialize: function () {
                     this.setVars().build().events();
-                    this.rowAdd();
                 },
 
                 setVars: function () {
@@ -417,7 +448,6 @@
 
                 initialize: function () {
                     this.setVars().build().events();
-                    this.rowAdd();
                 },
 
                 setVars: function () {

@@ -2,6 +2,7 @@ namespace zeynerp.Application.DTOs.Tanimlamalar
 {
     public class CariDto
     {
+        public int Id { get; set; }
         public string Adi { get; set; } = string.Empty;
         public string KisaAdi { get; set; } = string.Empty;
         public string Telefon { get; set; } = string.Empty;
@@ -10,8 +11,9 @@ namespace zeynerp.Application.DTOs.Tanimlamalar
         public string VergiDairesi { get; set; } = string.Empty;
         public string VergiNumarasi { get; set; } = string.Empty;
         public string FaturaAdresi { get; set; } = string.Empty;
-        public int[] SelectedCariTurIds { get; set; } = null!;
-        public IReadOnlyList<CariYetkiliDto> CariYetkiliDtos { get; set; } = null!;
-        public IReadOnlyList<TeslimatAdresDto> TeslimatAdresDtos { get; set; } = null!;
+        public List<int> SelectedCariTurIds { get; set; } = null!;
+        public ICollection<CariTurDto> CariTurDtos { get; set; } = null!;
+        public ICollection<CariYetkiliDto> CariYetkiliDtos { get; set; } = null!;
+        public ICollection<TeslimatAdresDto> TeslimatAdresDtos { get; set; } = null!;
     }
 }

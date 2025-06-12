@@ -21,7 +21,22 @@ namespace zeynerp.Application.Mapper
             CreateMap<Stok, StokDto>().ReverseMap();
             CreateMap<MalzemeTalep, MalzemeTalepDto>().ReverseMap();
             CreateMap<CariTur, CariTurDto>().ReverseMap();
-            CreateMap<Cari, CariDto>().ReverseMap();
+            CreateMap<TeslimatAdres, TeslimatAdresDto>().ReverseMap();
+            CreateMap<CariYetkili, CariYetkiliDto>().ReverseMap();
+            CreateMap<Cari, CariDto>()
+                .ForMember(dest => dest.CariTurDtos,
+                    opt => opt.MapFrom(src => src.CariTurler))
+                .ForMember(dest => dest.CariYetkiliDtos,
+                    opt => opt.MapFrom(src => src.CariYetkililer))
+                .ForMember(dest => dest.TeslimatAdresDtos,
+                    opt => opt.MapFrom(src => src.TeslimatAdresler));
+            CreateMap<CariDto, Cari>()
+                .ForMember(dest => dest.CariTurler,
+                    opt => opt.MapFrom(src => src.CariTurDtos))
+                .ForMember(dest => dest.CariYetkililer,
+                    opt => opt.MapFrom(src => src.CariYetkiliDtos))
+                .ForMember(dest => dest.TeslimatAdresler,
+                    opt => opt.MapFrom(src => src.TeslimatAdresDtos));
         }
     }
 }

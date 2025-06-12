@@ -1,0 +1,442 @@
+@{
+    ViewData["LayoutTitle"] = "Malzeme Talepleri";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+            <li><span>Satın Alma Yönetimi</span></li>
+            <li><span class="text-light">Malzeme Talepleri</span></li>
+        </ol>
+    </div>
+</header>
+
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="CariEkle" method="post">
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-ecommerce-simple table-striped mb-0 malzemeTable"
+                        style="min-width: 1200px;">
+                        <thead>
+                            <tr>
+                                <th width="3%">
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" />
+                                        <label></label>
+                                    </div>
+                                </th>
+                                <th>Malzeme Adı</th>
+                                <th>Özellik</th>
+                                <th>Boyutlar</th>
+                                <th>Birim</th>
+                                <th>KG</th>
+                                <th>M2</th>
+                                <th>MM</th>
+                                <th>M</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="checkbox-custom checkbox-default">
+                                        <input type="checkbox" />
+                                        <label></label>
+                                    </div>
+                                </td>
+                                <td>Grasörlük (1/8" ölçüde olacak, açıklamayı dikkate alınız)</td>
+                                <td>304 Paslanmaz</td>
+                                <td>M8</td>
+                                <td>40</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped datatable-yetkili mb-0" id="datatable-editable"
+                        style="min-width: 550px">
+                        <thead>
+                            <tr>
+                                <th>Firma</th>
+                                <th>Yetkili</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-ecommerce-simple table-striped mb-0 firmaTable"
+                        style="min-width: 1200px;">
+                        <thead>
+                            <tr>
+                                <th width="40%">Firma Adı</th>
+                                <th>Yetkili Adı</th>
+                                <th>Yetkili Telefonu</th>
+                                <th>Yetkili E-Posta</th>
+                                <th width="5%">Mail</th>
+                                <th width="5%">Fiyat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Eray Hırdavat</td>
+                                <td>Erdoğan Bey</td>
+                                <td>0216 447 27 57</td>
+                                <td>info@eraycivata.com.tr</td>
+                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Özdur Civata</td>
+                                <td>Sinan Karataş</td>
+                                <td>0226 465 65 07</td>
+                                <td>yalova@ozdurcivata.com.tr</td>
+                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row action-buttons">
+        <div class="col-12 col-md-auto">
+            <button id="addToTable"
+                class="btn btn-default btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1">
+                <i class="bx bx-plus me-2"></i> Firma Satır Ekle
+            </button>
+        </div>
+        <div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0">
+            <a href="#"
+                class="btn btn-default btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i
+                    class="bx bx-trending-up text-4 me-2"></i> Fiyat Karşılaştır</a>
+        </div>
+        <div class="col-12 col-md-auto mt-3 mt-md-0">
+            <button type="button"
+                class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
+                data-loading-text="Loading...">
+                <i class="bx bx-envelope text-4 me-2"></i> E-Posta Gönder
+            </button>
+        </div>
+    </div>
+</form>
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <link rel="stylesheet" href="~/vendor/select2/css/select2.css" />
+    <link rel="stylesheet" href="~/vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
+    <style>
+        table th,
+        table td {
+            border: none !important;
+        }
+    </style>
+}
+
+@section VendorScripts {
+    <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/select2/js/select2.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
+    <script src="~/vendor/jquery-validation/localization/messages_tr.min.js"></script>
+}
+
+@section Scripts {
+    <script src="~/js/examples/examples.validation.js"></script>
+    <script>
+        var successMessage = @Html.Raw(Json.Serialize(ViewBag.SuccessMessage));
+        if (successMessage.length > 0) {
+            var notice = new PNotify({
+                text: successMessage,
+                type: 'success',
+                addclass: 'click-2-close',
+                hide: true,
+                buttons: {
+                    closer: false,
+                    sticker: false
+                }
+            });
+
+            notice.get().click(function () {
+                notice.remove();
+            });
+        }
+    </script>
+    <script>
+        (function ($) {
+
+            'use strict';
+
+            var ecommerceListDataTableInit = function () {
+
+                var $malzemeTable = $('.malzemeTable');
+
+                $malzemeTable.dataTable({
+                    dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            orderable: false
+                        }
+                    ],
+                    order: [],
+                });
+
+                var $firmaTable = $('.firmaTable');
+
+                $firmaTable.dataTable({
+                    dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
+                    columnDefs: [
+                        {
+                            targets: 4,
+                            orderable: false
+                        },
+                        {
+                            targets: 5,
+                            orderable: false
+                        }
+                    ],
+                    order: [],
+                });
+            };
+
+            ecommerceListDataTableInit();
+
+        }(jQuery));
+    </script>
+    <script>
+        (function ($) {
+            "use strict";
+
+            var EditableYetkiliTable = {
+                options: {
+                    addButton: "#addToTable",
+                    saveButton: "#saveAllRows",
+                    table: "#datatable-editable"
+                },
+
+                initialize: function () {
+                    this.setVars().build().events();
+                    this.rowAdd();
+                },
+
+                setVars: function () {
+                    this.$table = $(this.options.table);
+                    this.$addButton = $(this.options.addButton);
+                    return this;
+                },
+
+                build: function () {
+                    this.datatable = this.$table.DataTable({
+                        dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
+                        aoColumns: [null, { width: '35%' }, { width: '5%' }],
+                        ordering: false,
+                        language: {
+                            emptyTable: "Tabloda gösterilecek veri bulunmamaktadır"
+                        }
+                    });
+
+                    window.dt = this.datatable;
+
+                    return this;
+                },
+
+                events: function () {
+                    var _self = this;
+
+                    this.$table
+                        .on("click", "a.cancel-row", function (e) {
+                            e.preventDefault();
+                            _self.rowCancel($(this).closest("tr"));
+                        });
+
+                    this.$addButton.on("click", function (e) {
+                        e.preventDefault();
+                        _self.rowAdd();
+                    });
+
+                    $(this.options.saveButton).on("click", function (e) {
+                        e.preventDefault();
+                        _self.saveAllRows();
+                    });
+
+                    return this;
+                },
+
+                rowAdd: function () {
+                    var _self = this;
+
+                    var actions, data, $row;
+
+                    actions = [
+                        '<a href="#" class="hidden on-editing cancel-row text-danger"><i class="fas fa-trash-can fa-xl"></i></a>',
+                    ].join(" ");
+
+                    data = this.datatable.row.add(["", "", actions]);
+                    $row = this.datatable.row(data[0]).nodes().to$();
+                    console.log(_self);
+                    $row.addClass("adding").find("td:last").addClass("actions text-center");
+
+                    this.rowEdit($row);
+
+                    this.datatable.order([0, "asc"]).draw();
+                },
+
+                saveAllRows: function () {
+                    var _self = this;
+                    this.$table.find("tbody tr").each(function () {
+                        _self.rowSave($(this));
+                    });
+                },
+
+                rowCancel: function ($row) {
+                    var _self = this,
+                        $actions,
+                        i,
+                        data;
+
+                    if ($row.hasClass("adding")) {
+                        this.rowRemove($row);
+                    } else {
+                        data = this.datatable.row($row.get(0)).data();
+                        this.datatable.row($row.get(0)).data(data);
+
+                        $actions = $row.find("td.actions");
+                        if ($actions.get(0)) {
+                            this.rowSetActionsDefault($row);
+                        }
+
+                        this.datatable.draw();
+                    }
+                },
+
+                rowEdit: function ($row) {
+                    var _self = this,
+                        data,
+                        rowIndex;
+
+                    data = this.datatable.row($row.get(0)).data();
+
+                    rowIndex = this.datatable.rows().count();
+
+                    $row.children("td").each(function (i) {
+                        var $this = $(this);
+
+                        if ($this.hasClass("actions")) {
+                            _self.rowSetActionsEditing($row);
+                        } else {
+                            var inputType = "text";
+                            var inputClass = "form-control populate";
+                            var content = data[i];
+                            var inputName = "";
+
+                            @* if (i === 0) {
+                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].AdiSoyadi";
+                            } else if (i === 1) {
+                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].Telefon";
+                            } else if (i === 2) {
+                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].Fax";
+                            } else if (i === 3) {
+                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].EPosta";
+                            }
+                            else {
+                                inputClass += "text-center";
+                            } *@
+
+                                    var inputElement =
+                                '<select name="' +
+                                inputName +
+                                '" class="' +
+                                inputClass +
+                                '" required><option>Seç</option></select>';
+
+                            $this.html(inputElement);
+                        }
+                    });
+                },
+
+                rowSave: function ($row) {
+                    var _self = this,
+                        $actions,
+                        values = [];
+
+                    if ($row.hasClass("adding")) {
+                        this.$addButton.removeAttr("disabled");
+                        $row.removeClass("adding");
+                    }
+
+                    values = $row
+                        .find("td")
+                        .map(function (i) {
+                            var $this = $(this);
+
+                            if ($this.hasClass("actions")) {
+                                _self.rowSetActionsDefault($row);
+                                return _self.datatable.cell(this).data();
+                            } else {
+                                var $input = $this.find("input");
+                                if ($input.length) {
+                                    return $.trim($input.val());
+                                } else {
+                                    return $.trim($this.text());
+                                }
+                            }
+                        })
+                        .get();
+
+                    this.datatable.row($row.get(0)).data(values);
+
+                    $actions = $row.find("td.actions");
+                    if ($actions.get(0)) {
+                        this.rowSetActionsDefault($row);
+                    }
+
+                    this.datatable.draw();
+                },
+
+                rowRemove: function ($row) {
+                    if ($row.hasClass("adding")) {
+                        this.$addButton.removeAttr("disabled");
+                    }
+
+                    this.datatable.row($row.get(0)).remove().draw();
+                },
+
+                rowSetActionsEditing: function ($row) {
+                    $row.find(".on-editing").removeClass("hidden");
+                    $row.find(".on-default").addClass("hidden");
+                },
+
+                rowSetActionsDefault: function ($row) {
+                    $row.find(".on-editing").addClass("hidden");
+                    $row.find(".on-default").removeClass("hidden");
+                },
+            };
+
+            $(function () {
+                EditableYetkiliTable.initialize();
+            });
+        }).apply(this, [jQuery]);
+    </script>
+}

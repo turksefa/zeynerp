@@ -51,9 +51,16 @@ namespace zeynerp.Web.Controllers
             return View();
         }
 
-        public IActionResult CariTanimlar()
+        public async Task<IActionResult> CariTanimlar()
         {
-            return View();
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
+            IReadOnlyList<CariViewModel> cariViewModel = _mapper.Map<IReadOnlyList<CariViewModel>>(await _cariService.GetCarilerAsync());
+
+            return View(cariViewModel);
         }
 
         public async Task<IActionResult> CariEkle()
@@ -70,7 +77,65 @@ namespace zeynerp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _cariService.CariOlusturAsync(_mapper.Map<CariDto>(model));
+                var cariDto = new CariDto
+                {
+                    Adi = model.Adi,
+                    KisaAdi = model.KisaAdi,
+                    Telefon = model.Telefon,
+                    Fax = model.Fax,
+                    EPosta = model.EPosta,
+                    VergiDairesi = model.VergiDairesi,
+                    VergiNumarasi = model.VergiNumarasi,
+                    FaturaAdresi = model.FaturaAdresi,
+                    SelectedCariTurIds = model.SelectedCariTurIds,
+                    CariYetkiliDtos = _mapper.Map<ICollection<CariYetkiliDto>>(model.CariYetkiliViewModels),
+                    TeslimatAdresDtos = _mapper.Map<ICollection<TeslimatAdresDto>>(model.TeslimatAdresViewModels)
+                };
+
+                var result = await _cariService.CariOlusturAsync(_mapper.Map<CariDto>(cariDto));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("CariTanimlar");
+                }
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> CariGuncelle([FromRoute] int id)
+        {
+            CariViewModel cariViewModel = _mapper.Map<CariViewModel>(await _cariService.GetCariByIdAsync(id));
+            foreach (var cariTur in cariViewModel.CariTurViewModels)
+            {
+                cariViewModel.SelectedCariTurIds.Add(cariTur.Id);
+            }
+            cariViewModel.CariTurViewModels = _mapper.Map<IReadOnlyList<CariTurViewModel>>(await _cariTurService.GetCariTurlerAsync());
+            return View(cariViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CariGuncelle([FromForm] CariViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var cariDto = new CariDto
+                {
+                    Id = model.Id,
+                    Adi = model.Adi,
+                    KisaAdi = model.KisaAdi,
+                    Telefon = model.Telefon,
+                    Fax = model.Fax,
+                    EPosta = model.EPosta,
+                    VergiDairesi = model.VergiDairesi,
+                    VergiNumarasi = model.VergiNumarasi,
+                    FaturaAdresi = model.FaturaAdresi,
+                    SelectedCariTurIds = model.SelectedCariTurIds,
+                    CariYetkiliDtos = _mapper.Map<ICollection<CariYetkiliDto>>(model.CariYetkiliViewModels),
+                    TeslimatAdresDtos = _mapper.Map<ICollection<TeslimatAdresDto>>(model.TeslimatAdresViewModels)
+                };
+
+                var result = await _cariService.CariGuncelleAsync(_mapper.Map<CariDto>(cariDto));
                 if (result.Success)
                 {
                     TempData["SuccessMessage"] = result.Message;

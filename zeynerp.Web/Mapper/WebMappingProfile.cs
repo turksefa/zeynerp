@@ -99,7 +99,22 @@ namespace zeynerp.Web.Mapper
                             : double.Parse(src.M, CultureInfo.InvariantCulture)
                     ));
             CreateMap<CariTurDto, CariTurViewModel>().ReverseMap();
-            CreateMap<CariDto, CariViewModel>().ReverseMap();
+            CreateMap<TeslimatAdresDto, TeslimatAdresViewModel>().ReverseMap();
+            CreateMap<CariYetkiliDto, CariYetkiliViewModel>().ReverseMap();
+            CreateMap<CariDto, CariViewModel>()
+                .ForMember(dest => dest.CariTurViewModels,
+                    opt => opt.MapFrom(src => src.CariTurDtos))
+                .ForMember(dest => dest.CariYetkiliViewModels,
+                    opt => opt.MapFrom(src => src.CariYetkiliDtos))
+                .ForMember(dest => dest.TeslimatAdresViewModels,
+                    opt => opt.MapFrom(src => src.TeslimatAdresDtos));
+            CreateMap<CariViewModel, CariDto>()
+                .ForMember(dest => dest.CariTurDtos,
+                    opt => opt.MapFrom(src => src.CariTurViewModels))
+                .ForMember(dest => dest.CariYetkiliDtos,
+                    opt => opt.MapFrom(src => src.CariYetkiliViewModels))
+                .ForMember(dest => dest.TeslimatAdresDtos,
+                    opt => opt.MapFrom(src => src.TeslimatAdresViewModels));
         }
     }
 }

@@ -38,5 +38,6 @@ namespace zeynerp.Infrastructure.Data
         public ICariTurRepository CariTurRepository => _cariTurRepository;
 
         public ICariRepository CariRepository => _cariRepository;
+
     }
 }
