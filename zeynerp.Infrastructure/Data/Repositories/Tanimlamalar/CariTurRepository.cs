@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using zeynerp.Core.Entities.Tanimlamalar;
 using zeynerp.Core.Repositories.Tanimlamalar;
 using zeynerp.Infrastructure.Data.Contexts;
@@ -21,6 +22,6 @@ namespace zeynerp.Infrastructure.Data.Repositories.Tanimlamalar
             var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
             return await context.Set<CariTur>().FindAsync(id);
-        }
+        }        
     }
 }

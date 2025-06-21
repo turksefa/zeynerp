@@ -18,26 +18,31 @@
 </header>
 
 <form id="form" class="ecommerce-form action-buttons-fixed" asp-action="MalzemeTalepEkle" method="post">
-    <section class="card">
-        <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
-                <thead>
-                    <tr>
-                        <th>Birim</th>
-                        <th>Stok Grup</th>
-                        <th>Stok</th>
-                        <th>Stok Özellik</th>
-                        <th>Açıklama</th>
-                        <th>Boyutlar</th>
-                        <th>Birimler</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped mb-0" id="datatable-editable"
+                        style="min-width: 1200px;">
+                        <thead>
+                            <tr>
+                                <th>Birim</th>
+                                <th>Stok Grup</th>
+                                <th>Stok</th>
+                                <th>Stok Özellik</th>
+                                <th>Açıklama</th>
+                                <th>Boyutlar</th>
+                                <th>Birimler</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
     <div class="row action-buttons">
         <div class="col-12 col-md-auto">
             <button id="addToTable"
@@ -67,37 +72,12 @@
         table td {
             border: none !important;
         }
-
-        @@media only screen and (max-width: 576px) {
-            table th:nth-child(1) {
-                min-width: 80px !important;
-            }
-
-            table th:nth-child(2),
-            table th:nth-child(3),
-            table th:nth-child(4) {
-                min-width: 120px !important;
-            }
-
-            table th:nth-child(5) {
-                min-width: 200px !important;
-            }
-
-            table th:nth-child(6) {
-                min-width: 300px !important;
-            }
-
-            table th:nth-child(7) {
-                min-width: 200px !important;
-            }
-        }
     </style>
 }
 
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
     <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 

@@ -25,22 +25,26 @@
 </header>
 
 <form id="form" asp-action="BirimEkle" class="ecommerce-form action-buttons-fixed" method="post">
-    <section class="card">
-        <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
-                <thead>
-                    <tr>
-                        <th>Sıra</th>
-                        <th>Birim Adı</th>
-                        <th>Birim</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>            
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped mb-0" id="datatable-editable" style="min-width: 550px;">
+                        <thead>
+                            <tr>
+                                <th>Sıra</th>
+                                <th>Birim Adı</th>
+                                <th>Birim</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
     <div class="row action-buttons">
         <div class="col-12 col-md-auto">
             <button id="addToTable"
@@ -64,7 +68,6 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
-    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
     <style>
         table th,
         table td {
@@ -76,7 +79,6 @@
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
     <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
@@ -120,7 +122,7 @@
                 build: function () {
                     this.datatable = this.$table.DataTable({
                         dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
-                        aoColumns: [{ targets: 0, width: '8%' }, null, { targets: 2, width: '10%' }, { targets: 3, width: '5%' }],
+                        aoColumns: [{ width: '8%' }, null, { width: '10%' }, { width: '5%' }],
                         ordering: false
                     });
 
@@ -228,8 +230,7 @@
                                 content = data[i];
                                 $this.addClass("text-center align-content-center");
 
-                                if(i === 2)
-                                {
+                                if (i === 2) {
                                     inputName = "Model[" + (rowIndex - 1) + "].Unit";
                                 }
                             }
@@ -316,18 +317,18 @@
     </script>
     <script>
         var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
-                            e.ErrorMessage).ToList()));
-        if (errorMessages.length > 0) {
-            var notice = new PNotify({
-                text: errorMessages.join('<br>'),
-                type: 'error',
-                addclass: 'click-2-close',
-                hide: true,
-                buttons: {
-                    closer: false,
-                    sticker: false
-                }
-            });
+                                                            e.ErrorMessage).ToList()));
+    if (errorMessages.length > 0) {
+        var notice = new PNotify({
+            text: errorMessages.join('<br>'),
+            type: 'error',
+            addclass: 'click-2-close',
+            hide: true,
+            buttons: {
+                closer: false,
+                sticker: false
+            }
+        });
 
             notice.get().click(function () {
                 notice.remove();

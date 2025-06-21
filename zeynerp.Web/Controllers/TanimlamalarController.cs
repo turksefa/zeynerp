@@ -273,6 +273,17 @@ namespace zeynerp.Web.Controllers
             return View(stokViewModel);
         }
 
+        public async Task<IActionResult> StokGuncelle([FromRoute] int id)
+        {
+            StokViewModel stokViewModel = _mapper.Map<StokViewModel>(await _stokService.GetStokByIdAsync(id));
+
+            stokViewModel.StokGrups = _mapper.Map<IReadOnlyList<StokGrupViewModel>>(await _stokGrupService.GetStokGrupsAsync());
+            stokViewModel.Birims = _mapper.Map<IReadOnlyList<BirimViewModel>>(await _birimService.BirimlerAsync());
+            stokViewModel.Users = _userManager.Users.ToList();
+
+            return View(stokViewModel);
+        }
+
         [HttpPost]
         public async Task<IActionResult> StokEkle([FromForm] StokViewModel model)
         {

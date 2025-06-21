@@ -55,15 +55,17 @@ namespace zeynerp.Application.Services.Tanimlamalar
 
         public async Task<(bool Success, string Message)> CariGuncelleAsync(CariDto cariDto)
         {
-            var existingCari = await _tenantUnitOfWork.CariRepository.GetCariByIdAsync(cariDto.Id);
-            cariDto.CariTurDtos = new List<CariTurDto>();
+            await _tenantUnitOfWork.CariRepository.DeleteCariTurlerByCariIdAsync(cariDto.Id);
+
+            var cari = _mapper.Map<Cari>(cariDto);
+
             foreach (var cariTurId in cariDto.SelectedCariTurIds)
             {
-                cariDto.CariTurDtos.Add(_mapper.Map<CariTurDto>(await _tenantUnitOfWork.CariTurRepository.GetCariTurByIdAsync(cariTurId)));
+                cari.CariTurler.Add(await _tenantUnitOfWork.CariTurRepository.GetCariTurByIdAsync(cariTurId));
             }
 
-            _mapper.Map(cariDto, existingCari);
-            await _tenantUnitOfWork.CariRepository.UpdateAsync(existingCari);
+            await _tenantUnitOfWork.CariRepository.UpdateAsync(cari);
+
             return (true, $"{cariDto.Adi} cari güncelleştirildi.");
         }
     }

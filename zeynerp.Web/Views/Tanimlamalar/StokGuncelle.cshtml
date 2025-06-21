@@ -41,11 +41,14 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="formGroupExampleInput">Stok Grup</label>
                                 @{
-                                    var stokGrupSelectedList = new SelectList(Model.StokGrups, "Id", "Name");
+                                    var stokGrupSelectedList = Model.StokGrups?.Select(c => new SelectListItem
+                                    {
+                                        Value = c.Id.ToString(),
+                                        Text = c.Name
+                                    }).ToList();
                                 }
-                                <select asp-for="StokGrupId" asp-items="stokGrupSelectedList" class="form-control" required>
-                                    <option value="">Seç</option>
-                                </select>
+                                <select asp-for="StokGrupId" asp-items="stokGrupSelectedList" class="form-control"
+                                    required></select>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -64,11 +67,14 @@
                             <div class="form-group">
                                 <label class="col-form-label" for="formGroupExampleInput">Birim</label>
                                 @{
-                                    var birimSelectedList = new SelectList(Model.Birims, "Id", "Name");
+                                    var birimSelectedList = Model.Birims?.Select(c => new SelectListItem
+                                    {
+                                        Value = c.Id.ToString(),
+                                        Text = c.Name
+                                    }).ToList();
                                 }
-                                <select asp-for="BirimId" asp-items="birimSelectedList" class="form-control" required>
-                                    <option value="">Seç</option>
-                                </select>
+                                <select asp-for="BirimId" asp-items="birimSelectedList" class="form-control"
+                                    required></select>
                             </div>
                         </div>
                     </div>
@@ -104,14 +110,17 @@
                     <div class="row form-group pb-3">
                         <div class="col-lg-3">
                             <div class="form-group">
-                                <label class="col-form-label" for="formGroupExampleInput">Birim Fiyat Hesaplama Yöntemi</label>
+                                <label class="col-form-label" for="formGroupExampleInput">Birim Fiyat Hesaplama
+                                    Yöntemi</label>
                                 @{
-                                    var birimSelectedList2 = new SelectList(Model.Birims, "Id", "Name");
+                                    var birimSelectedList2 = Model.Birims?.Select(c => new SelectListItem
+                                    {
+                                        Value = c.Id.ToString(),
+                                        Text = c.Name
+                                    }).ToList();
                                 }
-                                <select asp-for="BirimFiyatHesaplama" asp-items="birimSelectedList2" class="form-control"
-                                    required>
-                                    <option value="">Seç</option>
-                                </select>
+                                <select asp-for="BirimFiyatHesaplama" asp-items="birimSelectedList2"
+                                    class="form-control" required></select>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -140,9 +149,8 @@
                                 @{
                                     var userSelectedList = new SelectList(Model.Users, "Id", "FullName");
                                 }
-                                <select asp-for="StokSorumluId" asp-items="userSelectedList" class="form-control" required>
-                                    <option value="">Seç</option>
-                                </select>
+                                <select asp-for="StokSorumluId" asp-items="userSelectedList" class="form-control"
+                                    required></select>
                             </div>
                         </div>
                     </div>
@@ -152,7 +160,7 @@
     </div>
     <div class="row action-buttons justify-content-end">
         <div class="col-12 col-md-auto order-lg-1">
-            <button type="submit"
+            <button type="button"
                 class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
                 data-loading-text="Loading...">
                 <i class="bx bx-save text-4 me-2"></i> Kaydet
@@ -196,24 +204,52 @@
                     $('#inputContainer').append('<div id="boyutContainer" class="row"></div>');
 
                     for (var i = 0; i < selectedValue; i++) {
+                        var onculValue = "";
+                        var ayracValue = "";
+                        var boyutValue = "";
+                        if(i == 0)
+                        {
+                            onculValue = '@Model.Oncul1';
+                            ayracValue = '@Model.Ayrac1';
+                            boyutValue = '@Model.Boyut1';
+                        }
+                        else if(i == 1)
+                        {
+                            onculValue = '@Model.Oncul2';
+                            ayracValue = '@Model.Ayrac2';
+                            boyutValue = '@Model.Boyut2';
+                        }
+                        else if(i == 2)
+                        {
+                            onculValue = '@Model.Oncul3';
+                            ayracValue = '@Model.Ayrac3';
+                            boyutValue = '@Model.Boyut3';
+                        }
+                        else
+                        {
+                            onculValue = '@Model.Oncul4';
+                            ayracValue = '@Model.Ayrac4';
+                            boyutValue = '@Model.Boyut4';
+                        }
+                        
                         $('#onculContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Öncül</label>' +
-                            '<input id="Oncul' + (i + 1) + '" name="Oncul' + (i + 1) + '" type="text" class="form-control" />' +
+                            '<input id="Oncul' + (i + 1) + '" name="Oncul' + (i + 1) + '" type="text" class="form-control" value="' + onculValue + '" />' +
                             '</div>' +
                             '</div>');
 
                         $('#ayracContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Ayraç</label>' +
-                            '<input id="Ayrac' + (i + 1) + '" name="Ayrac' + (i + 1) + '" type="text" class="form-control" />' +
+                            '<input id="Ayrac' + (i + 1) + '" name="Ayrac' + (i + 1) + '" type="text" class="form-control" value="' + ayracValue + '" />' +
                             '</div>' +
                             '</div>');
 
                         $('#boyutContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Boyut</label>' +
-                            '<input id="Boyut' + (i + 1) + '" name="Boyut' + (i + 1) + '" type="text" class="form-control" />' +
+                            '<input id="Boyut' + (i + 1) + '" name="Boyut' + (i + 1) + '" type="text" class="form-control" value="' + boyutValue + '" />' +
                             '</div>' +
                             '</div>');
 
@@ -285,6 +321,8 @@
                     }
                 }
             });
+
+            $('#kutuSayisi').trigger('change');
         });
     </script>
 }

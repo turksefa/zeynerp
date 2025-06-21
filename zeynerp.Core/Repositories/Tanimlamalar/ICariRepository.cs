@@ -6,5 +6,6 @@ namespace zeynerp.Core.Repositories.Tanimlamalar
     {
         Task<IReadOnlyList<Cari>> GetCarilerAsync();
         Task<Cari> GetCariByIdAsync(int id);
+        Task DeleteCariTurlerByCariIdAsync(int id); 
     }
 }

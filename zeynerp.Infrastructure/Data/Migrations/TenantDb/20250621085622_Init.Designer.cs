@@ -12,8 +12,8 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250602084753_CariTurlerOlusturuldu")]
-    partial class CariTurlerOlusturuldu
+    [Migration("20250621085622_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CariCariTur", b =>
+                {
+                    b.Property<int>("CariTurlerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CarilerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CariTurlerId", "CarilerId");
+
+                    b.HasIndex("CarilerId");
+
+                    b.ToTable("CariCariTur");
+                });
 
             modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
                 {
@@ -120,6 +135,51 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         });
                 });
 
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Cari", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EPosta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaturaAdresi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KisaAdi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VergiDairesi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VergiNumarasi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cariler");
+                });
+
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariTur", b =>
                 {
                     b.Property<int>("Id")
@@ -141,6 +201,39 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasKey("Id");
 
                     b.ToTable("CariTurler");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariYetkili", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdiSoyadi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CariId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EPosta")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fax")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CariId");
+
+                    b.ToTable("CariYetkililer");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>
@@ -307,6 +400,47 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.ToTable("StokOzellikler");
                 });
 
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.TeslimatAdres", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adres")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Baslik")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CariId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CariId");
+
+                    b.ToTable("TeslimatAdresleri");
+                });
+
+            modelBuilder.Entity("CariCariTur", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.CariTur", null)
+                        .WithMany()
+                        .HasForeignKey("CariTurlerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Cari", null)
+                        .WithMany()
+                        .HasForeignKey("CarilerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
                 {
                     b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
@@ -334,6 +468,17 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.Navigation("StokOzellik");
                 });
 
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariYetkili", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Cari", "Cari")
+                        .WithMany("CariYetkililer")
+                        .HasForeignKey("CariId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cari");
+                });
+
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>
                 {
                     b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
@@ -343,6 +488,24 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .IsRequired();
 
                     b.Navigation("StokGrup");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.TeslimatAdres", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Cari", "Cari")
+                        .WithMany("TeslimatAdresler")
+                        .HasForeignKey("CariId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cari");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Cari", b =>
+                {
+                    b.Navigation("CariYetkililer");
+
+                    b.Navigation("TeslimatAdresler");
                 });
 #pragma warning restore 612, 618
         }

@@ -61,6 +61,6 @@ namespace zeynerp.Infrastructure.Data.Repositories
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
             context.Set<T>().Update(entity);
             await context.SaveChangesAsync();
-        }
+        }        
     }
 }

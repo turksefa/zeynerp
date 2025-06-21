@@ -28,6 +28,41 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cariler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Adi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KisaAdi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EPosta = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VergiDairesi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VergiNumarasi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FaturaAdresi = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cariler", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CariTurler",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CariTurler", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "StokGruplar",
                 columns: table => new
                 {
@@ -56,6 +91,74 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StokOzellikler", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CariYetkililer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CariId = table.Column<int>(type: "int", nullable: false),
+                    AdiSoyadi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EPosta = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CariYetkililer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CariYetkililer_Cariler_CariId",
+                        column: x => x.CariId,
+                        principalTable: "Cariler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TeslimatAdresleri",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CariId = table.Column<int>(type: "int", nullable: false),
+                    Baslik = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Adres = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeslimatAdresleri", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeslimatAdresleri_Cariler_CariId",
+                        column: x => x.CariId,
+                        principalTable: "Cariler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CariCariTur",
+                columns: table => new
+                {
+                    CariTurlerId = table.Column<int>(type: "int", nullable: false),
+                    CarilerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CariCariTur", x => new { x.CariTurlerId, x.CarilerId });
+                    table.ForeignKey(
+                        name: "FK_CariCariTur_CariTurler_CariTurlerId",
+                        column: x => x.CariTurlerId,
+                        principalTable: "CariTurler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CariCariTur_Cariler_CarilerId",
+                        column: x => x.CarilerId,
+                        principalTable: "Cariler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,6 +261,16 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 values: new object[] { 1, "Yok", 1, 1, "Yok" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CariCariTur_CarilerId",
+                table: "CariCariTur",
+                column: "CarilerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CariYetkililer_CariId",
+                table: "CariYetkililer",
+                column: "CariId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MalzemeTalepler_StokGrupId",
                 table: "MalzemeTalepler",
                 column: "StokGrupId");
@@ -176,6 +289,11 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "IX_Stoklar_StokGrupId",
                 table: "Stoklar",
                 column: "StokGrupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeslimatAdresleri_CariId",
+                table: "TeslimatAdresleri",
+                column: "CariId");
         }
 
         /// <inheritdoc />
@@ -185,13 +303,28 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "Birimler");
 
             migrationBuilder.DropTable(
+                name: "CariCariTur");
+
+            migrationBuilder.DropTable(
+                name: "CariYetkililer");
+
+            migrationBuilder.DropTable(
                 name: "MalzemeTalepler");
+
+            migrationBuilder.DropTable(
+                name: "TeslimatAdresleri");
+
+            migrationBuilder.DropTable(
+                name: "CariTurler");
 
             migrationBuilder.DropTable(
                 name: "StokOzellikler");
 
             migrationBuilder.DropTable(
                 name: "Stoklar");
+
+            migrationBuilder.DropTable(
+                name: "Cariler");
 
             migrationBuilder.DropTable(
                 name: "StokGruplar");

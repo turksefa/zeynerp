@@ -23,12 +23,25 @@ namespace zeynerp.Infrastructure.Data.Repositories.Tanimlamalar
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
             return await context.Set<Cari>().Include(c => c.CariTurler).ToListAsync();
         }
-        
+
         public async Task<Cari> GetCariByIdAsync(int id)
         {
             var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
             return await context.Set<Cari>().Include(c => c.CariTurler).Include(c => c.CariYetkililer).Include(c => c.TeslimatAdresler).AsTracking().FirstOrDefaultAsync(c => c.Id == id);
+        }
+        
+        public async Task DeleteCariTurlerByCariIdAsync(int id)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+
+            var existingCari = await context.Set<Cari>().Include(c => c.CariTurler).FirstOrDefaultAsync(c => c.Id == id);
+            if (existingCari != null && existingCari.CariTurler.Count > 0)
+            {
+                existingCari.CariTurler.Clear();
+            }
+            await context.SaveChangesAsync();
         }
     }
 }

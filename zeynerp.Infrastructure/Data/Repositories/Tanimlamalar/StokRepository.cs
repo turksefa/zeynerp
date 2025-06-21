@@ -23,5 +23,12 @@ namespace zeynerp.Infrastructure.Data.Repositories.Tanimlamalar
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
             return await context.Set<Stok>().Include(s => s.StokGrup).ToListAsync();
         }
+        
+        public async Task<Stok> GetStokByIdAsync(int id)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            return await context.Set<Stok>().Include(s => s.StokGrup).FirstOrDefaultAsync(s => s.Id == id);
+        }
     }
 }

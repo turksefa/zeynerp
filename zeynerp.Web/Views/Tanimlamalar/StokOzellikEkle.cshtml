@@ -25,22 +25,27 @@
 </header>
 
 <form id="form" class="ecommerce-form action-buttons-fixed" asp-action="StokOzellikEkle" method="post">
-    <section class="card">
-        <div class="card-body">
-            <table class="table table-bordered table-striped mb-0" id="datatable-editable" style="min-width: 550px;">
-                <thead>
-                    <tr>
-                        <th>Sıra</th>
-                        <th>Malzeme Özellik Adı</th>
-                        <th>Özgül Ağırlık</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+    <div class="row">
+        <div class="col">
+            <section class="card card-modern">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped mb-0" id="datatable-editable"
+                        style="min-width: 1200px;">
+                        <thead>
+                            <tr>
+                                <th>Sıra</th>
+                                <th>Malzeme Özellik Adı</th>
+                                <th>Özgül Ağırlık</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
-    </section>
+    </div>
     <div class="row action-buttons">
         <div class="col-12 col-md-auto">
             <button id="addToTable"
@@ -64,21 +69,10 @@
 
 @section VendorStyles {
     <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
-    <link rel="stylesheet" href="~/vendor/pnotify/pnotify.custom.css" />
     <style>
         table th,
         table td {
             border: none !important;
-        }
-
-        @@media only screen and (max-width: 576px) {
-            table th:nth-child(1) {
-                min-width: 80px !important;
-            }
-
-            table th:nth-child(3) {
-                min-width: 100px !important;
-            }
         }
     </style>
 }
@@ -86,7 +80,6 @@
 @section VendorScripts {
     <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
-    <script src="~/vendor/pnotify/pnotify.custom.js"></script>
     <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
 }
 
@@ -347,7 +340,7 @@
     </script>
     <script>
         var errorMessages = @Html.Raw(Json.Serialize(ViewData.ModelState.Values.SelectMany(v => v.Errors).Select(e =>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            e.ErrorMessage).ToList()));
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            e.ErrorMessage).ToList()));
     if (errorMessages.length > 0) {
         var notice = new PNotify({
             text: errorMessages.join('<br>'),

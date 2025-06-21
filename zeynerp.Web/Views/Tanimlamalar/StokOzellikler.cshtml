@@ -44,7 +44,6 @@
                                         <option value="3">Phone</option>
                                         <option value="4">E-mail</option>
                                         <option value="5">Orders</option>
-    using System.Globalization;
                                         <option value="6">Total Amount</option>
                                     </select>
                                 </div>
@@ -74,12 +73,12 @@
                         </div>
                     </div>
 
-                    <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-ecommerce-list"
-                        style="min-width: 550px;">
+                    <table class="table table-ecommerce-simple table-striped mb-0" id="datatable-list"
+                        style="min-width: 800px;">
 
                         <thead>
                             <tr>
-                                <th width="3%">Sıra</th>
+                                <th width="5%">Sıra</th>
                                 <th>Stok Özellik Adı</th>
                                 <th width="15%">Özgül Ağırlık</th>
                             </tr>
@@ -88,20 +87,19 @@
                             @for (int i = 0; i < Model.Count; i++)
                             {
                                 <tr>
-                                    <form id="form" asp-action="StokOzellikGuncelle" method="post">
-                                        <input type="hidden" name="Id" value="@Model[i].Id">
-                                        <td>@Model[i].Order</td>
-                                        <td>
-                                            <a href="#" data-bs-toggle="modal"
-                                                data-bs-target="#modal-@Model[i].Id"><strong>@Model[i].Name</strong></a>
-                                            <div class="modal fade" id="modal-@Model[i].Id" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
+                                    <td>@Model[i].Order</td>
+                                    <td>
+                                        <a href="#modal-@Model[i].Id"
+                                            data-bs-toggle="modal"><strong>@Model[i].Name</strong></a>
+                                        <div id="modal-@Model[i].Id" class="modal" tabindex="-1">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <form id="form-@Model[i].Id" asp-action="StokOzellikGuncelle" method="post">
+                                                        <input type="hidden" name="Id" value="@Model[i].Id">
                                                         <div class="modal-body">
                                                             <div class="form-row">
                                                                 <div class="form-group">
-                                                                    <label for="stokGrup.Name">Stok Özellik Adı</label>
+                                                                    <label>Stok Özellik Adı</label>
                                                                     <input type="text" class="form-control" name="Name"
                                                                         value="@Model[i].Name" required>
                                                                 </div>
@@ -144,18 +142,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary"><i
-                                                                    class="fas fa-save"></i> Kaydet</button>
                                                             <button type="button" class="btn btn-default"
                                                                 data-bs-dismiss="modal">İptal</button>
+                                                            <button type="submit" class="btn btn-primary"><i
+                                                                class="fas fa-save"></i> Kaydet</button>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="d-flex justify-content-between align-items-center">
-                                            @Model[i].OzgulAgirlik
-                                            @if(Model[i].Status == 0)
+                                        </div>
+                                    </td>
+                                    <td class="d-flex justify-content-between align-items-center">
+                                        @Model[i].OzgulAgirlik
+                                        @if(Model[i].Status == 0)
                                             {
                                                 <span class="ecommerce-status failed"></span>
                                             }
@@ -163,37 +162,10 @@
                                             {
                                                 <span class="ecommerce-status completed"></span>
                                             }
-                                        </td>
-                                    </form>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
-                    </table>
-                    <hr class="solid mt-5 opacity-4">
-                    <div class="datatable-footer">
-                        <div class="row align-items-center justify-content-between mt-3">
-                            <div class="col-md-auto order-1 mb-3 mb-lg-0">
-                                @* <div class="d-flex align-items-stretch">
-                                    <div class="d-grid gap-3 d-md-flex justify-content-md-end me-4">
-                                        <select class="form-control select-style-1 bulk-action" name="bulk-action"
-                                            style="min-width: 170px;">
-                                            <option value="" selected>Bulk Actions</option>
-                                            <option value="delete">Delete</option>
-                                        </select>
-                                        <a href="#"
-                                            class="bulk-action-apply btn btn-light btn-px-4 py-3 border font-weight-semibold text-color-dark text-3">Apply</a>
-                                    </div>
-
-                                </div> *@
-                            </div>
-                            <div class="col-lg-auto text-center order-3 order-lg-2">
-                                <div class="results-info-wrapper"></div>
-                            </div>
-                            <div class="col-lg-auto order-2 order-lg-3 mb-3 mb-lg-0">
-                                <div class="pagination-wrapper"></div>
-                            </div>
-                        </div>
-                    </div>
                     </table>
                 </div>
             </div>
@@ -215,8 +187,113 @@
 }
 
 @section Scripts {
-    <script src="~/js/examples/examples.ecommerce.datatables.list.js"></script>
-    <script src="~/js/examples/examples.validation.js"></script>
+    <script>
+        (function ($) {
+
+            'use strict';
+
+            var listDataTableInit = function () {
+
+                var $listTable = $('#datatable-list');
+
+                $listTable.dataTable({
+                    dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
+                    pageLength: 12,
+                    order: [],
+                    language: {
+                        emptyTable: "Tabloda gösterilecek veri bulunmamaktadır.",
+                        paginate: {
+                            previous: '<i class="fas fa-chevron-left"></i>',
+                            next: '<i class="fas fa-chevron-right"></i>'
+                        }
+                    },
+                    drawCallback: function () {
+
+                        $listTable
+                            .closest('.dataTables_wrapper')
+                            .find('.dataTables_info')
+                            .appendTo($listTable.closest('.datatables-header-footer-wrapper').find('.results-info-wrapper'));
+
+                        $listTable
+                            .closest('.dataTables_wrapper')
+                            .find('.dataTables_paginate')
+                            .appendTo($listTable.closest('.datatables-header-footer-wrapper').find('.pagination-wrapper'));
+
+                        $listTable.closest('.datatables-header-footer-wrapper').find('.pagination').addClass('pagination-modern pagination-modern-spacing justify-content-center');
+
+                    }
+                });
+
+                $(document).on('change', '.results-per-page', function () {
+                    var $this = $(this),
+                        $dataTable = $this.closest('.datatables-header-footer-wrapper').find('.dataTable').DataTable();
+
+                    $dataTable.page.len($this.val()).draw();
+                });
+
+                $(document).on('keyup', '.search-term', function () {
+                    var $this = $(this),
+                        $filterBy = $this.closest('.datatables-header-footer-wrapper').find('.filter-by'),
+                        $dataTable = $this.closest('.datatables-header-footer-wrapper').find('.dataTable').DataTable();
+
+                    if ($filterBy.val() == 'all') {
+                        $dataTable.search($this.val()).draw();
+                    } else {
+                        $dataTable.column(parseInt($filterBy.val())).search($this.val()).draw();
+                    }
+                });
+
+                $(document).on('change', '.filter-by', function () {
+                    var $this = $(this),
+                        $searchField = $this.closest('.datatables-header-footer-wrapper').find('.search-term');
+
+                    $searchField.trigger('keyup');
+                });
+
+                $listTable.find('.select-all').on('change', function () {
+                    if (this.checked) {
+                        $listTable.find('input[type="checkbox"]:not(.select-all)').prop('checked', true);
+                    } else {
+                        $listTable.find('input[type="checkbox"]:not(.select-all)').prop('checked', false);
+                    }
+                })
+
+            };
+
+            listDataTableInit();
+
+        }(jQuery));
+    </script>
+
+    <script>
+        (function () {
+
+            'use strict';
+
+            // basic
+            $('[id^="form-"]').each(function () {
+                $(this).validate({
+                    highlight: function (label) {
+                        $(label).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function (label) {
+                        $(label).closest('.form-group').removeClass('has-error');
+                        label.remove();
+                    },
+                    errorPlacement: function (error, element) {
+                        var placement = element.closest('.input-group');
+                        if (!placement.get(0)) {
+                            placement = element;
+                        }
+                        if (error.text() !== '') {
+                            placement.after(error);
+                        }
+                    }
+                });
+            });
+
+        }).apply(this, [jQuery]);
+    </script>
 
     <script>
         var successMessage = @Html.Raw(Json.Serialize(ViewBag.SuccessMessage));
