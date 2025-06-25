@@ -12,7 +12,7 @@ using zeynerp.Infrastructure.Data.Contexts;
 namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20250621085622_Init")]
+    [Migration("20250624113426_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -75,6 +75,9 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.Property<double>("M2")
                         .HasColumnType("float");
 
+                    b.Property<int?>("MalzemeTalepleriId")
+                        .HasColumnType("int");
+
                     b.Property<double>("Mm")
                         .HasColumnType("float");
 
@@ -89,6 +92,8 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MalzemeTalepleriId");
+
                     b.HasIndex("StokGrupId");
 
                     b.HasIndex("StokId");
@@ -96,6 +101,32 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasIndex("StokOzellikId");
 
                     b.ToTable("MalzemeTalepler");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CariId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CariYetkiliId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CariId");
+
+                    b.HasIndex("CariYetkiliId");
+
+                    b.ToTable("MalzemeTalepleri");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Birim", b =>
@@ -443,6 +474,10 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
             modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
                 {
+                    b.HasOne("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", "MalzemeTalepleri")
+                        .WithMany("MalzemeTalepler")
+                        .HasForeignKey("MalzemeTalepleriId");
+
                     b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
                         .WithMany()
                         .HasForeignKey("StokGrupId")
@@ -461,11 +496,32 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("MalzemeTalepleri");
+
                     b.Navigation("Stok");
 
                     b.Navigation("StokGrup");
 
                     b.Navigation("StokOzellik");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", b =>
+                {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Cari", "Cari")
+                        .WithMany()
+                        .HasForeignKey("CariId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.CariYetkili", "CariYetkili")
+                        .WithMany()
+                        .HasForeignKey("CariYetkiliId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cari");
+
+                    b.Navigation("CariYetkili");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariYetkili", b =>
@@ -499,6 +555,11 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .IsRequired();
 
                     b.Navigation("Cari");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", b =>
+                {
+                    b.Navigation("MalzemeTalepler");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Cari", b =>

@@ -1,13 +1,9 @@
-using zeynerp.Web.Models.Tanimlamalar;
-
-namespace zeynerp.Web.Models.SatinalmaYonetimi
+namespace zeynerp.Application.DTOs.SatinalmaYonetimi
 {
-    public class MalzemeTalepleriViewModel
+    public class MalzemeTalepleriDto
     {
         public List<SelectedCariCariYetkililer> SelectedCariCariYetkililer { get; set; }
         public List<SelectedMalzemeTalepler> SelectedMalzemeTalepler { get; set; }
-        public IReadOnlyList<MalzemeTalepViewModel> MalzemeTalepViewModels { get; set; } = new List<MalzemeTalepViewModel>();
-        public IReadOnlyList<CariViewModel> CariViewModels { get; set; } = new List<CariViewModel>();
     }
 
     public class SelectedCariCariYetkililer

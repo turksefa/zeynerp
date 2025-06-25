@@ -65,6 +65,7 @@ builder.Services.AddScoped<IStokOzellikService, StokOzellikService>();
 builder.Services.AddScoped<IBirimService, BirimService>();
 builder.Services.AddScoped<IStokService, StokService>();
 builder.Services.AddScoped<IMalzemeTalepService, MalzemeTalepService>();
+builder.Services.AddScoped<IMalzemeTalepleriService, MalzemeTalepleriService>();
 builder.Services.AddScoped<ICariTurService, CariTurService>();
 builder.Services.AddScoped<ICariService, CariService>();
 
@@ -76,6 +77,7 @@ builder.Services.AddScoped<IStokOzellikRepository, StokOzellikRepository>();
 builder.Services.AddScoped<IBirimRepository, BirimRepository>();
 builder.Services.AddScoped<IStokRepository, StokRepository>();
 builder.Services.AddScoped<IMalzemeTalepRepository, MalzemeTalepRepository>();
+builder.Services.AddScoped<IMalzemeTalepleriRepository, MalzemeTalepleriRepository>();
 builder.Services.AddScoped<ICariTurRepository, CariTurRepository>();
 builder.Services.AddScoped<ICariRepository, CariRepository>();
 

@@ -1,3 +1,4 @@
+@model MalzemeTalepleriViewModel
 @{
     ViewData["LayoutTitle"] = "Malzeme Talepleri";
 }
@@ -13,7 +14,7 @@
     </div>
 </header>
 
-<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="CariEkle" method="post">
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="MalzemeTalepleri" method="post">
     <div class="row">
         <div class="col">
             <section class="card card-modern">
@@ -39,22 +40,62 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @for (int i = 0; i < Model.MalzemeTalepViewModels.Count; i++)
+                            {
+                                <tr>
+                                    <input type="hidden" name="Model.SelectedMalzemeTalepler[@i].MalzemeTalepId"
+                                        value="@Model.MalzemeTalepViewModels[i].Id" />
+                                    <td>
+                                        <div class="checkbox-custom chekbox-primary">
+                                            <input type="checkbox" name="Model.SelectedMalzemeTalepler[@i].IsSelected"
+                                                value="true" />
+                                            <label></label>
+                                        </div>
+                                    </td>
+                                    <td>@Model.MalzemeTalepViewModels[i].Stok.Name
+                                        @(!string.IsNullOrEmpty(Model.MalzemeTalepViewModels[i].Aciklama) ?
+                                                                            $"({Model.MalzemeTalepViewModels[i].Aciklama})" : "")</td>
+                                <td>@Model.MalzemeTalepViewModels[i].StokOzellik.Name</td>
                                 <td>
-                                    <div class="checkbox-custom checkbox-default">
-                                        <input type="checkbox" />
-                                        <label></label>
-                                    </div>
+                                    @if (Model.MalzemeTalepViewModels[i].Boyut1 != "0")
+                                        {
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Oncul1</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Boyut1</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Ayrac1</span>
+                                        }
+                                        @if (Model.MalzemeTalepViewModels[i].Boyut2 != "0")
+                                        {
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Oncul2</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Boyut2</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Ayrac2</span>
+                                        }
+                                        @if (Model.MalzemeTalepViewModels[i].Boyut3 != "0")
+                                        {
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Oncul3</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Boyut3</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Ayrac3</span>
+                                        }
+                                        @if (Model.MalzemeTalepViewModels[i].Boyut4 != "0")
+                                        {
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Oncul4</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Boyut4</span>
+                                            <span>@Model.MalzemeTalepViewModels[i].Stok.Ayrac4</span>
+                                        }
                                 </td>
-                                <td>Grasörlük (1/8" ölçüde olacak, açıklamayı dikkate alınız)</td>
-                                <td>304 Paslanmaz</td>
-                                <td>M8</td>
-                                <td>40</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>@Model.MalzemeTalepViewModels[i].Birim</td>
+                                <td>@((Model.MalzemeTalepViewModels[i].Kg != "0") ?
+                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].Kg).ToString("N2") : "")
+                                                                                                                                          </td>
+                                                                                                                                          <td>@((Model.MalzemeTalepViewModels[i].M2 != "0") ?
+                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].M2).ToString("N2") : "")
+                                                                                                                                          </td>
+                                                                                                                                          <td>@((Model.MalzemeTalepViewModels[i].Mm != "0") ?
+                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].Mm).ToString("N2") : "")
+                                                                                                                                          </td>
+                                                                                                                                          <td>@((Model.MalzemeTalepViewModels[i].M != "0") ?
+                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].M).ToString("N2") : "")</td>
                             </tr>
+                                                        }
                         </tbody>
                     </table>
                 </div>
@@ -65,7 +106,7 @@
         <div class="col">
             <section class="card card-modern">
                 <div class="card-body">
-                    <table class="table table-bordered table-striped datatable-yetkili mb-0" id="datatable-editable"
+                    <table class="table table-striped datatable-yetkili mb-0" id="datatable-editable"
                         style="min-width: 550px">
                         <thead>
                             <tr>
@@ -93,8 +134,7 @@
                                 <th>Yetkili Adı</th>
                                 <th>Yetkili Telefonu</th>
                                 <th>Yetkili E-Posta</th>
-                                <th width="5%">Mail</th>
-                                <th width="5%">Fiyat</th>
+                                <th class="text-center" width="10%">Talep Durum</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -103,16 +143,16 @@
                                 <td>Erdoğan Bey</td>
                                 <td>0216 447 27 57</td>
                                 <td>info@eraycivata.com.tr</td>
-                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
-                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                                <td class="text-center"><i class="fa-regular fa-circle-check fa-lg text-success"></i>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Özdur Civata</td>
                                 <td>Sinan Karataş</td>
                                 <td>0226 465 65 07</td>
                                 <td>yalova@ozdurcivata.com.tr</td>
-                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
-                                <td><i class="fa-regular fa-circle-check text-success"></i></td>
+                                <td class="text-center"><i class="fa-regular fa-circle-check fa-lg text-success"></i>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -133,7 +173,7 @@
                     class="bx bx-trending-up text-4 me-2"></i> Fiyat Karşılaştır</a>
         </div>
         <div class="col-12 col-md-auto mt-3 mt-md-0">
-            <button type="button"
+            <button type="submit"
                 class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
                 data-loading-text="Loading...">
                 <i class="bx bx-envelope text-4 me-2"></i> E-Posta Gönder
@@ -211,10 +251,6 @@
                         {
                             targets: 4,
                             orderable: false
-                        },
-                        {
-                            targets: 5,
-                            orderable: false
                         }
                     ],
                     order: [],
@@ -226,6 +262,8 @@
         }(jQuery));
     </script>
     <script>
+        var cariler = @Html.Raw(Json.Serialize(Model.CariViewModels));
+
         (function ($) {
             "use strict";
 
@@ -350,28 +388,29 @@
                             var inputClass = "form-control populate";
                             var content = data[i];
                             var inputName = "";
+                            var element = "";
 
-                            @* if (i === 0) {
-                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].AdiSoyadi";
-                            } else if (i === 1) {
-                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].Telefon";
-                            } else if (i === 2) {
-                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].Fax";
-                            } else if (i === 3) {
-                                inputName = "Model.CariYetkiliViewModels[" + (rowIndex - 1) + "].EPosta";
+                            if (i === 0) {
+                                element = '<select name="Model.SelectedCariCariYetkililer[' + (rowIndex - 1) + '].CariId"' +
+                                    ' class="' +
+                                    inputClass +
+                                    ' cari-select" data-row-index="' + (rowIndex - 1) + '" required><option>Seçiniz</option>';
+
+                                for (var j = 0; j < cariler.length; j++) {
+                                    var cari = cariler[j];
+                                    element += "<option value='" + cari.id + "'>" + cari.kisaAdi + "</option>";
+                                };
+
+                                element += "</select>";
                             }
                             else {
-                                inputClass += "text-center";
-                            } *@
+                                element = '<select name="Model.SelectedCariCariYetkililer[' + (rowIndex - 1) + '].CariYetkiliId"' +
+                                    ' class="' +
+                                    inputClass +
+                                    ' cariYetkili" data-row-index="' + (rowIndex - 1) + '" required><option>Seçiniz</option></select>';
+                            }
 
-                                    var inputElement =
-                                '<select name="' +
-                                inputName +
-                                '" class="' +
-                                inputClass +
-                                '" required><option>Seç</option></select>';
-
-                            $this.html(inputElement);
+                            $this.html(element);
                         }
                     });
                 },
@@ -438,5 +477,22 @@
                 EditableYetkiliTable.initialize();
             });
         }).apply(this, [jQuery]);
+
+        $(document).on('change', '.cari-select', function () {
+            var $cariSelect = $(this);
+            var rowIndex = $cariSelect.data('row-index');
+
+            $('.cariYetkili[data-row-index="' + rowIndex + '"]').empty();
+            $('.cariYetkili[data-row-index="' + rowIndex + '"]').append('<option>Seçiniz</option>');
+
+            var carilerArr = cariler.filter(function (cari) {
+                return cari.id == $cariSelect.val();
+            });
+
+            for (var i = 0; i < carilerArr[0].cariYetkiliViewModels.length; i++) {
+                var cariYetkili = carilerArr[0].cariYetkiliViewModels[i];
+                $('.cariYetkili[data-row-index="' + rowIndex + '"]').append('<option value="' + cariYetkili.id + '">' + cariYetkili.adiSoyadi + '</option>');
+            }
+        });
     </script>
 }

@@ -11,16 +11,26 @@ namespace zeynerp.Infrastructure.Data
         private readonly IBirimRepository _birimRepository;
         private readonly IStokRepository _stokRepository;
         private readonly IMalzemeTalepRepository _malzemeTalepRepository;
+        private readonly IMalzemeTalepleriRepository _malzemeTalepleriRepository;
         private readonly ICariTurRepository _cariTurRepository;
         private readonly ICariRepository _cariRepository;
 
-        public TenantUnitOfWork(IStokGrupRepository stokGrupRepository, IStokOzellikRepository stokOzellikRepository, IBirimRepository birimRepository, IStokRepository stokRepository, IMalzemeTalepRepository malzemeTalepRepository, ICariTurRepository cariTurRepository, ICariRepository cariRepository)
+        public TenantUnitOfWork(
+            IStokGrupRepository stokGrupRepository,
+            IStokOzellikRepository stokOzellikRepository,
+            IBirimRepository birimRepository,
+            IStokRepository stokRepository,
+            IMalzemeTalepRepository malzemeTalepRepository,
+            IMalzemeTalepleriRepository malzemeTalepleriRepository,
+            ICariTurRepository cariTurRepository,
+            ICariRepository cariRepository)
         {
             _stokGrupRepository = stokGrupRepository;
             _stokOzellikRepository = stokOzellikRepository;
             _birimRepository = birimRepository;
             _stokRepository = stokRepository;
             _malzemeTalepRepository = malzemeTalepRepository;
+            _malzemeTalepleriRepository = malzemeTalepleriRepository;
             _cariTurRepository = cariTurRepository;
             _cariRepository = cariRepository;
         }
@@ -34,6 +44,8 @@ namespace zeynerp.Infrastructure.Data
         public IStokRepository StokRepository => _stokRepository;
 
         public IMalzemeTalepRepository MalzemeTalepRepository => _malzemeTalepRepository;
+        
+        public IMalzemeTalepleriRepository MalzemeTalepleriRepository => _malzemeTalepleriRepository;
 
         public ICariTurRepository CariTurRepository => _cariTurRepository;
 

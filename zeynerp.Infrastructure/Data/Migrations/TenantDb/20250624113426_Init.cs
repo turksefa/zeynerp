@@ -213,6 +213,33 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 });
 
             migrationBuilder.CreateTable(
+                name: "MalzemeTalepleri",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CariId = table.Column<int>(type: "int", nullable: false),
+                    CariYetkiliId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MalzemeTalepleri", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepleri_CariYetkililer_CariYetkiliId",
+                        column: x => x.CariYetkiliId,
+                        principalTable: "CariYetkililer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepleri_Cariler_CariId",
+                        column: x => x.CariId,
+                        principalTable: "Cariler",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MalzemeTalepler",
                 columns: table => new
                 {
@@ -230,11 +257,17 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     Kg = table.Column<double>(type: "float", nullable: false),
                     M2 = table.Column<double>(type: "float", nullable: false),
                     Mm = table.Column<double>(type: "float", nullable: false),
-                    M = table.Column<double>(type: "float", nullable: false)
+                    M = table.Column<double>(type: "float", nullable: false),
+                    MalzemeTalepleriId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MalzemeTalepler", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MalzemeTalepler_MalzemeTalepleri_MalzemeTalepleriId",
+                        column: x => x.MalzemeTalepleriId,
+                        principalTable: "MalzemeTalepleri",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_MalzemeTalepler_StokGruplar_StokGrupId",
                         column: x => x.StokGrupId,
@@ -271,6 +304,11 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 column: "CariId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepler_MalzemeTalepleriId",
+                table: "MalzemeTalepler",
+                column: "MalzemeTalepleriId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MalzemeTalepler_StokGrupId",
                 table: "MalzemeTalepler",
                 column: "StokGrupId");
@@ -284,6 +322,16 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "IX_MalzemeTalepler_StokOzellikId",
                 table: "MalzemeTalepler",
                 column: "StokOzellikId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepleri_CariId",
+                table: "MalzemeTalepleri",
+                column: "CariId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MalzemeTalepleri_CariYetkiliId",
+                table: "MalzemeTalepleri",
+                column: "CariYetkiliId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stoklar_StokGrupId",
@@ -306,9 +354,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "CariCariTur");
 
             migrationBuilder.DropTable(
-                name: "CariYetkililer");
-
-            migrationBuilder.DropTable(
                 name: "MalzemeTalepler");
 
             migrationBuilder.DropTable(
@@ -318,16 +363,22 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                 name: "CariTurler");
 
             migrationBuilder.DropTable(
+                name: "MalzemeTalepleri");
+
+            migrationBuilder.DropTable(
                 name: "StokOzellikler");
 
             migrationBuilder.DropTable(
                 name: "Stoklar");
 
             migrationBuilder.DropTable(
-                name: "Cariler");
+                name: "CariYetkililer");
 
             migrationBuilder.DropTable(
                 name: "StokGruplar");
+
+            migrationBuilder.DropTable(
+                name: "Cariler");
         }
     }
 }

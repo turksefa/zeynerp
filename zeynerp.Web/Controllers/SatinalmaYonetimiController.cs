@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using zeynerp.Application.DTOs.SatinalmaYonetimi;
@@ -15,14 +14,22 @@ namespace zeynerp.Web.Controllers
         private readonly IStokGrupService _stokGrupService;
         private readonly IStokOzellikService _stokOzellikService;
         private readonly IStokService _stokService;
+        private readonly ICariService _cariService;
         private readonly IMapper _mapper;
 
-        public SatinalmaYonetimiController(IMalzemeTalepService malzemeTalepService, IStokGrupService stokGrupService, IStokOzellikService stokOzellikService, IStokService stokService, IMapper mapper)
+        public SatinalmaYonetimiController(
+            IMalzemeTalepService malzemeTalepService,
+            IStokGrupService stokGrupService,
+            IStokOzellikService stokOzellikService,
+            IStokService stokService,
+            ICariService cariService,
+            IMapper mapper)
         {
             _malzemeTalepService = malzemeTalepService;
             _stokGrupService = stokGrupService;
             _stokOzellikService = stokOzellikService;
             _stokService = stokService;
+            _cariService = cariService;
             _mapper = mapper;
         }
 
@@ -59,7 +66,18 @@ namespace zeynerp.Web.Controllers
             return View();
         }
 
-        public IActionResult MalzemeTalepleri()
+        public async Task<IActionResult> MalzemeTalepleri()
+        {
+            MalzemeTalepleriViewModel malzemeTalepleriViewModels = new MalzemeTalepleriViewModel
+            {
+                MalzemeTalepViewModels = _mapper.Map<IReadOnlyList<MalzemeTalepViewModel>>(await _malzemeTalepService.MalzemeTaleplerAsync()),
+                CariViewModels = _mapper.Map<IReadOnlyList<CariViewModel>>(await _cariService.GetCarilerAsync())
+            };
+            return View(malzemeTalepleriViewModels);
+        }
+
+        [HttpPost]
+        public IActionResult MalzemeTalepleri([FromForm] MalzemeTalepleriViewModel model)
         {
             return View();
         }

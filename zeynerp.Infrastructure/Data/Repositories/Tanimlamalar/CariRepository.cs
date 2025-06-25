@@ -21,7 +21,7 @@ namespace zeynerp.Infrastructure.Data.Repositories.Tanimlamalar
         {
             var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
             using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
-            return await context.Set<Cari>().Include(c => c.CariTurler).ToListAsync();
+            return await context.Set<Cari>().Include(c => c.CariTurler).Include(c => c.CariYetkililer).Include(c => c.TeslimatAdresler).ToListAsync();
         }
 
         public async Task<Cari> GetCariByIdAsync(int id)

@@ -10,6 +10,7 @@ namespace zeynerp.Core.Interfaces
         IBirimRepository BirimRepository { get; }
         IStokRepository StokRepository { get; }
         IMalzemeTalepRepository MalzemeTalepRepository { get; }
+        IMalzemeTalepleriRepository MalzemeTalepleriRepository { get; }
         ICariTurRepository CariTurRepository { get; }
         ICariRepository CariRepository { get; }
     }

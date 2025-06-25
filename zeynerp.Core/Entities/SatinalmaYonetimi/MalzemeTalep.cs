@@ -21,5 +21,7 @@ namespace zeynerp.Core.Entities.SatinalmaYonetimi
         public double M2 { get; set; }
         public double Mm { get; set; }
         public double M { get; set; }
+        public int? MalzemeTalepleriId { get; set; }
+        public MalzemeTalepleri? MalzemeTalepleri { get; set; }
     }
 }
