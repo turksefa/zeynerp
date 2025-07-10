@@ -19,6 +19,9 @@ namespace zeynerp.Web.Controllers
         private readonly IStokService _stokService;
         private readonly ICariTurService _cariTurService;
         private readonly ICariService _cariService;
+        private readonly IKDVService _kdvService;
+        private readonly IOdemeVadeService _odemeVadeService;
+        private readonly IParaBirimService _paraBirimService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
 
@@ -28,6 +31,9 @@ namespace zeynerp.Web.Controllers
             IStokService stokService,
             ICariTurService cariTurService,
             ICariService cariService,
+            IKDVService kdvService,
+            IOdemeVadeService odemeVadeService,
+            IParaBirimService paraBirimService,
             UserManager<ApplicationUser> userManager,
             IMapper mapper)
         {
@@ -37,6 +43,9 @@ namespace zeynerp.Web.Controllers
             _stokService = stokService;
             _cariTurService = cariTurService;
             _cariService = cariService;
+            _kdvService = kdvService;
+            _odemeVadeService = odemeVadeService;
+            _paraBirimService = paraBirimService;
             _userManager = userManager;
             _mapper = mapper;
         }
@@ -408,6 +417,156 @@ namespace zeynerp.Web.Controllers
         public IActionResult Test()
         {
             return View();
+        }
+
+        public async Task<IActionResult> KDVler()
+        {
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
+            var kdvler = _mapper.Map<IReadOnlyList<KDVViewModel>>(await _kdvService.GetKDVlerAsync());
+            return View(kdvler);
+        }
+
+        public IActionResult KDVEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> KDVEkle([FromForm] List<KDVViewModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ForEach(item => item.Status = Status.Aktif);
+
+                var result = await _kdvService.CreateKDVAsync(_mapper.Map<IReadOnlyList<KDVDto>>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("KDVler");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> KDVGuncelle([FromForm] KDVViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _kdvService.UpdateKDVAsync(_mapper.Map<KDVDto>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("KDVler");
+                }
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> OdemeVadeler()
+        {
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+
+            var odemeVadeler = _mapper.Map<IReadOnlyList<OdemeVadeViewModel>>(await _odemeVadeService.GetOdemeVadelerAsync());
+            return View(odemeVadeler);
+        }
+
+        public IActionResult OdemeVadeEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OdemeVadeEkle([FromForm] List<OdemeVadeViewModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ForEach(item => item.Status = Status.Aktif);
+
+                var result = await _odemeVadeService.CreateOdemeVadeAsync(_mapper.Map<IReadOnlyList<OdemeVadeDto>>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("OdemeVadeler");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OdemeVadeGuncelle([FromForm] OdemeVadeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _odemeVadeService.UpdateOdemeVadeAsync(_mapper.Map<OdemeVadeDto>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("OdemeVadeler");
+                }
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> ParaBirimler()
+        {
+            if (TempData["SuccessMessage"] != null)
+            {
+                ViewBag.SuccessMessage = TempData["SuccessMessage"].ToString();
+            }
+    
+            var paraBirimler = _mapper.Map<IReadOnlyList<ParaBirimViewModel>>(await _paraBirimService.GetParaBirimlerAsync());            
+            return View(paraBirimler);
+        }
+
+        public IActionResult ParaBirimEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ParaBirimEkle([FromForm] List<ParaBirimViewModel> model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ForEach(item => item.Status = Status.Aktif);
+
+                var result = await _paraBirimService.CreateParaBirimAsync(_mapper.Map<IReadOnlyList<ParaBirimDto>>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("ParaBirimler");
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ParaBirimGuncelle([FromForm] ParaBirimViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _paraBirimService.UpdateParaBirimAsync(_mapper.Map<ParaBirimDto>(model));
+                if (result.Success)
+                {
+                    TempData["SuccessMessage"] = result.Message;
+                    return RedirectToAction("ParaBirimler");
+                }
+            }
+
+            return View(model);
         }
     }
 }

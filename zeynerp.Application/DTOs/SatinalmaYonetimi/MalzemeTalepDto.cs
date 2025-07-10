@@ -1,3 +1,4 @@
+using zeynerp.Core.Entities;
 using zeynerp.Core.Entities.Tanimlamalar;
 
 namespace zeynerp.Application.DTOs.SatinalmaYonetimi
@@ -21,5 +22,7 @@ namespace zeynerp.Application.DTOs.SatinalmaYonetimi
         public double M2 { get; set; }
         public double Mm { get; set; }
         public double M { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int Durum { get; set; }
     }
 }

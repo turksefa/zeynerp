@@ -13,5 +13,8 @@ namespace zeynerp.Core.Interfaces
         IMalzemeTalepleriRepository MalzemeTalepleriRepository { get; }
         ICariTurRepository CariTurRepository { get; }
         ICariRepository CariRepository { get; }
+        IKDVRepository KDVRepository { get; }
+        IOdemeVadeRepository OdemeVadeRepository { get; }
+        IParaBirimRepository ParaBirimRepository { get; }
     }
 }

@@ -252,24 +252,64 @@
                             '<input id="Boyut' + (i + 1) + '" name="Boyut' + (i + 1) + '" type="text" class="form-control" value="' + boyutValue + '" />' +
                             '</div>' +
                             '</div>');
-
-                        $('#fireContainer').append('<div class="col-lg-3">' +
+                        
+                        if(i === 0)
+                        {
+                            $('#fireContainer').append('<div class="col-lg-3">' +
                             '<div class="form-group">' +
                             '<label class="col-form-label">Fire</label>' +
-                            '<select id="Fire' + (i + 1) + '" name="Fire' + (i + 1) + '" class="form-control" required>' +
-                            '<option value="">Seç</option>' +
-                            '<option value="false">Yok</option>' +
-                            '<option value="true">Var</option>' +
+                            '<select id="Fire1" name="Fire1" class="form-control" required>' +
+                            '<option value="False">Yok</option>' +
+                            '<option value="True">Var</option>' +
                             '</select>' +
                             '</div>' +
-                            '</div>');
+                            '</div>');   
+                        }
+
+                        if(i === 1)
+                        {
+                            $('#fireContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label">Fire</label>' +
+                            '<select id="Fire2" name="Fire2" class="form-control" required>' +
+                            '<option value="False">Yok</option>' +
+                            '<option value="True">Var</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>');   
+                        }   
+
+                        if(i === 2)
+                        {
+                            $('#fireContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label">Fire</label>' +
+                            '<select id="Fire3" name="Fire3" class="form-control" required>' +
+                            '<option value="False">Yok</option>' +
+                            '<option value="True">Var</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>');   
+                        }   
+
+                        if(i === 3)
+                        {
+                            $('#fireContainer').append('<div class="col-lg-3">' +
+                            '<div class="form-group">' +
+                            '<label class="col-form-label">Fire</label>' +
+                            '<select id="Fire4" name="Fire4" class="form-control" required>' +
+                            '<option value="False">Yok</option>' +
+                            '<option value="True">Var</option>' +
+                            '</select>' +
+                            '</div>' +
+                            '</div>');   
+                        }                         
 
                         if (selectedValue == 1) {
                             $('#siralamaContainer').append('<div class="col-lg-3">' +
                                 '<div class="form-group">' +
                                 '<label class="col-form-label">Sıralama</label>' +
                                 '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
-                                '<option value="">Seç</option>' +
                                 '<option value="0">Yok</option>' +
                                 '<option value="1">1. Kutu</option>' +
                                 '</select>' +
@@ -281,7 +321,6 @@
                                 '<div class="form-group">' +
                                 '<label class="col-form-label">Sıralama</label>' +
                                 '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
-                                '<option value="">Seç</option>' +
                                 '<option value="0">Yok</option>' +
                                 '<option value="1">1. Kutu</option>' +
                                 '<option value="2">2. Kutu</option>' +
@@ -294,7 +333,6 @@
                                 '<div class="form-group">' +
                                 '<label class="col-form-label">Sıralama</label>' +
                                 '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
-                                '<option value="">Seç</option>' +
                                 '<option value="0">Yok</option>' +
                                 '<option value="1">1. Kutu</option>' +
                                 '<option value="2">2. Kutu</option>' +
@@ -308,7 +346,6 @@
                                 '<div class="form-group">' +
                                 '<label class="col-form-label">Sıralama</label>' +
                                 '<select id="Siralama' + (i + 1) + '" name="Siralama' + (i + 1) + '" class="form-control" required>' +
-                                '<option value="">Seç</option>' +
                                 '<option value="0">Yok</option>' +
                                 '<option value="1">1. Kutu</option>' +
                                 '<option value="2">2. Kutu</option>' +
@@ -320,6 +357,15 @@
                         }
                     }
                 }
+
+                $("#Siralama1").val(@Model.Siralama1);
+                $("#Siralama2").val(@Model.Siralama2);
+                $("#Siralama3").val(@Model.Siralama3);
+                $("#Siralama4").val(@Model.Siralama4);
+                $("#Fire1").val("@Model.Fire1");                
+                $("#Fire2").val("@Model.Fire2");                
+                $("#Fire3").val("@Model.Fire3");                
+                $("#Fire4").val("@Model.Fire4");                
             });
 
             $('#kutuSayisi').trigger('change');

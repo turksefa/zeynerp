@@ -4,6 +4,7 @@ using zeynerp.Application.DTOs;
 using zeynerp.Application.DTOs.Authentication;
 using zeynerp.Application.DTOs.SatinalmaYonetimi;
 using zeynerp.Application.DTOs.Tanimlamalar;
+using zeynerp.Core.Entities.Tanimlamalar;
 using zeynerp.Web.Models;
 using zeynerp.Web.Models.Authentication;
 using zeynerp.Web.Models.SatinalmaYonetimi;
@@ -98,8 +99,19 @@ namespace zeynerp.Web.Mapper
                             ? 0
                             : double.Parse(src.M, CultureInfo.InvariantCulture)
                     ));
+            CreateMap<MalzemeTalepleriDto, MalzemeTalepleriViewModel>()
+                .ForMember(dest => dest.BirimFiyat,
+                    opt => opt.MapFrom(src => src.BirimFiyat.ToString()));
+            CreateMap<MalzemeTalepleriViewModel, MalzemeTalepleriDto>()
+                .ForMember(dest => dest.BirimFiyat,
+                    opt => opt.MapFrom(src =>
+                        string.IsNullOrWhiteSpace(src.BirimFiyat)
+                            ? 0
+                            : double.Parse(src.BirimFiyat, CultureInfo.InvariantCulture)
+                    ));
             CreateMap<CariTurDto, CariTurViewModel>().ReverseMap();
             CreateMap<TeslimatAdresDto, TeslimatAdresViewModel>().ReverseMap();
+            CreateMap<TeslimatAdres, TeslimatAdresViewModel>().ReverseMap();
             CreateMap<CariYetkiliDto, CariYetkiliViewModel>().ReverseMap();
             CreateMap<CariDto, CariViewModel>()
                 .ForMember(dest => dest.CariTurViewModels,
@@ -115,6 +127,9 @@ namespace zeynerp.Web.Mapper
                     opt => opt.MapFrom(src => src.CariYetkiliViewModels))
                 .ForMember(dest => dest.TeslimatAdresDtos,
                     opt => opt.MapFrom(src => src.TeslimatAdresViewModels));
+            CreateMap<KDVDto, KDVViewModel>().ReverseMap();
+            CreateMap<OdemeVadeDto, OdemeVadeViewModel>().ReverseMap();
+            CreateMap<ParaBirimDto, ParaBirimViewModel>().ReverseMap();
         }
     }
 }

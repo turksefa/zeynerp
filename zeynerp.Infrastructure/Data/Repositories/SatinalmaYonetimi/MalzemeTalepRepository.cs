@@ -17,6 +17,13 @@ namespace zeynerp.Infrastructure.Data.Repositories.SatinalmaYonetimi
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<MalzemeTalep> GetMalzemeTalepByIdAsync(int id)
+        {
+            var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();
+            using var context = await _tenantDbContextFactory.CreateDbContextAsync(userId);
+            return await context.Set<MalzemeTalep>().FindAsync(id);
+        }
+
         public async Task<IReadOnlyList<MalzemeTalep>> GetMalzemeTaleplerAsync()
         {
             var userId = _httpContextAccessor.HttpContext.Items["UserId"]?.ToString();

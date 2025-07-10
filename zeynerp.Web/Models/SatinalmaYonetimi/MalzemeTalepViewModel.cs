@@ -1,3 +1,4 @@
+using zeynerp.Core.Entities;
 using zeynerp.Core.Entities.Tanimlamalar;
 using zeynerp.Web.Models.Tanimlamalar;
 
@@ -22,6 +23,8 @@ namespace zeynerp.Web.Models.SatinalmaYonetimi
         public string? M2 { get; set; }
         public string? Mm { get; set; }
         public string? M { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int Durum { get; set; }
         public IReadOnlyList<StokGrupViewModel>? StokGrups { get; set; }
         public IReadOnlyList<StokViewModel>? Stoks { get; set; }
         public IReadOnlyList<StokOzellikViewModel>? StokOzelliks { get; set; }

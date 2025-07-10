@@ -63,6 +63,12 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.Property<double>("Boyut4")
                         .HasColumnType("float");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Durum")
+                        .HasColumnType("int");
+
                     b.Property<double>("Kg")
                         .HasColumnType("float");
 
@@ -71,9 +77,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
                     b.Property<double>("M2")
                         .HasColumnType("float");
-
-                    b.Property<int?>("MalzemeTalepleriId")
-                        .HasColumnType("int");
 
                     b.Property<double>("Mm")
                         .HasColumnType("float");
@@ -88,8 +91,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MalzemeTalepleriId");
 
                     b.HasIndex("StokGrupId");
 
@@ -108,20 +109,83 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal?>("BirimFiyat")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("BirimId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BirimSayisi")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Boyut1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Boyut2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Boyut3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Boyut4")
+                        .HasColumnType("float");
+
                     b.Property<int>("CariId")
                         .HasColumnType("int");
 
                     b.Property<int>("CariYetkiliId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("KdvId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MalzemeTalepId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("Mevcut")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OdemeVadeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParaBirimId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("TeslimatAdresId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TeslimatNot")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("TeslimatTarih")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Tutar")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BirimId");
 
                     b.HasIndex("CariId");
 
                     b.HasIndex("CariYetkiliId");
+
+                    b.HasIndex("KdvId");
+
+                    b.HasIndex("MalzemeTalepId");
+
+                    b.HasIndex("OdemeVadeId");
+
+                    b.HasIndex("ParaBirimId");
+
+                    b.HasIndex("TeslimatAdresId");
 
                     b.ToTable("MalzemeTalepleri");
                 });
@@ -160,6 +224,46 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                             Order = 1,
                             Status = 1,
                             Unit = "Yok"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Adet",
+                            Order = 2,
+                            Status = 1,
+                            Unit = "Adet"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Kilogram",
+                            Order = 3,
+                            Status = 1,
+                            Unit = "KG"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Metrekare",
+                            Order = 4,
+                            Status = 1,
+                            Unit = "M2"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Milimetre",
+                            Order = 5,
+                            Status = 1,
+                            Unit = "MM"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Metre",
+                            Order = 6,
+                            Status = 1,
+                            Unit = "M"
                         });
                 });
 
@@ -202,6 +306,9 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.Property<string>("VergiNumarasi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("cariStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -262,6 +369,144 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasIndex("CariId");
 
                     b.ToTable("CariYetkililer");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.KDV", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KDVler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "0",
+                            Order = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "1",
+                            Order = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "10",
+                            Order = 3,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "20",
+                            Order = 4,
+                            Status = 1
+                        });
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.OdemeVade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FaturaTarihinden")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kalan")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sipariste")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OdemeVadeler");
+                });
+
+            modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.ParaBirim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Birim")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ParaBirimler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Birim = "₺",
+                            Name = "TRY",
+                            Order = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Birim = "$",
+                            Name = "USD",
+                            Order = 2,
+                            Status = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Birim = "€",
+                            Name = "EUR",
+                            Order = 3,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Stok", b =>
@@ -400,6 +645,15 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasKey("Id");
 
                     b.ToTable("StokGruplar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yok",
+                            Order = 1,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.StokOzellik", b =>
@@ -426,6 +680,16 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                     b.HasKey("Id");
 
                     b.ToTable("StokOzellikler");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Yok",
+                            Order = 1,
+                            OzgulAgirlik = 1.0,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.TeslimatAdres", b =>
@@ -471,10 +735,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
             modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", b =>
                 {
-                    b.HasOne("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", "MalzemeTalepleri")
-                        .WithMany("MalzemeTalepler")
-                        .HasForeignKey("MalzemeTalepleriId");
-
                     b.HasOne("zeynerp.Core.Entities.Tanimlamalar.StokGrup", "StokGrup")
                         .WithMany()
                         .HasForeignKey("StokGrupId")
@@ -493,8 +753,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("MalzemeTalepleri");
-
                     b.Navigation("Stok");
 
                     b.Navigation("StokGrup");
@@ -504,6 +762,10 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
 
             modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", b =>
                 {
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Birim", "Birim")
+                        .WithMany()
+                        .HasForeignKey("BirimId");
+
                     b.HasOne("zeynerp.Core.Entities.Tanimlamalar.Cari", "Cari")
                         .WithMany()
                         .HasForeignKey("CariId")
@@ -516,9 +778,43 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.KDV", "KDV")
+                        .WithMany()
+                        .HasForeignKey("KdvId");
+
+                    b.HasOne("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalep", "MalzemeTalep")
+                        .WithMany()
+                        .HasForeignKey("MalzemeTalepId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.OdemeVade", "OdemeVade")
+                        .WithMany()
+                        .HasForeignKey("OdemeVadeId");
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.ParaBirim", "ParaBirim")
+                        .WithMany()
+                        .HasForeignKey("ParaBirimId");
+
+                    b.HasOne("zeynerp.Core.Entities.Tanimlamalar.TeslimatAdres", "TeslimatAdres")
+                        .WithMany()
+                        .HasForeignKey("TeslimatAdresId");
+
+                    b.Navigation("Birim");
+
                     b.Navigation("Cari");
 
                     b.Navigation("CariYetkili");
+
+                    b.Navigation("KDV");
+
+                    b.Navigation("MalzemeTalep");
+
+                    b.Navigation("OdemeVade");
+
+                    b.Navigation("ParaBirim");
+
+                    b.Navigation("TeslimatAdres");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.CariYetkili", b =>
@@ -552,11 +848,6 @@ namespace zeynerp.Infrastructure.Data.Migrations.TenantDb
                         .IsRequired();
 
                     b.Navigation("Cari");
-                });
-
-            modelBuilder.Entity("zeynerp.Core.Entities.SatinalmaYonetimi.MalzemeTalepleri", b =>
-                {
-                    b.Navigation("MalzemeTalepler");
                 });
 
             modelBuilder.Entity("zeynerp.Core.Entities.Tanimlamalar.Cari", b =>

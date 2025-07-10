@@ -14,6 +14,9 @@ namespace zeynerp.Infrastructure.Data
         private readonly IMalzemeTalepleriRepository _malzemeTalepleriRepository;
         private readonly ICariTurRepository _cariTurRepository;
         private readonly ICariRepository _cariRepository;
+        private readonly IKDVRepository _kdvRepository;
+        private readonly IOdemeVadeRepository _odemeVadeRepository;
+        private readonly IParaBirimRepository _paraBirimRepository;
 
         public TenantUnitOfWork(
             IStokGrupRepository stokGrupRepository,
@@ -23,7 +26,10 @@ namespace zeynerp.Infrastructure.Data
             IMalzemeTalepRepository malzemeTalepRepository,
             IMalzemeTalepleriRepository malzemeTalepleriRepository,
             ICariTurRepository cariTurRepository,
-            ICariRepository cariRepository)
+            ICariRepository cariRepository,
+            IKDVRepository kdvRepository,
+            IOdemeVadeRepository odemeVadeRepository,
+            IParaBirimRepository paraBirimRepository)
         {
             _stokGrupRepository = stokGrupRepository;
             _stokOzellikRepository = stokOzellikRepository;
@@ -33,6 +39,9 @@ namespace zeynerp.Infrastructure.Data
             _malzemeTalepleriRepository = malzemeTalepleriRepository;
             _cariTurRepository = cariTurRepository;
             _cariRepository = cariRepository;
+            _kdvRepository = kdvRepository;
+            _odemeVadeRepository = odemeVadeRepository;
+            _paraBirimRepository = paraBirimRepository;
         }
 
         public IStokGrupRepository StokGrupRepository => _stokGrupRepository;
@@ -51,5 +60,10 @@ namespace zeynerp.Infrastructure.Data
 
         public ICariRepository CariRepository => _cariRepository;
 
+        public IKDVRepository KDVRepository => _kdvRepository;
+
+        public IOdemeVadeRepository OdemeVadeRepository => _odemeVadeRepository;
+
+        public IParaBirimRepository ParaBirimRepository => _paraBirimRepository;
     }
 }

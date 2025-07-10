@@ -1,6 +1,6 @@
 @model MalzemeTalepleriViewModel
 @{
-    ViewData["LayoutTitle"] = "Malzeme Talepleri";
+    ViewData["LayoutTitle"] = "Talepler";
 }
 
 <header class="page-header">
@@ -9,7 +9,7 @@
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs me-3">
             <li><span>Satın Alma Yönetimi</span></li>
-            <li><span class="text-light">Malzeme Talepleri</span></li>
+            <li><span class="text-light">Talepler</span></li>
         </ol>
     </div>
 </header>
@@ -23,12 +23,12 @@
                         style="min-width: 1200px;">
                         <thead>
                             <tr>
-                                <th width="3%">
+                                <th width="3%" class="checkbox-column">
                                     <div class="checkbox-custom checkbox-default">
                                         <input type="checkbox" />
                                         <label></label>
                                     </div>
-                                </th>
+                                </th>                              
                                 <th>Malzeme Adı</th>
                                 <th>Özellik</th>
                                 <th>Boyutlar</th>
@@ -93,7 +93,8 @@
                                                                         decimal.Parse(Model.MalzemeTalepViewModels[i].Mm).ToString("N2") : "")
                                                                                                                                           </td>
                                                                                                                                           <td>@((Model.MalzemeTalepViewModels[i].M != "0") ?
-                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].M).ToString("N2") : "")</td>
+                                                                        decimal.Parse(Model.MalzemeTalepViewModels[i].M).ToString("N2") : "")
+                                </td>
                             </tr>
                                                         }
                         </tbody>
@@ -134,26 +135,27 @@
                                 <th>Yetkili Adı</th>
                                 <th>Yetkili Telefonu</th>
                                 <th>Yetkili E-Posta</th>
-                                <th class="text-center" width="10%">Talep Durum</th>
+                                <th class="text-center" width="8%">Mail Durum</th>
+                                <th class="text-center" width="8%">Talep Durum</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Eray Hırdavat</td>
-                                <td>Erdoğan Bey</td>
-                                <td>0216 447 27 57</td>
-                                <td>info@eraycivata.com.tr</td>
-                                <td class="text-center"><i class="fa-regular fa-circle-check fa-lg text-success"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Özdur Civata</td>
-                                <td>Sinan Karataş</td>
-                                <td>0226 465 65 07</td>
-                                <td>yalova@ozdurcivata.com.tr</td>
-                                <td class="text-center"><i class="fa-regular fa-circle-check fa-lg text-success"></i>
-                                </td>
-                            </tr>
+                            @foreach (var malzemeTalepGroup in Model.MalzemeTalepler.GroupBy(mt => mt.CariYetkiliId))
+                            {
+                                var malzemeTalep = malzemeTalepGroup.First();
+                                <tr>
+                                    <td><a asp-action="MalzemeTalepleriDetay" asp-route-id="@malzemeTalep.CariYetkiliId"><strong>@malzemeTalep.CariViewModel.KisaAdi</strong></a></td>
+                                    <td>@malzemeTalep.CariYetkiliViewModel.AdiSoyadi</td>
+                                    <td>@malzemeTalep.CariYetkiliViewModel.Telefon</td>
+                                    <td>@malzemeTalep.CariYetkiliViewModel.EPosta</td>
+                                    <td class="text-center">
+                                        <i class="fa-regular fa-circle-xmark fa-lg text-danger"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="fa-regular fa-circle-xmark fa-lg text-danger"></i>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -168,7 +170,7 @@
             </button>
         </div>
         <div class="col-12 col-md-auto ms-md-auto mt-3 mt-md-0">
-            <a href="#"
+            <a asp-action="FiyatKarsilastirma"
                 class="btn btn-default btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i
                     class="bx bx-trending-up text-4 me-2"></i> Fiyat Karşılaştır</a>
         </div>
@@ -228,36 +230,30 @@
 
             'use strict';
 
-            var ecommerceListDataTableInit = function () {
-
-                var $malzemeTable = $('.malzemeTable');
-
-                $malzemeTable.dataTable({
-                    dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
-                    columnDefs: [
-                        {
-                            targets: 0,
-                            orderable: false
-                        }
-                    ],
-                    order: [],
-                });
+            var listDataTableInit = function () {
 
                 var $firmaTable = $('.firmaTable');
+                var $malzemeTable = $('.malzemeTable');
 
                 $firmaTable.dataTable({
                     dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
-                    columnDefs: [
-                        {
-                            targets: 4,
-                            orderable: false
-                        }
-                    ],
-                    order: [],
-                });
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [4, 5]
+                    }]
+                });           
+
+                $malzemeTable.dataTable({
+                    dom: '<"row justify-content-between"<"col-auto"><"col-auto">><"table-responsive"t>',
+                    order: [[1, 'asc']],
+                    columnDefs: [{
+                        orderable: false,
+                        targets: [0]
+                    }]
+                });           
             };
 
-            ecommerceListDataTableInit();
+            listDataTableInit();
 
         }(jQuery));
     </script>
@@ -408,9 +404,19 @@
                                     ' class="' +
                                     inputClass +
                                     ' cariYetkili" data-row-index="' + (rowIndex - 1) + '" required><option>Seçiniz</option></select>';
-                            }
+                            }                            
 
                             $this.html(element);
+
+                            $this.find('select').select2({
+                                theme: "bootstrap",
+                                width: '100%',
+                                language: {
+                                    noResults: function() {
+                                        return "";
+                                    }
+                                }
+                            });
                         }
                     });
                 },

@@ -1,3 +1,5 @@
+using zeynerp.Core.Entities.Tanimlamalar;
+
 namespace zeynerp.Application.DTOs.Tanimlamalar
 {
     public class CariDto
@@ -11,6 +13,7 @@ namespace zeynerp.Application.DTOs.Tanimlamalar
         public string VergiDairesi { get; set; } = string.Empty;
         public string VergiNumarasi { get; set; } = string.Empty;
         public string FaturaAdresi { get; set; } = string.Empty;
+        public CariStatus cariStatus { get; set; }
         public List<int> SelectedCariTurIds { get; set; } = null!;
         public ICollection<CariTurDto> CariTurDtos { get; set; } = null!;
         public ICollection<CariYetkiliDto> CariYetkiliDtos { get; set; } = null!;

@@ -13,7 +13,7 @@
             </li>
 
             <li>
-                <a asp-action="GenelTanimlar"><span>Genel Tanımlar</span></a>
+                <a asp-action="MuhasebeTanimlar"><span>Muhasebe Tanımlar</span></a>
             </li>
 
             <li><span class="text-light">Cari Tanımlar</span></li>
@@ -80,7 +80,7 @@
                                 <th>Adı</th>
                                 <th>Türler</th>
                                 <th width="15%">Telefon</th>
-                                <th width="15%">E-Posta</th>
+                                <th width="20%">E-Posta</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,13 +110,25 @@
                                     <td>
                                         @cari.Telefon
                                     </td>
-                                    <td>
+                                    <td class="d-flex justify-content-between align-items-center">
                                         @cari.EPosta
+                                        @if (cari.cariStatus == CariStatus.Pasif)
+                                        {
+                                            <span class="ecommerce-status failed"></span>
+                                        }
+                                        else if(cari.cariStatus == CariStatus.Beklemede)
+                                        {
+                                            <span class="ecommerce-status on-hold"></span>
+                                        }
+                                        else
+                                        {
+                                            <span class="ecommerce-status completed"></span>
+                                        }
                                     </td>
                                 </tr>
                             }
                         </tbody>
-                    </table>                    
+                    </table>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f523a8c4931cd8db4bfe8fae322e0ccb7fc09e2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f344d1e2b0e4051dfd648d15ee3ef7253496e19")]
 [assembly: System.Reflection.AssemblyProductAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("zeynerp.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

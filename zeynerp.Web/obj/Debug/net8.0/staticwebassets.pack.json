@@ -1321,6 +1321,10 @@
       "PackagePath": "staticwebassets\\img\\widget-twitter-profile.jpg"
     },
     {
+      "Id": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Web\\wwwroot\\img\\zeynerp-logo.png",
+      "PackagePath": "staticwebassets\\img\\zeynerp-logo.png"
+    },
+    {
       "Id": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Web\\wwwroot\\js\\custom.js",
       "PackagePath": "staticwebassets\\js\\custom.js"
     },

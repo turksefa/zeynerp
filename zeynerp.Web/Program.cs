@@ -68,6 +68,9 @@ builder.Services.AddScoped<IMalzemeTalepService, MalzemeTalepService>();
 builder.Services.AddScoped<IMalzemeTalepleriService, MalzemeTalepleriService>();
 builder.Services.AddScoped<ICariTurService, CariTurService>();
 builder.Services.AddScoped<ICariService, CariService>();
+builder.Services.AddScoped<IKDVService, KDVService>();
+builder.Services.AddScoped<IOdemeVadeService, OdemeVadeService>();
+builder.Services.AddScoped<IParaBirimService, ParaBirimService>();
 
 builder.Services.AddScoped<IPlanRepository, PlanRepository>();
 builder.Services.AddScoped<ITenantPlanRepository, TenantPlanRepository>();
@@ -80,6 +83,9 @@ builder.Services.AddScoped<IMalzemeTalepRepository, MalzemeTalepRepository>();
 builder.Services.AddScoped<IMalzemeTalepleriRepository, MalzemeTalepleriRepository>();
 builder.Services.AddScoped<ICariTurRepository, CariTurRepository>();
 builder.Services.AddScoped<ICariRepository, CariRepository>();
+builder.Services.AddScoped<IKDVRepository, KDVRepository>();
+builder.Services.AddScoped<IOdemeVadeRepository, OdemeVadeRepository>();
+builder.Services.AddScoped<IParaBirimRepository, ParaBirimRepository>();
 
 var app = builder.Build();
 

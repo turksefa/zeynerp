@@ -1,0 +1,477 @@
+@using System.Globalization
+@model MalzemeTalepleriDetayViewModel
+@{
+    ViewData["LayoutTitle"] = "";
+}
+
+<header class="page-header">
+    <h2>@ViewData["LayoutTitle"]</h2>
+
+    <div class="right-wrapper text-end">
+        <ol class="breadcrumbs me-3">
+
+    </div>
+</header>
+
+<form id="form" class="ecommerce-form action-buttons-fixed" asp-action="MalzemeTalepleriDetay" method="post">
+    <div class="row">
+        <div class="col">
+            <section class="card">
+                <div class="card-body modern">
+                    <div class="invoice">
+                        <header class="clearfix">
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="ib">
+                                        <img src="~/img/zeynerp-logo.png" width="220" alt="OKLER Themes" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-end mt-3">
+                                    <p class="mb-0">
+                                        <span class="text-dark">Talep Tarihi:</span>
+                                        <span class="value">@Model.MalzemeTalepleriViewModels[0].CreatedDate</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="bill-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="bill-to">
+                                        <address>
+                                            @Model.MalzemeTalepleriViewModels[0].Cari.KisaAdi
+                                            <br />
+                                            @Model.MalzemeTalepleriViewModels[0].CariYetkili.AdiSoyadi
+                                            <br />
+                                            @Model.MalzemeTalepleriViewModels[0].CariYetkili.Telefon
+                                            <br />
+                                            @Model.MalzemeTalepleriViewModels[0].CariYetkili.EPosta
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bill-data text-end">
+                                        <address>
+                                            Smak Makine A.Ş.
+                                            <br />
+                                            Efkan CANBEK
+                                            <br />
+                                            Telefon: 0553 532 85 70
+                                            <br />
+                                            efkan.canbek@smak.com.tr
+                                        </address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="datatable-editable" class="table invoice-items">
+                            <thead>
+                                <tr class="text-dark">
+                                    <th id="cell-id" class="font-weight-semibold" style="width: 80px;">Birim Sayısı</th>
+                                    <th id="cell-item" class="font-weight-semibold" style="width: 150px;">Stok Tanım</th>
+                                    <th id="cell-desc" class="font-weight-semibold" style="width: 150px;">Stok Tanım Özellik</th>
+                                    <th id="cell-price" class="text-center font-weight-semibold" style="width: 330px;">Boyutlar</th>
+                                    <th id="cell-qty" class="text-center font-weight-semibold" style="width: 60px;">Mevcut</th>
+                                    <th id="cell-qty" class="text-center font-weight-semibold" style="width: 80px;">Birim</th>
+                                    <th id="cell-qty" class="text-center font-weight-semibold" style="width: 90px;">Birim Sayısı</th>
+                                    <th id="cell-qty" class="text-center font-weight-semibold" style="width: 90px;">Birim Fiyat</th>
+                                    <th id="cell-qty" class="text-center font-weight-semibold" style="width: 60px;">KDV</th>
+                                    <th id="cell-total" class="text-end font-weight-semibold" style="width: 80px;">Tutar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(int i = 0; i < Model.MalzemeTalepleriViewModels.Count; i++)
+                                {
+                                    if(Model.MalzemeTalepleriViewModels[i].Status == false)
+                                    {                                        
+                                        <tr>
+                                            <input type="hidden" name="MalzemeTalepleriViewModels[@i].Id" value="@Model.MalzemeTalepleriViewModels[@i].Id" />
+                                            <input class="toplamTutar" type="hidden" name="MalzemeTalepleriViewModels[@i].Tutar" data-row-index="@i" />
+                                            <td class="align-middle">@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Birim</td>
+                                            <td class="align-middle font-weight-semibold text-dark">
+                                                @Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Stok.Name</td>
+                                            <td class="align-middle">@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.StokOzellik.Name</td>
+                                            <td class="align-middle text-center d-flex">
+                                                @if (Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut1 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut1" class="form-control boyut1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut1" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut2 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut2" class="form-control boyut2 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut2" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut3 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut3" class="form-control boyut3 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut3" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut4 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut4" class="form-control boyut4 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Boyut4" data-row-index="@i" required />
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <select name="MalzemeTalepleriViewModels[@i].Mevcut" id="" class="form-control mevcut-select" data-row-index="@i">
+                                                    <option value="">Seç</option>
+                                                    <option value="true">Var</option>
+                                                    <option value="false">Yok</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    var birimler = new SelectList(Model.BirimViewModels, "Id", "Name");
+                                                }
+                                                <select name="MalzemeTalepleriViewModels[@i].BirimId" asp-items="birimler" data-plugin-selectTwo
+                                                    class="form-control birim-select" data-row-index="@i" required>
+                                                    <option value="">Seç</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="number" name="MalzemeTalepleriViewModels[@i].BirimSayisi" class="form-control birimSayisi" data-row-index="@i" required />
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="number" name="MalzemeTalepleriViewModels[@i].BirimFiyat" step="any" class="form-control birimFiyat"
+                                                    data-row-index="@i" required />
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    var kdvler = new SelectList(Model.KDVViewModels, "Id", "Name");
+                                                }
+                                                <select name="MalzemeTalepleriViewModels[@i].KdvId" asp-items="kdvler" data-plugin-selectTwo class="form-control kdv-select"
+                                                    data-row-index="@i" required>
+                                                    <option value="">Seç</option>
+                                                </select>
+                                            </td>
+                                            <td class="align-middle text-end"><span class="unit-price"></span><span class="tutar"
+                                                    data-row-index="@i">0,00</span></td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <input type="hidden" name="MalzemeTalepleriViewModels[@i].Id" value="@Model.MalzemeTalepleriViewModels[@i].Id" />
+                                            <input class="toplamTutar" type="hidden" name="MalzemeTalepleriViewModels[@i].Tutar" data-row-index="@i" />
+                                            <td class="align-middle">@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Birim</td>
+                                            <td class="align-middle font-weight-semibold text-dark">
+                                                @Model.MalzemeTalepleriViewModels[i].MalzemeTalep.Stok.Name</td>
+                                            <td class="align-middle">@Model.MalzemeTalepleriViewModels[i].MalzemeTalep.StokOzellik.Name</td>
+                                            <td class="align-middle text-center d-flex">
+                                                @if (Model.MalzemeTalepleriViewModels[i].Boyut1 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut1" class="form-control boyut1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].Boyut1" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].Boyut2 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut2" class="form-control boyut2 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].Boyut2" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].Boyut3 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut3" class="form-control boyut3 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].Boyut3" data-row-index="@i" required />
+                                                }
+                                                @if (Model.MalzemeTalepleriViewModels[i].Boyut4 > 0)
+                                                {
+                                                    <input type="number" name="MalzemeTalepleriViewModels[@i].Boyut4" class="form-control boyut4 ms-1" step="any"
+                                                        value="@Model.MalzemeTalepleriViewModels[i].Boyut4" data-row-index="@i" required />
+                                                }
+                                            </td>
+                                            <td class="text-center">
+                                                <select asp-for="MalzemeTalepleriViewModels[i].Mevcut" id="" class="form-control mevcut-select" data-row-index="@i">
+                                                    <option value="">Seç</option>
+                                                    <option value="true">Var</option>
+                                                    <option value="false">Yok</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    var birimler = new SelectList(Model.BirimViewModels, "Id", "Name");
+                                                }
+                                                <select asp-for="MalzemeTalepleriViewModels[i].BirimId" asp-items="birimler" data-plugin-selectTwo
+                                                    class="form-control birim-select" data-row-index="@i" required>
+                                                    <option value="">Seç</option>
+                                                </select>
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="number" name="MalzemeTalepleriViewModels[@i].BirimSayisi" class="form-control birimSayisi" 
+                                                    value="@Model.MalzemeTalepleriViewModels[i].BirimSayisi" data-row-index="@i" required />
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    string showBirimFiyat = "";
+                                                    if(Model.MalzemeTalepleriViewModels[i].BirimFiyat != null)
+                                                        showBirimFiyat = Model.MalzemeTalepleriViewModels[i].BirimFiyat.Replace(",",".");
+                                                }
+                                                <input type="number" name="MalzemeTalepleriViewModels[@i].BirimFiyat" 
+                                                    value="@showBirimFiyat" step="any" class="form-control birimFiyat"
+                                                    data-row-index="@i" required />
+                                            </td>
+                                            <td class="text-center">
+                                                @{
+                                                    var kdvler = new SelectList(Model.KDVViewModels, "Id", "Name");
+                                                }
+                                                <select asp-for="MalzemeTalepleriViewModels[i].KdvId" asp-items="kdvler" data-plugin-selectTwo class="form-control kdv-select"
+                                                    data-row-index="@i" required>
+                                                    <option value="">Seç</option>
+                                                </select>
+                                            </td>
+                                            <td class="align-middle text-end"><span class="unit-price"></span><span class="tutar"
+                                                    data-row-index="@i">@Model.MalzemeTalepleriViewModels[i].Tutar</span></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                        <div class="invoice-summary">
+                            <div class="row justify-content-end">
+                                <div class="col-lg-6 col-xl-4">
+                                    <table class="table h6 text-dark">
+                                        <tbody>
+                                            <tr class="b-top-0">
+                                                <td colspan="2">Toplam</td>
+                                                <td class="text-end"><span class="unit-price"></span><span class="toplam">0,00</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">KDV</td>
+                                                <td class="text-end"><span class="unit-price"></span><span class="kdv">0,00</span></td>
+                                            </tr>
+                                            <tr class="h4">
+                                                <td colspan="2">Genel Toplam</td>
+                                                <td class="text-end"><span class="unit-price"></span><span class="genelToplam">0,00</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row pb-3">
+                        <div class="col-lg-1">
+                            <div class="form-group">
+                                <label class="col-form-label">Para Birimi</label>
+                                @{
+                                    var paraBirimler = new SelectList(Model.ParaBirimViewModels, "Id", "Birim");
+                                    for(int i = 0; i < Model.MalzemeTalepleriViewModels.Count; i++)
+                                    {
+                                        if(Model.MalzemeTalepleriViewModels[i].ParaBirimId != null
+                                            && Model.MalzemeTalepleriViewModels[i].OdemeVadeId != null
+                                            && Model.MalzemeTalepleriViewModels[i].TeslimatAdresId != null)
+                                        {
+                                            Model.MalzemeTalepleriViewModels[0].ParaBirimId = Model.MalzemeTalepleriViewModels[i].ParaBirimId;
+                                            Model.MalzemeTalepleriViewModels[0].OdemeVadeId = Model.MalzemeTalepleriViewModels[i].OdemeVadeId;
+                                            Model.MalzemeTalepleriViewModels[0].TeslimatAdresId = Model.MalzemeTalepleriViewModels[i].TeslimatAdresId;
+                                            Model.MalzemeTalepleriViewModels[0].TeslimatTarih = Model.MalzemeTalepleriViewModels[i].TeslimatTarih;
+                                            Model.MalzemeTalepleriViewModels[0].TeslimatNot = Model.MalzemeTalepleriViewModels[i].TeslimatNot;
+                                        }
+                                    }
+                                }
+                                <select asp-for="MalzemeTalepleriViewModels[0].ParaBirimId" asp-items="paraBirimler" data-plugin-selectTwo class="form-control paraBirim" required>
+                                    <option value="">Seç</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Ödeme Vadesi</label>
+                                @{
+                                    var odemeVadeler = new SelectList(Model.OdemeVadeViewModels, "Id", "Name");
+                                }
+                                <select asp-for="MalzemeTalepleriViewModels[0].OdemeVadeId" asp-items="odemeVadeler" data-plugin-selectTwo class="form-control" required>
+                                    <option value="">Seç</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="col-form-label">Teslim Yeri</label>
+                                @{
+                                    var teslimatAdresler = new SelectList(Model.TeslimatAdresViewModels, "Id", "Baslik");
+                                }
+                                <select asp-for="MalzemeTalepleriViewModels[0].TeslimatAdresId" asp-items="teslimatAdresler" data-plugin-selectTwo class="form-control"
+                                    required>
+                                    <option value="">Seç</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label class="col-form-label">Teslimat Tarihi</label>
+                                <input type="date" asp-for="MalzemeTalepleriViewModels[0].TeslimatTarih" class="form-control" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col">
+                            <label class="col-form-label">Teslimat Notu</label>
+                            <textarea asp-for="MalzemeTalepleriViewModels[0].TeslimatNot" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </div>
+    <div class="row action-buttons">
+        <div class="col-12 col-md-auto">
+        </div>
+        <div class="col-12 col-md-auto order-lg-1 mt-3 mt-md-0">
+            <button type="submit"
+                class="submit-button btn btn-primary btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"
+                data-loading-text="Loading...">
+                <i class="bx bx-save text-4 me-2"></i> Kaydet
+            </button>
+        </div>
+        <div class="col-12 col-md-auto ms-lg-auto px-md-0 mt-3 mt-md-0">
+            <a href="pages-invoice-print.html" target="_blank"
+                class="submit-button btn btn-default btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i
+                    class="bx bx-printer text-4 me-2"></i> Yazdır</a>
+        </div>
+    </div>
+</form>
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/datatables/media/css/dataTables.bootstrap5.css" />
+    <style>
+        table th,
+        table td {
+            border: none !important;
+        }
+    </style>
+}
+
+@section VendorScripts {
+    <script src="~/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/media/js/dataTables.bootstrap5.min.js"></script>
+    <script src="~/vendor/jquery-validation/jquery.validate.js"></script>
+}
+
+@section Scripts {
+    <script>
+        (function ($) {
+            "use strict";
+
+            var EditableTable = {
+                options: {
+                    addButton: "#addToTable",
+                    saveButton: "#saveAllRows",
+                    table: "#datatable-editable",
+                },
+
+                initialize: function () {
+                    this.setVars().build().events();
+                },
+
+                setVars: function () {
+                    this.$table = $(this.options.table);
+                    this.$addButton = $(this.options.addButton);
+                    $('.mevcut-select').trigger('change');
+                    $('.paraBirim').trigger('change');
+                    return this;
+                },
+
+                build: function () {
+                    this.datatable = this.$table.DataTable({
+                        dom: '<"row"<"col-lg-6"><"col-lg-6">><"table-responsive"t>',
+                        aoColumns: [null, null, null, null, null, null, null, null, null, null],
+                        ordering: false
+                    });
+
+                    window.dt = this.datatable;
+
+                    return this;
+                }
+            };
+
+            $(function () {
+                EditableTable.initialize();
+            });
+        }).apply(this, [jQuery]);
+
+        $(document).on('change', '.mevcut-select', function () {
+            var $mevcutSelect = $(this);
+            var rowIndex = $mevcutSelect.data('row-index');
+
+            if ($mevcutSelect.val() !== "true") {
+                $('.birim-select[data-row-index="' + rowIndex + '"]').val("");
+                $('.kdv-select[data-row-index="' + rowIndex + '"]').val("");
+                $('.birimSayisi[data-row-index="' + rowIndex + '"]').val("");
+                $('.birimFiyat[data-row-index="' + rowIndex + '"]').val("");
+                $('.birim-select[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.birimSayisi[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.birimFiyat[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.kdv-select[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.boyut1[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.boyut2[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.boyut3[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+                $('.boyut4[data-row-index="' + rowIndex + '"]').prop('disabled', true);
+
+                $('.tutar[data-row-index="' + rowIndex + '"]').text("0,00");
+                $('.birimSayisi').trigger('change');  
+            }
+            else {
+                $('.birim-select[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.birimSayisi[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.birimFiyat[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.kdv-select[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.boyut1[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.boyut2[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.boyut3[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+                $('.boyut4[data-row-index="' + rowIndex + '"]').prop('disabled', false);
+            }
+        });
+
+        $(document).on('change', '.birimSayisi, .birimFiyat, .kdv-select', function () {
+            let formatter = new Intl.NumberFormat('tr-TR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+            var $element = $(this);
+            var rowIndex = $element.data('row-index');
+
+            var birim = parseInt($('.birimSayisi[data-row-index="' + rowIndex + '"]').val());
+            var birimFiyat = parseFloat($('.birimFiyat[data-row-index="' + rowIndex + '"]').val());
+
+            var result = formatter.format(birim * birimFiyat);
+            if (result === 'NaN') {
+                result = formatter.format(0);
+            }
+            $('.tutar[data-row-index="' + rowIndex + '"]').text(result);
+
+            let toplam = 0;
+            let kdv = 0;
+
+            $('.kdv-select').each(function () {                
+                var tutar = parseFloat($('.tutar[data-row-index="' + $(this).data('row-index') + '"]').text().replace(/\./g, '').replace('.', '')) || 0;
+                var kdvDeger = parseInt($('.kdv-select[data-row-index="' + $(this).data('row-index') + '"]').find('option:selected').text()) || 0;
+                kdv += tutar * (kdvDeger / 100);
+            });
+            
+            $('.tutar').each(function () {
+                let deger = parseFloat($(this).text().replace(/\./g, '').replace('.', '').replace(',', '.')) || 0;
+                toplam += deger;
+            }); 
+
+            $('.toplamTutar[data-row-index="' + $(this).data('row-index') + '"]').val(formatter.format(toplam));
+            $(".toplam").text(formatter.format(toplam));
+            $(".kdv").text(formatter.format(kdv));
+            $(".genelToplam").text(formatter.format(toplam + kdv));
+        });
+
+        $(document).on('change', '.paraBirim', function () {
+            var $unitPrice = $(this);
+            $('.unit-price').each(function () {
+                if($('.paraBirim option:selected').text() === "Seç")
+                {
+                    $(this).text('');
+                }                                
+                else
+                {
+                    $(this).text($('.paraBirim option:selected').text());
+                }
+            });
+        });
+    </script>
+}
