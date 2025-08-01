@@ -7,7 +7,9 @@
 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs me-3">
-
+            <li><span>Satın Alma Yönetimi</span></li>
+            <li><a asp-action="MalzemeTalepleri"><span>Talepler</span></a></li>
+            <li><span class="text-light">Fiyat Karşılaştırma</span></li>
         </ol>
     </div>
 </header>
@@ -22,10 +24,26 @@
                         <th></th>
                         <th></th>
                         <th></th>
-                        <th colspan="4" class="text-center">Özdur Cıvata</th>
-                        <th colspan="4" class="text-center">Cadde Makine</th>
+                        <th></th>
+                        <th colspan="4" class="text-center">
+                            <span>Özdur Cıvata</span>
+                            <div class="checkbox-custom chekbox-primary d-inline ms-1">
+                                <input type="checkbox" name=""
+                                    value="true" />
+                                <label></label>
+                            </div>
+                        </th>
+                        <th colspan="4" class="text-center">
+                            <span>Cadde Makine</span>
+                            <div class="checkbox-custom chekbox-primary d-inline ms-1">
+                                <input type="checkbox" name=""
+                                    value="true" />
+                                <label></label>
+                            </div>
+                        </th>
                     </tr>
                     <tr>
+                        <th class="text-center">Gizle</th>
                         <th>Malzeme</th>
                         <th>Özellik</th>
                         <th>Boyut</th>
@@ -42,6 +60,13 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td class="text-center">
+                            <div class="checkbox-custom chekbox-primary d-inline">
+                                <input type="checkbox" name=""
+                                    value="true" />
+                                <label></label>
+                            </div>
+                        </td>
                         <td>Civata</td>
                         <td>316 Paslanmaz</td>
                         <td>M6 x 30 mm</td>
@@ -68,6 +93,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="text-center">
+                            <div class="checkbox-custom chekbox-primary d-inline">
+                                <input type="checkbox" name=""
+                                    value="true" />
+                                <label></label>
+                            </div>
+                        </td>
                         <td>Pul</td>
                         <td>Bronz</td>
                         <td>M6 x 30 mm</td>
@@ -94,6 +126,13 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="text-center">
+                            <div class="checkbox-custom chekbox-primary d-inline">
+                                <input type="checkbox" name=""
+                                    value="true" />
+                                <label></label>
+                            </div>
+                        </td>
                         <td>Tig Teli</td>
                         <td>303 Paslanmaz</td>
                         <td>M6 x 30 mm</td>
@@ -120,32 +159,32 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Seçilen Tutar</strong></td>
+                        <td colspan="5" class="text-end"><strong>Seçilen Tutar</strong></td>
                         <td colspan="4" class="text-end">0,00</td>
                         <td colspan="4" class="text-end">0,00</td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Toplam</strong></td>
+                        <td colspan="5" class="text-end"><strong>Toplam</strong></td>
                         <td colspan="4" class="text-end"><strong>0,00</strong></td>
                         <td colspan="4" class="text-end"><strong>0,00</strong></td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Ödeme Vadesi</strong></td>
+                        <td colspan="5" class="text-end"><strong>Ödeme Vadesi</strong></td>
                         <td colspan="4" class="text-end">Fatura tarihinden itibaren 90 gün vade</td>
                         <td colspan="4" class="text-end">Fatura tarihinden itibaren 90 gün vade</td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Teslim Yeri</strong></td>
+                        <td colspan="5" class="text-end"><strong>Teslim Yeri</strong></td>
                         <td colspan="4" class="text-end">Smak Makine</td>
                         <td colspan="4" class="text-end">Smak Makine</td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Teslim Tarihi</strong></td>
+                        <td colspan="5" class="text-end"><strong>Teslim Tarihi</strong></td>
                         <td colspan="4" class="text-end">10/07/2025</td>
                         <td colspan="4" class="text-end">10/07/2025</td>
                     </tr>
                     <tr>
-                        <td colspan="4" class="text-end"><strong>Tedarikçi Notu</strong></td>
+                        <td colspan="5" class="text-end"><strong>Tedarikçi Notu</strong></td>
                         <td colspan="4" class="text-end"></td>
                         <td colspan="4" class="text-end"></td>
                     </tr>

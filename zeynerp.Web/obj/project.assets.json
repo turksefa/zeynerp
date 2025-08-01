@@ -4764,11 +4764,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Web\\zeynerp.Web.csproj",
+      "projectUniqueName": "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Web\\zeynerp.Web.csproj",
       "projectName": "zeynerp.Web",
-      "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Web\\zeynerp.Web.csproj",
+      "projectPath": "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Web\\zeynerp.Web.csproj",
       "packagesPath": "C:\\Users\\IT\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Web\\obj\\",
+      "outputPath": "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\IT\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4785,11 +4785,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Application\\zeynerp.Application.csproj": {
-              "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Application\\zeynerp.Application.csproj"
+            "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Application\\zeynerp.Application.csproj": {
+              "projectPath": "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Application\\zeynerp.Application.csproj"
             },
-            "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Infrastructure\\zeynerp.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\IT\\Desktop\\zeynerp\\zeynerp.Infrastructure\\zeynerp.Infrastructure.csproj"
+            "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Infrastructure\\zeynerp.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\IT\\Desktop\\zeynerpp\\zeynerp.Infrastructure\\zeynerp.Infrastructure.csproj"
             }
           }
         }
@@ -4803,7 +4803,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -4827,6 +4828,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.18, 8.0.18]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4835,7 +4854,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

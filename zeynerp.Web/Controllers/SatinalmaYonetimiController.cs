@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using zeynerp.Application.DTOs.SatinalmaYonetimi;
@@ -168,9 +169,14 @@ namespace zeynerp.Web.Controllers
             return View(model);
         }
 
-        public IActionResult FiyatKarsilastirma()
+        public async Task<IActionResult> FiyatKarsilastirma()
         {
-            return View();
+            FiyatKarsilastirmaViewModel fiyatKarsilastirmaViewModel = new FiyatKarsilastirmaViewModel()
+            {
+                MalzemeTalepleriViewModels = _mapper.Map<IReadOnlyList<MalzemeTalepleriViewModel>>(await _malzemeTalepleriService.GetMalzemeTalepleriAsync())
+            };
+
+            return View(fiyatKarsilastirmaViewModel);
         }
     }
 }

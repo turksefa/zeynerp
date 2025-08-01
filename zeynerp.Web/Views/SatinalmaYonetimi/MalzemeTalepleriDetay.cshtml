@@ -1,7 +1,7 @@
 @using System.Globalization
 @model MalzemeTalepleriDetayViewModel
 @{
-    ViewData["LayoutTitle"] = "";
+    ViewData["LayoutTitle"] = "Talep Detay";
 }
 
 <header class="page-header">
@@ -9,7 +9,10 @@
 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs me-3">
-
+            <li><span>Satın Alma Yönetimi</span></li>
+            <li><a asp-action="MalzemeTalepleri"><span>Talepler</span></a></li>
+            <li><span class="text-light">Talep Detay</span></li>
+        </ol>
     </div>
 </header>
 
@@ -324,7 +327,7 @@
             </button>
         </div>
         <div class="col-12 col-md-auto ms-lg-auto px-md-0 mt-3 mt-md-0">
-            <a href="pages-invoice-print.html" target="_blank"
+            <a href="#" target="_blank"
                 class="submit-button btn btn-default btn-px-4 py-3 d-flex align-items-center font-weight-semibold line-height-1"><i
                     class="bx bx-printer text-4 me-2"></i> Yazdır</a>
         </div>
